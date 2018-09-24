@@ -1,0 +1,68 @@
+<div class="container-fluid p-0">
+
+  <!--Navbar-->
+  <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark unique-color-dark" [containerInside]="true">
+
+    <!-- Navbar brand -->
+    <mdb-navbar-brand><a class="navbar-brand mr-5 font-weight-bold" href="#">FAES</a></mdb-navbar-brand>
+
+    <!-- Collapsible content -->
+    <links>
+
+      <!-- Links -->
+      <ul class="navbar-nav mr-auto">
+
+        <!-- Menu Home/INICIO -->
+        <li class="nav-item active mr-3">
+          <a class="nav-link waves-light" mdbWavesEffect>Início<span class="sr-only">(current)</span></a>
+        </li>
+
+        <!-- Dropdown IGREJA-->
+        <li class="nav-item dropdown mr-3" dropdown>
+          <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+            Igreja<span class="caret"></span></a>
+          <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <a class="dropdown-item waves-light" mdbWavesEffect href="#">Confissão</a>
+            <a class="dropdown-item waves-light" mdbWavesEffect href="#">Organização</a>
+            <div class="divider dropdown-divider"></div>
+            <a class="dropdown-item waves-light" mdbWavesEffect href="#">Nossa História</a>
+          </div>
+        </li>
+
+        <!-- Dropdown DEPARTAMENTOS -->
+        <li class="nav-item dropdown mr-3" dropdown>
+          <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+            Ministérios<span class="caret"></span></a>
+          <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <a class="dropdown-item waves-light" mdbWavesEffect href="#">FAES Mulheres</a>
+            <a class="dropdown-item waves-light" mdbWavesEffect href="#">FAES Jovens</a>
+            <a class="dropdown-item waves-light" mdbWavesEffect href="#">FAES Adolescentes</a>
+            <a class="dropdown-item waves-light" mdbWavesEffect href="#">FAES Crianças</a>
+            <div class="divider dropdown-divider"></div>
+            <a class="dropdown-item waves-light" mdbWavesEffect href="#">Diretoria</a>
+          </div>
+        </li>
+
+        <!-- Menu CONTATO -->
+        <li class="nav-item">
+          <a class="nav-link waves-light" mdbWavesEffect>Contato</a>
+        </li>
+
+      </ul>
+      <!-- Links -->
+
+      <!-- Search form -->
+      <form class="form-inline waves-light" mdbWavesEffect>
+        <div class="md-form mt-0 mb-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Procurar">
+          <button mdbBtn color="white" outline="true" size="sm" class="my-0 waves-light" type="submit" mdbWavesEffect>Procurar</button>
+        </div>
+      </form>
+    </links>
+    <!-- Collapsible content -->
+
+  </mdb-navbar>
+  <!--/.Navbar-->
+
+</div>
+<!-- container NavBar-->

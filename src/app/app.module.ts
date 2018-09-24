@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { HeaderBannerComponent } from './header-banner/header-banner.component'
+import { HeaderBannerComponent } from './header-banner/header-banner.component';
+import { NavbarComponent } from './navbar/navbar.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderBannerComponent
+    HeaderBannerComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
