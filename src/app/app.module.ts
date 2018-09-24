@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { MDBBootstrapModule } from 'angular-bootstrap-md'
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { HeaderBannerComponent } from './header-banner/header-banner.component'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderBannerComponent
   ],
   imports: [
     BrowserModule,
