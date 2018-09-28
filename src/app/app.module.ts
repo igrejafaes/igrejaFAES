@@ -4,20 +4,26 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { HeaderBannerComponent } from './header-banner/header-banner.component';
 import { NavbarComponent } from './navbar/navbar.component'
+import { HomepageModule } from './homepage/homepage.module';
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderBannerComponent,
-    NavbarComponent
+    NavbarComponent,
+    PaginaNaoEncontradaComponent
   ],
   imports: [
     BrowserModule,
+    SharedModule,
+    HomepageModule,
     AppRoutingModule,
-    MDBBootstrapModule.forRoot()
+  ],
+  exports: [
   ],
   providers: [],
   bootstrap: [AppComponent]
