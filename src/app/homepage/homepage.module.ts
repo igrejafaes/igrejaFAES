@@ -8,6 +8,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { HomepageComponent } from './homepage.component';
 import { AgendaComponent } from './agenda/agenda.component';
 import { ReunioesComponent } from './reunioes/reunioes.component';
+import { NoticiasComponent } from './noticias/noticias.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { ReunioesComponent } from './reunioes/reunioes.component';
   declarations: [
     CarouselComponent, 
     HomepageComponent, 
-    AgendaComponent, ReunioesComponent]
+    AgendaComponent, ReunioesComponent, NoticiasComponent]
 })
 export class HomepageModule { }

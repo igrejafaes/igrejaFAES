@@ -1,0 +1,38 @@
+<div class="noticias-full">
+
+    <!-- HEADER NOTICIAS -->
+    <div class="row noticia-header justify-content-between">
+        <div class="col sm-4">
+          <h1 class="h1-responsive"><i class="fa fa-newspaper-o"></i>Notícias</h1>
+        </div>
+        <div class="col sm-4 text-right noticia-header-navbtn">
+          <i class="fa fa-arrow-circle-o-left btn-nav view overlay zoom" (click)="slickModal.slickPrev()"></i>
+          <i class="fa fa-arrow-circle-o-right btn-nav" (click)="slickModal.slickNext()"></i>
+        </div>
+      </div>
+      <!-- /HEADER NOTICIAS -->
+
+      <ngx-slick-carousel
+      class="carousel" 
+      #slickModal="slick-carousel" 
+      [config]="slideConfig">
+
+        <div ngxSlickItem *ngFor="let item of noticias" class="slide m-2 view overlay">
+          
+          <a href="#">
+            <img class="img-fluid" [src]='item.Imagem' alt="Noticia Image" width="100%">
+            <div class="mask h-100 rgba-white-strong">
+              <div class="noticia-descricao">
+
+                <div class="noticia-titulo">{{ item.NoticiaTitulo }}</div>
+                <div class="noticia-texto">{{ item.NoticiaTexto }}</div>
+
+              </div>
+            </div>
+          </a>
+         
+        </div>
+
+      </ngx-slick-carousel>
+
+</div>
