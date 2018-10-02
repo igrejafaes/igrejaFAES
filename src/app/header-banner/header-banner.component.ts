@@ -34,6 +34,7 @@ export class HeaderBannerComponent implements OnInit {
       this.bannerImage = '../../assets/images/BannerSuperior_peq.jpg';
     } else {
       this.bannerImage = '../../assets/images/BannerSuperior.jpg';
+      //this.bannerImage = 'https://firebasestorage.googleapis.com/v0/b/sitefaes.appspot.com/o/images%2FBannerSuperior.jpg?alt=media&token=bcf1565c-d9c7-48fa-bf0c-0e413032e2cc';
     }
 
   }

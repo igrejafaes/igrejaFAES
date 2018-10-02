@@ -1,0 +1,26 @@
+<!-- BANNER CENTRAL -->
+<div class="row-fluid bannercentral">
+
+  <!-- IMAGEM BACKGROUND -->
+  <img [src]="bannerImage" alt="bannercentral" class="bannercentral-image">
+
+  <!-- TEXTO DO BANNER -->
+  <div class="col-12 text-bannercentral">
+    <h2 class="banner-titulo h1-responsive">CULTOS e REUNIÕES</h2>
+
+    <div class="reunioes">
+
+      <p *ngFor="let reuniao of reunioes">
+        <span class="dia-da-semana"> {{ reuniao.DiaDaSemana }} </span>
+        <span> - </span>
+        <span> {{ reuniao.Hora }} </span>
+        <span> - </span>
+        <span> {{ reuniao.Titulo }} </span>
+        <!-- {{ reuniao.DiaDaSemana + ' ' + reuniao.Hora + ' - ' + reuniao.Titulo }} -->
+      </p>
+      
+    </div>
+
+  </div>
+
+</div>

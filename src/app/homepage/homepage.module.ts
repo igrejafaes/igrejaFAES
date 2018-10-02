@@ -7,6 +7,7 @@ import { HomepageRoutingModule } from './homepage-routing.module';
 import { CarouselComponent } from './carousel/carousel.component';
 import { HomepageComponent } from './homepage.component';
 import { AgendaComponent } from './agenda/agenda.component';
+import { ReunioesComponent } from './reunioes/reunioes.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,9 @@ import { AgendaComponent } from './agenda/agenda.component';
     SharedModule,
     HomepageRoutingModule,
   ],
-  declarations: [CarouselComponent, HomepageComponent, AgendaComponent]
+  declarations: [
+    CarouselComponent, 
+    HomepageComponent, 
+    AgendaComponent, ReunioesComponent]
 })
 export class HomepageModule { }

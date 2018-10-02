@@ -1,73 +1,48 @@
-<!-- <div class="col-lg-4 col-md-6 my-5"> -->
-<!--Card-->
-<!-- mdb-card class="card card-cascade wider">
+<div class="agendaFull">
 
-    <div class="view view-cascade gradient-card-header peach-gradient">
-      <h2 class="card-header-title mb-2">Title of the news</h2>
-      <p class="">
-        <i class="fa fa-calendar"></i> 26.07.2017</p>
-
+  <!-- HEADER AGENDA -->
+  <div class="row agenda-header justify-content-between">
+    <div class="col sm-4">
+      <h1 class="h1-responsive"><i class="fa fa-calendar-check-o"></i>Agenda</h1>
     </div>
-
-    <mdb-card-body cascade="true" class="text-center">
-
-      <mdb-card-text>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod
-        quibusdam
-        dignissimos neque rem nihil ratione est placeat vel, natus non quos laudantium veritatis sequi.Ut enim ad
-        minima
-        veniam, quis nostrum.
-      </mdb-card-text>
-
-      <a href="#" class="orange-text mt-1 d-flex flex-row-reverse">
-        <h5 class="waves-effect p-2" mdbWavesEffect>Read more
-          <i class="fa fa-chevron-right"></i>
-        </h5>
-      </a>
-
-    </mdb-card-body -->
-<!--/.Card content-->
-
-<!-- /mdb-card -->
-<!--/.Card-->
-<!--/div -->
-
-
-<div class="container my-5">
-
-  <div class="card-deck">
-    <div class="card">
-      <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-          content. This content is a little bit longer.</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">Last updated 3 mins ago</small>
-      </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">Last updated 3 mins ago</small>
-      </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-          content. This card has even longer content than the first to show that equal height action.</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">Last updated 3 mins ago</small>
-      </div>
+    <div class="col sm-4 text-right agenda-header-navbtn">
+      <i class="fa fa-arrow-circle-o-left btn-nav view overlay zoom" (click)="slickModal.slickPrev()"></i>
+      <i class="fa fa-arrow-circle-o-right btn-nav" (click)="slickModal.slickNext()"></i>
     </div>
   </div>
+  <!-- /HEADER AGENDA -->
 
-</div>
+  <!-- CARROUSEL AGENDA -->
+
+    <ngx-slick-carousel 
+    class="carousel" 
+    #slickModal="slick-carousel" 
+    [config]="slideConfig" 
+    (init)="slickInit($event)"
+    (breakpoint)="breakpoint($event)" 
+    (afterChange)="afterChange($event)" 
+    (beforeChange)="beforeChange($event)">
+
+           
+      <div ngxSlickItem *ngFor="let item of agenda" class="card slide text-center m-2 view overlay">
+        
+          <img class="card-img-top img-fluid" [src]='item.Imagem' alt="Card image cap" width="100%">
+          <div class="mask rgba-blue-light"></div>
+          <div class="card-body">
+            <h5 class="card-title">{{ item.Titulo }}</h5>
+            <p class="card-text">{{ item.Descricao }}</p>
+          </div>
+          <div class="card-footer">
+            <p>{{ item.AgendaData }}</p>
+            <!-- <small class="text-muted">{{ item.AgendaData }}</small> -->
+          </div>
+        
+      </div>
+       
+    </ngx-slick-carousel>
+
+    <!-- </div> -->
+
+  <!-- /CARROUSEL AGENDA -->
+
+</div> 
