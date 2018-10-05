@@ -9,13 +9,15 @@ import { NavbarComponent } from './navbar/navbar.component'
 import { HomepageModule } from './homepage/homepage.module';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { SharedModule } from './shared/shared.module';
+import { RodapeComponent } from './rodape/rodape.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderBannerComponent,
     NavbarComponent,
-    PaginaNaoEncontradaComponent
+    PaginaNaoEncontradaComponent,
+    RodapeComponent
   ],
   imports: [
     BrowserModule,

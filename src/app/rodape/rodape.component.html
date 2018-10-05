@@ -1,0 +1,108 @@
+<footer class="container-fluid" id="main-Footer">
+  <div class="row row-principal">
+
+      <!-- COLUMN 1 - LOGO RODAPE E SOCIAL ICONS -->
+      <div class="col-md-3 col-primeira">
+
+        <div class="logo">
+          <img [src]=logoFAES alt="">
+        </div>
+
+        <div class="social-icons">
+          <a href="#">
+            <i class="fa fa-facebook" aria-hidden="true"></i>
+          </a>
+          <a href="#">
+            <i class="fa fa-youtube" aria-hidden="true"></i>
+          </a>
+          <a href="#">
+            <i class="fa fa-twitter" aria-hidden="true"></i>
+          </a>
+        </div>
+
+      </div>
+      <!-- /COLUMN 1 - LOGO RODAPE E SOCIAL ICONS -->
+
+      <!-- COLUMN 2 - CONTATOS -->
+      <div class="col-md-5 col-segunda">
+
+        <!-- TITULO -->
+        <div class="titulo">
+          <h3><i class="fa fa-comment" aria-hidden="true"></i>FALE CONOSCO</h3>
+        </div>
+
+        <!-- ITENS -->
+        <div>
+
+          <div class="col-segunda-item">
+
+            <div class="iconItem">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+            </div>
+
+            <div>
+              <h6>SEDE:</h6>
+              <p>{{ infoIgreja.Endereco + ' | ' + infoIgreja.Bairro + ' - ' + infoIgreja.Cidade }}</p>
+            </div>
+
+          </div>
+
+          <div class="col-segunda-item">
+            <div class="iconItem">
+              <i class="fa fa-phone-square" aria-hidden="true"></i>
+            </div>
+            <div>
+              <p>{{ infoIgreja.Telefone1 }}
+                <br>{{ infoIgreja.Telefone2 }}
+              </p>
+            </div>
+          </div>
+
+          <div class="col-segunda-item">
+            <div class="iconItem">
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+            </div>
+            <div class="footerDadosTexto">
+              <p>{{ infoIgreja.Email }}</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- /COLUMN 2 - CONTATOS -->
+
+      <!-- COLUMN 3 - FORM NEWSLETTER -->
+      <div class="col md-4 col-terceira">
+
+        <!-- TITULO -->
+        <div class="dados-titulo">
+          <h5><i class="fa fa-comment mr-3" aria-hidden="true"></i>RECEBA NOSSO NEWSLETTER</h5>
+        </div>
+
+        <!-- FORMULARIO -->
+        <form class="formulario" id="newsletter-form" action="#" method="post">
+          <input type="text" id="newsletter-name" class="required input-footer" name="name" placeholder="Seu nome"
+            value="">
+          <input type="text" id="newsletter-email" class="required email input-footer" name="email" placeholder="Seu email"
+            value="">
+          <input type="hidden" id="newsletter-send" name="send" value="1">
+          <input type="button" class="main_sprite small-btn input-submit" value="Cadastrar">
+        </form>
+
+      </div>
+      <!-- /COLUMN 3 - FORM NEWSLETTER -->
+
+  </div>
+
+  <!-- BARRA PROPAGANDA -->
+  <div class="row row-copyright justify-content-between p-3">
+    <div class="col-xs-6">
+      <small>Copyright © 2018. Assembléia de Deus Ministério FAES. Todos os os direitos reservados.</small>
+    </div>
+    <div class="col-xs-6">
+      <small>DRO-Design</small>
+    </div>
+  </div>
+  <!-- /BARRA PROPAGANDA -->
+
+</footer>
