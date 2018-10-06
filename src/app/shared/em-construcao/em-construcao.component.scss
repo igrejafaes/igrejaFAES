@@ -1,0 +1,35 @@
+.construcao {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    h1 {
+        font-weight: 500;
+    }
+
+    h2 {
+        color: rgb(167, 24, 24);
+        font-weight: 500;
+    }
+
+    a {
+        font-size: 1.5em;
+        font-weight: 500;
+        color: rgb(34, 34, 143);
+        padding: 10px;
+        border-radius: 7px;
+
+        &:hover {
+            color: lighten($color:  rgb(34, 34, 143), $amount: 20%);
+            background-color: rgb(227, 234, 253);
+        }
+
+        i {
+            padding-right: 10px;
+        }
+    }
+
+}

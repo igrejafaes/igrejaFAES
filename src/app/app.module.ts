@@ -10,6 +10,9 @@ import { HomepageModule } from './homepage/homepage.module';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { SharedModule } from './shared/shared.module';
 import { RodapeComponent } from './rodape/rodape.component';
+import { ContatoComponent } from './contato/contato.component';
+import { DepartamentoModule } from './departamento/departamento.module';
+import { IgrejaModule } from './igreja/igreja.module';
 
 @NgModule({
   declarations: [
@@ -17,16 +20,18 @@ import { RodapeComponent } from './rodape/rodape.component';
     HeaderBannerComponent,
     NavbarComponent,
     PaginaNaoEncontradaComponent,
-    RodapeComponent
-  ],
+    RodapeComponent,
+    ContatoComponent
+    ],
   imports: [
     BrowserModule,
-    SharedModule,
     HomepageModule,
+    DepartamentoModule,
+    IgrejaModule,
+    SharedModule,
     AppRoutingModule,
   ],
-  exports: [
-  ],
+  exports: [],
   providers: [],
   bootstrap: [AppComponent]
 })

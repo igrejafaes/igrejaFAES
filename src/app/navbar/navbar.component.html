@@ -3,7 +3,11 @@
 
   <!-- Navbar brand -->
   <mdb-navbar-brand>
-    <a class="navbar-brand mr-5 font-weight-bold" href="#">
+    <a 
+      class="navbar-brand mr-5 font-weight-bold" 
+      href="#"
+      [routerLink]="['/']" 
+      routerLinkActive="router-link-active">
       FAES
     </a>
   </mdb-navbar-brand>
@@ -16,38 +20,111 @@
 
       <!-- Menu Home/INICIO -->
       <li class="nav-item active mr-3">
-        <a class="nav-link waves-light" mdbWavesEffect>Início<span class="sr-only">(current)</span></a>
+        <a 
+          class="nav-link waves-light" 
+          mdbWavesEffect
+          [routerLink]="['/home']" 
+          routerLinkActive="router-link-active">
+            Início
+          <span class="sr-only">(current)</span>
+        </a>
       </li>
 
       <!-- Dropdown IGREJA-->
       <li class="nav-item dropdown mr-3" dropdown>
-        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+        <a 
+          dropdownToggle 
+          mdbWavesEffect 
+          type="button" 
+          class="nav-link dropdown-toggle waves-light" 
+          mdbWavesEffect>
           Igreja<span class="caret"></span></a>
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Confissão</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Organização</a>
+          <!-- CONFISSAO -->
+          <a 
+            class="dropdown-item waves-light" 
+            [routerLink]="['/igreja/confissao']" routerLinkActive="router-link-active"
+            mdbWavesEffect>Confissão
+          </a>
+          <!-- ORAGANIZACAO -->
+          <a
+            class="dropdown-item waves-light"
+            [routerLink]="['/igreja/organizacao']" routerLinkActive="router-link-active" 
+            mdbWavesEffect>Organização
+          </a>
+          <!-- DIVIDER -->
           <div class="divider dropdown-divider"></div>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Nossa História</a>
+          <!-- NOSSA HISTORIA -->
+          <a 
+            class="dropdown-item waves-light"
+            [routerLink]="['/igreja/historia']" routerLinkActive="router-link-active" 
+            mdbWavesEffect>Nossa História
+          </a>
         </div>
       </li>
 
       <!-- Dropdown DEPARTAMENTOS -->
       <li class="nav-item dropdown mr-3" dropdown>
+
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-          Ministérios<span class="caret"></span></a>
+          Ministérios<span class="caret"></span>
+        </a>
+
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">FAES Mulheres</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">FAES Jovens</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">FAES Adolescentes</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">FAES Crianças</a>
+
+          <!-- DEPARTAMENTO MULHERES -->
+          <a 
+            class="dropdown-item waves-light"
+            [routerLink]="['/departamento/mulheres']" 
+            routerLinkActive="router-link-active" 
+            mdbWavesEffect href="#">FAES Mulheres
+          </a>
+
+          <!-- DEPARTAMENTO JOVENS -->
+          <a
+            class="dropdown-item waves-light"
+            [routerLink]="['/departamento/jovens']" 
+            routerLinkActive="router-link-active" 
+            mdbWavesEffect href="#">FAES Jovens
+          </a>
+
+          <!-- DEPARTAMENTO ADOLESCENTES -->
+          <a 
+            class="dropdown-item waves-light"
+            [routerLink]="['/departamento/adolescentes']" 
+            routerLinkActive="router-link-active" 
+            mdbWavesEffect href="#">FAES Adolescentes
+          </a>
+
+          <!-- DEPARTAMENTO CRIANCAS -->
+          <a 
+            class="dropdown-item waves-light" 
+            [routerLink]="['/departamento/criancas']" 
+            routerLinkActive="router-link-active"
+            mdbWavesEffect href="#">FAES Crianças
+          </a>
+
           <div class="divider dropdown-divider"></div>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Diretoria</a>
+
+          <!-- DIRETORIA -->
+          <a 
+            class="dropdown-item waves-light"
+            [routerLink]="['/departamento/diretoria']" 
+            routerLinkActive="router-link-active" 
+            mdbWavesEffect href="#">Diretoria
+          </a>
+
         </div>
       </li>
 
       <!-- Menu CONTATO -->
       <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect>Contato</a>
+        <a 
+          class="nav-link waves-light"
+          [routerLink]="['/contato']" 
+          routerLinkActive="router-link-active" 
+          mdbWavesEffect>Contato
+        </a>
       </li>
 
     </ul>

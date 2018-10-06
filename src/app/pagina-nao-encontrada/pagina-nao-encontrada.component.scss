@@ -1,9 +1,17 @@
+@import '../shared/styles/cores.scss';
+
 .naoencotrado {
     height: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    h1 {
+        font-weight: 500;
+        color: $cor-primaria;
+    }
+
 }
 
 img {

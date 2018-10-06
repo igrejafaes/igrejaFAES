@@ -1,3 +1,5 @@
+@import '../shared/styles/cores.scss';
+
 * {
     padding: 0;
     margin: 0;
@@ -5,7 +7,7 @@
 }
 
 .row-principal {
-    background-color: #0c2849;
+    background-color: $cor-primaria;
     color: white;
     padding: 20px;
 
@@ -55,6 +57,7 @@
 
         .titulo {
             margin-bottom: 15px;
+            //background: url(https://www.novasiao.com.br/themes/leo_book/img/bg_title.png) repeat-x scroll 0 50% transparent;
 
             & h3 {
                 font-weight: 400;
@@ -127,7 +130,6 @@
 
 input[type=text], input[type=email], input[type=password], textarea {
     width: 100%;
-
 }
 
 // Extra small devices (portrait phones, less than 576px)
