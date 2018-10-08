@@ -13,6 +13,7 @@ import { RodapeComponent } from './rodape/rodape.component';
 import { ContatoComponent } from './contato/contato.component';
 import { DepartamentoModule } from './departamento/departamento.module';
 import { IgrejaModule } from './igreja/igreja.module';
+import { NgwWowModule } from 'ngx-wow';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { IgrejaModule } from './igreja/igreja.module';
     DepartamentoModule,
     IgrejaModule,
     SharedModule,
+    NgwWowModule.forRoot(),
     AppRoutingModule,
   ],
   exports: [],
