@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { AgendaService } from '../../services/agenda.service';
 import { clAgenda } from '../../models/clAgenda';
+import { Observable, Timestamp } from 'rxjs';
 
 @Component({
   selector: 'app-agenda',
@@ -9,7 +10,7 @@ import { clAgenda } from '../../models/clAgenda';
 })
 export class AgendaComponent implements OnInit {
 
-  agenda: clAgenda[] = []; // ARRAY DADOS DA AGENDA
+  agenda: Observable<clAgenda[]> //clAgenda[] = []; // ARRAY DADOS DA AGENDA
   tamanho: number = window.innerWidth; // TAMANHO DA WINDOW
 
   constructor(private agendaService: AgendaService) {
@@ -20,6 +21,10 @@ export class AgendaComponent implements OnInit {
     this.verificaWidth();
     // get a agenda
     this.agenda = this.agendaService.getAgenda()
+  }
+
+  setAgenda() {
+    this.agendaService.setAgenda()
   }
 
   @HostListener('window:resize') onResize() {

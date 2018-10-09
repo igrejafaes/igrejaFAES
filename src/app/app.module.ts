@@ -1,19 +1,28 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireDatabaseModule } from 'angularfire2/database'
+import { environment } from '../environments/environment';
 
-import { HeaderBannerComponent } from './header-banner/header-banner.component';
-import { NavbarComponent } from './navbar/navbar.component'
 import { HomepageModule } from './homepage/homepage.module';
-import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { SharedModule } from './shared/shared.module';
-import { RodapeComponent } from './rodape/rodape.component';
-import { ContatoComponent } from './contato/contato.component';
 import { DepartamentoModule } from './departamento/departamento.module';
 import { IgrejaModule } from './igreja/igreja.module';
 import { NgwWowModule } from 'ngx-wow';
+
+import { AppComponent } from './app.component';
+import { HeaderBannerComponent } from './header-banner/header-banner.component';
+import { NavbarComponent } from './navbar/navbar.component'
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
+import { RodapeComponent } from './rodape/rodape.component';
+import { ContatoComponent } from './contato/contato.component';
+//lOCALE PT-BR
+import { registerLocaleData } from '@angular/common';
+import ptBr from '@angular/common/locales/pt';
+registerLocaleData(ptBr)
 
 @NgModule({
   declarations: [
@@ -26,6 +35,9 @@ import { NgwWowModule } from 'ngx-wow';
     ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
     HomepageModule,
     DepartamentoModule,
     IgrejaModule,
@@ -33,8 +45,10 @@ import { NgwWowModule } from 'ngx-wow';
     NgwWowModule.forRoot(),
     AppRoutingModule,
   ],
-  exports: [],
-  providers: [],
+  exports: [ ],
+  providers: [
+    { provide: LOCALE_ID, useValue: "pt-BR" }, //replace "en-US" with your locale
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

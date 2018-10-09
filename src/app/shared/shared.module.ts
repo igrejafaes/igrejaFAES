@@ -5,6 +5,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { EmConstrucaoComponent } from './em-construcao/em-construcao.component';
 import { RouterModule } from '@angular/router';
+import { FirestoreDatePipe } from '../pipes/firestore-date.pipe';
 
 @NgModule({
   imports: [
@@ -14,12 +15,14 @@ import { RouterModule } from '@angular/router';
     RouterModule
   ],
   declarations: [
-    EmConstrucaoComponent
+    EmConstrucaoComponent,
+    FirestoreDatePipe
   ],
   exports: [
     MDBBootstrapModule,
     SlickCarouselModule,
-    EmConstrucaoComponent
+    EmConstrucaoComponent,
+    FirestoreDatePipe
   ]
 })
 export class SharedModule { }

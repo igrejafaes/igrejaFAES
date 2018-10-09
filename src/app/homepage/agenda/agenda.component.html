@@ -1,5 +1,4 @@
 <div class="agendaFull">
-
   <!-- HEADER AGENDA -->
   <div class="row agenda-header justify-content-between">
     <div class="col sm-4">
@@ -25,7 +24,7 @@
     (beforeChange)="beforeChange($event)">
 
            
-      <div ngxSlickItem *ngFor="let item of agenda" class="card slide text-center m-2 view overlay">
+      <div ngxSlickItem *ngFor="let item of agenda | async " class="card slide text-center m-2 view overlay">
         
           <img class="card-img-top img-fluid" [src]='item.Imagem' alt="Card image cap" width="100%">
           <div class="mask rgba-blue-light"></div>
@@ -34,7 +33,8 @@
             <p class="card-text">{{ item.Descricao }}</p>
           </div>
           <div class="card-footer">
-            <p>{{ item.AgendaData }}</p>
+            <!-- <p>{{ item.AgendaData['seconds'] * 1000 | date: 'dd/MMM/yyyy' }}</p> -->
+            <p>{{ item.AgendaData | firestoreDate: 'dd/MMM/yyyy' }}</p>
             <!-- <small class="text-muted">{{ item.AgendaData }}</small> -->
           </div>
         
