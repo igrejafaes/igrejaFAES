@@ -4,7 +4,7 @@
   data-wow-delay="0.4s">
 
   <!-- IMAGEM BACKGROUND -->
-  <img [src]="bannerImage" alt="bannercentral" class="bannercentral-image">
+  <img [src]="(bannerImage$ | async) || ''" alt="bannercentral" class="bannercentral-image">
 
   <!-- TEXTO DO BANNER -->
   <div class="col-12 text-bannercentral">

@@ -1,19 +1,21 @@
-import { Component,  HostListener, OnInit } from '@angular/core';
-import  returnWindowSize from '../shared/returnWindowSize' 
+import { Component, HostListener, OnInit } from '@angular/core';
+import { AngularFireStorage, AngularFireStorageReference } from 'angularfire2/storage';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
+import returnWindowSize from '../shared/returnWindowSize'
 
 @Component({
   selector: 'app-header-banner',
-  templateUrl: './header-banner.component.html',
+  template: `<img [src]="bannerImage" alt="Logo FAES" />`,
   styles: ['img {width: 100%; height: auto;}']
 })
 export class HeaderBannerComponent implements OnInit {
-  
-  windowSize: string = ''
-  bannerImage: string;
-  
-  constructor() {
-  }
-  
+
+  windowSize: string = '';
+  bannerImage: string = '';
+
+  constructor(private storage: AngularFireStorage) { }
+
   ngOnInit(): void {
     this.verificaWidth()
   }
@@ -21,7 +23,7 @@ export class HeaderBannerComponent implements OnInit {
   verificaWidth() {
 
     let actualWindowSize = returnWindowSize(window.innerWidth)
-    
+
     if (this.windowSize != actualWindowSize) {
       this.windowSize = actualWindowSize;
       this.defineImgOrigem()
@@ -29,17 +31,32 @@ export class HeaderBannerComponent implements OnInit {
 
   }
 
-  defineImgOrigem(){
+  defineImgOrigem() {
+    var ref: AngularFireStorageReference
+    
+    
     if (this.windowSize === 'small') {
-      this.bannerImage = '../../assets/images/BannerSuperior_peq.jpg';
+      ref = this.storage.ref('images/BannerSuperior_peq.jpg');
+      //this.bannerImage = '../../assets/images/BannerSuperior_peq.jpg';
     } else {
-      this.bannerImage = '../../assets/images/BannerSuperior.jpg';
-      //this.bannerImage = 'https://firebasestorage.googleapis.com/v0/b/sitefaes.appspot.com/o/images%2FBannerSuperior.jpg?alt=media&token=bcf1565c-d9c7-48fa-bf0c-0e413032e2cc';
+      ref = this.storage.ref('images/BannerSuperior.jpg');
+      //this.bannerImage = '../../assets/images/BannerSuperior.jpg';
     }
+    
+    let profileURL: Observable<string | null> = ref.getDownloadURL();
+
+    profileURL.subscribe((value)=>{
+       this.bannerImage = value;
+    })
+
+    profileURL.pipe(take(1))
+      .subscribe((imagem: string) => {
+        this.bannerImage = imagem
+      }, (error) => {console.log(error)})
 
   }
 
-  @HostListener('window: resize') resize(){
+  @HostListener('window: resize') resize() {
     this.verificaWidth()
   }
 

@@ -1,7 +1,10 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { AgendaService } from '../../services/agenda.service';
 import { clAgenda } from '../../models/clAgenda';
-import { Observable, Timestamp } from 'rxjs';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators'
+import { AppError } from 'src/app/shared/app-errors/app-error';
+import { NotFoundError } from 'src/app/shared/app-errors/not-found-error';
 
 @Component({
   selector: 'app-agenda',
@@ -10,7 +13,8 @@ import { Observable, Timestamp } from 'rxjs';
 })
 export class AgendaComponent implements OnInit {
 
-  agenda: Observable<clAgenda[]> //clAgenda[] = []; // ARRAY DADOS DA AGENDA
+  agenda$: Observable<clAgenda[]>; //clAgenda[] = []; // ARRAY DADOS DA AGENDA
+  agendas: clAgenda[] = [];
   tamanho: number = window.innerWidth; // TAMANHO DA WINDOW
 
   constructor(private agendaService: AgendaService) {
@@ -20,11 +24,25 @@ export class AgendaComponent implements OnInit {
     // verifica o width da janela
     this.verificaWidth();
     // get a agenda
-    this.agenda = this.agendaService.getAgenda()
+    this.agenda$ = this.agendaService.getAgenda()
+
+    this.agenda$
+      .pipe(take(1))
+      .subscribe((agendas: clAgenda[]) => {
+        this.agendas = agendas
+      }, (error: AppError) => {
+        if (error instanceof NotFoundError) {
+          alert('Erro 404. Arquivo não encontrado...');
+        } else {
+          console.log(error);
+          alert('Uma exceção inesperada ocorreu.');
+        }
+      })
   }
 
-  setAgenda() {
-    this.agendaService.setAgenda()
+  // método criado para exemplo de como criar agenda
+  createAgenda() {
+    this.agendaService.createAgenda()
   }
 
   @HostListener('window:resize') onResize() {
