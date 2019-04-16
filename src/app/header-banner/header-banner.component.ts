@@ -1,8 +1,9 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { AngularFireStorage, AngularFireStorageReference } from 'angularfire2/storage';
-import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+//import { AngularFireStorage, AngularFireStorageReference } from 'angularfire2/storage';
+//import { Observable } from 'rxjs';
+//import { take } from 'rxjs/operators';
 import returnWindowSize from '../shared/returnWindowSize'
+import { GetImageUrlService } from './../services/get-image-url.service';
 
 @Component({
   selector: 'app-header-banner',
@@ -14,7 +15,7 @@ export class HeaderBannerComponent implements OnInit {
   windowSize: string = '';
   bannerImage: string = '';
 
-  constructor(private storage: AngularFireStorage) { }
+  constructor(private getImage: GetImageUrlService) { }
 
   ngOnInit(): void {
     this.verificaWidth()
@@ -32,27 +33,34 @@ export class HeaderBannerComponent implements OnInit {
   }
 
   defineImgOrigem() {
-    var ref: AngularFireStorageReference
-    
-    
+    //var ref: AngularFireStorageReference
+    var imageName: string
+        
     if (this.windowSize === 'small') {
-      ref = this.storage.ref('images/BannerSuperior_peq.jpg');
+      imageName = 'BannerSuperior_peq.jpg'
+      //ref = this.storage.ref('images/BannerSuperior_peq.jpg');
       //this.bannerImage = '../../assets/images/BannerSuperior_peq.jpg';
     } else {
-      ref = this.storage.ref('images/BannerSuperior.jpg');
+      imageName = 'BannerSuperior.jpg'
+      //ref = this.storage.ref('images/BannerSuperior.jpg');
       //this.bannerImage = '../../assets/images/BannerSuperior.jpg';
     }
-    
-    let profileURL: Observable<string | null> = ref.getDownloadURL();
 
-    profileURL.subscribe((value)=>{
-       this.bannerImage = value;
-    })
+    this.getImage.getImageURL(imageName)
+      .subscribe((imageURL) => {
+        this.bannerImage = imageURL;
+      })
+      
+    //let profileURL: Observable<string | null> = ref.getDownloadURL();
 
-    profileURL.pipe(take(1))
-      .subscribe((imagem: string) => {
-        this.bannerImage = imagem
-      }, (error) => {console.log(error)})
+    // profileURL.subscribe((value)=>{
+    //    this.bannerImage = value;
+    // })
+
+    // profileURL.pipe(take(1))
+    //   .subscribe((imagem: string) => {
+    //     this.bannerImage = imagem
+    //   }, (error) => {console.log(error)})
 
   }
 
