@@ -12,6 +12,7 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { HomepageModule } from './homepage/homepage.module';
 import { SharedModule } from './shared/shared.module';
 import { DepartamentoModule } from './departamento/departamento.module';
+import { AdministracaoModule } from './administracao/administracao.module';
 import { IgrejaModule } from './igreja/igreja.module';
 import { NgwWowModule } from 'ngx-wow';
 
@@ -41,6 +42,7 @@ registerLocaleData(ptBr)
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,
+    AdministracaoModule,
     HomepageModule,
     DepartamentoModule,
     IgrejaModule,

@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'departamento', loadChildren: './departamento/departamento.module#DepartamentoModule' },
   { path: 'igreja', loadChildren: './igreja/igreja.module#IgrejaModule' },
   { path: 'home', loadChildren: './homepage/homepage.module#HomepageModule' },
+  { path: 'administracao', loadChildren: './administracao/administracao.module#AdministracaoModule' },
   { path: 'contato', component: ContatoComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PaginaNaoEncontradaComponent }
