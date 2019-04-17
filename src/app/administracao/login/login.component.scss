@@ -1,0 +1,88 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    //background-color: burlywood;
+}
+
+.login-frame {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 7vh 0 5vh 0;
+    width: 33vw;
+    height: 50vh;
+    //border: 1px solid black;
+    background-color: rgba(255, 255, 255, 0.253);
+    border-radius: 15px;
+}
+
+.icon-top {
+    position: absolute;
+    top: -40px;
+    //left: -10px;
+    z-index: 1;
+    font-size: 5em;
+    color: rgba(55, 142, 169, 0.541)
+}
+
+.usuario {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    width: 90%;
+}
+
+.box-input {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    margin: 20px 0;
+    height: 70px;
+    width: 90%;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.6);
+
+    i {
+        width: 50px;
+        text-align: center;
+        margin: 0 20px;
+        font-size: 3em;
+        color: darkgray
+    }
+
+    .user-inputs {
+        border: none;
+        line-height: 50px;
+        font-size: 1.5rem;
+        background-color: transparent;
+
+    }
+
+    .user-inputs:focus {outline: 0;}
+
+    .user-inputs::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: rgb(177, 177, 177);
+        opacity: 1; /* Firefox */
+    }
+}
+
+.login-butao {
+    background-color: rgba(55, 142, 169, 0.541);
+    border-radius: 10px;
+    border-color: transparent;
+    color: white;
+    font-size: 2rem;
+    font-weight: 300;
+    margin-top: 2vh;
+    width: 70%;
+    height: 70px;
+ 
+    &:focus {outline:0;}
+    &:hover {cursor: pointer;}
+}
