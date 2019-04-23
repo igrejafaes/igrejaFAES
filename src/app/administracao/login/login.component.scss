@@ -1,88 +1,151 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    //background-color: burlywood;
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-titulo {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+  color: rgb(185, 0, 0);
 }
 
 .login-frame {
-    display: flex;
-    position: relative;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    margin: 7vh 0 5vh 0;
-    width: 33vw;
-    height: 50vh;
-    //border: 1px solid black;
-    background-color: rgba(255, 255, 255, 0.253);
-    border-radius: 15px;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: 7vh 0 5vh 0;
+  width: 33vw;
+  height: 50vh;
+  background-color: rgba(255, 255, 255, 0.253);
+  border-radius: 15px;
 }
 
 .icon-top {
-    position: absolute;
-    top: -40px;
-    //left: -10px;
-    z-index: 1;
-    font-size: 5em;
-    color: rgba(55, 142, 169, 0.541)
+  position: absolute;
+  top: -40px;
+  z-index: 1;
+  font-size: 5em;
+  color: rgba(55, 142, 169, 0.541);
 }
 
 .usuario {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    position: relative;
-    width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  width: 90%;
 }
 
 .box-input {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    margin: 20px 0;
-    height: 70px;
-    width: 90%;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-content: center;
+  align-items: center;
+  margin: 20px 0;
+  height: 70px;
+  width: 90%;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.6);
 
-    i {
-        width: 50px;
-        text-align: center;
-        margin: 0 20px;
-        font-size: 3em;
-        color: darkgray
-    }
+  i {
+    width: 50px;
+    text-align: center;
+    margin: 0 20px;
+    font-size: 3em;
+    color: darkgray;
+  }
 
-    .user-inputs {
-        border: none;
-        line-height: 50px;
-        font-size: 1.5rem;
-        background-color: transparent;
+  .user-inputs {
+    border: none;
+    line-height: 50px;
+    font-size: 1.5rem;
+    background-color: transparent;
+  }
 
-    }
+  .user-inputs:focus {
+    outline: 0;
+  }
 
-    .user-inputs:focus {outline: 0;}
-
-    .user-inputs::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-        color: rgb(177, 177, 177);
-        opacity: 1; /* Firefox */
-    }
+  .user-inputs::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(177, 177, 177);
+    opacity: 1; /* Firefox */
+  }
 }
 
 .login-butao {
-    background-color: rgba(55, 142, 169, 0.541);
-    border-radius: 10px;
-    border-color: transparent;
-    color: white;
-    font-size: 2rem;
+  background-color: rgba(55, 142, 169, 0.541);
+  border-radius: 10px;
+  border-color: transparent;
+  color: white;
+  font-size: 2rem;
+  font-weight: 300;
+  margin-top: 2vh;
+  width: 70%;
+  height: 70px;
+
+  &:focus {
+    outline: 0;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+// Medium devices (tablets, less than 992px)
+// @media screen and (max-width: 900px) and (min-width: 600px)
+@media (max-width: 1024px) and (min-width: 768px) {
+  .login-frame {
+    margin: 7vh 0 5vh 0;
+    width: 50vw;
+    height: 40vh;
+  }
+}
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767px) {
+  .login-titulo {
+    font-size: 1.5rem;
+  }
+
+  .login-frame {
+    width: 90vw;
+    height: 40vh;
+    border-radius: 15px;
+  }
+
+  .icon-top {
+    top: -30px;
+    font-size: 3em;
+  }
+
+  .box-input {
+    margin: 10px 0;
+    height: 40px;
+    width: 90%;
+
+    i {
+      width: 30px;
+      margin: 0 10px;
+      font-size: 1.5em;
+    }
+
+    .user-inputs {
+      font-size: 1.5rem;
+      background-color: transparent;
+    }
+  }
+
+  .login-butao {
+    font-size: 1.5rem;
     font-weight: 300;
-    margin-top: 2vh;
-    width: 70%;
-    height: 70px;
- 
-    &:focus {outline:0;}
-    &:hover {cursor: pointer;}
+    margin-top: 3vh;
+    width: 50%;
+    height: 50px;
+  }
 }
