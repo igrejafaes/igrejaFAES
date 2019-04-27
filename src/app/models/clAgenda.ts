@@ -4,7 +4,7 @@ export class clAgenda {
         public Titulo: string,
         public AgendaData: number,
         public Descricao: string,
-        public Imagem: string,
+        public ImagemURL: string,
         public Local: string,
         public Filial: string,
         public id?: any

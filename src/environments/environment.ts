@@ -5,12 +5,22 @@
 export const environment = {
   production: false,
   firebase : {
-    apiKey: "AIzaSyCmjqhc698xKwBFwNU7M3ph3PQDmyToWBQ",
-    authDomain: "sitefaes.firebaseapp.com",
-    databaseURL: "https://sitefaes.firebaseio.com",
-    projectId: "sitefaes",
-    storageBucket: "sitefaes.appspot.com",
-    messagingSenderId: "1073543828369"
+    apiKey: "AIzaSyCPFo_tbah2ofycTiqj2c2o1xWUKiY3WkY",
+    authDomain: "site-faes.firebaseapp.com",
+    databaseURL: "https://site-faes.firebaseio.com",
+    projectId: "site-faes",
+    storageBucket: "site-faes.appspot.com",
+    messagingSenderId: "674522148657"
+
+
+
+
+    // apiKey: "AIzaSyCmjqhc698xKwBFwNU7M3ph3PQDmyToWBQ",
+    // authDomain: "sitefaes.firebaseapp.com",
+    // databaseURL: "https://sitefaes.firebaseio.com",
+    // projectId: "sitefaes",
+    // storageBucket: "sitefaes.appspot.com",
+    // messagingSenderId: "1073543828369"
   }
 };
 
