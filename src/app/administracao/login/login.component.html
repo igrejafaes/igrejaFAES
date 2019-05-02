@@ -1,19 +1,34 @@
 <div class="login">
   <p class="login-titulo">Faça o seu Login</p>
-  <div class="login-frame">
-    <i class="icon-top fa fa-user-circle"></i>
-    <div class="usuario">
-      <!-- <span>Nome</span> -->
-      <div class="box-input">
-        <i class="fa fa-user-circle"></i>
-        <input class="user-inputs" type="text" placeholder="Usuário" />
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="login-frame">
+      <i class="icon-top fa fa-user-circle"></i>
+      <div class="usuario">
+        <!-- <span>Nome</span> -->
+        <div class="box-input">
+          <i class="fa fa-user-circle"></i>
+          <input
+            formControlName="nome"
+            id="nome"
+            class="user-inputs"
+            type="text"
+            placeholder="Informe o Usuário"
+          />
+        </div>
+        <!-- <span>Senha</span> -->
+        <div class="box-input">
+          <i class="fa fa-lock"></i>
+          <input
+            formControlName="password"
+            id="password"
+            class="user-inputs"
+            type="password"
+            placeholder="Entre com a Senha"
+          />
+        </div>
       </div>
-      <!-- <span>Senha</span> -->
-      <div class="box-input">
-        <i class="fa fa-lock"></i>
-        <input class="user-inputs" type="password" placeholder="Senha" />
-      </div>
+      <button class="login-butao" type="submit">Login</button>
     </div>
-    <button class="login-butao">Login</button>
-  </div>
+  </form>
 </div>

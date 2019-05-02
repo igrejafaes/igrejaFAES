@@ -15,12 +15,12 @@
 .login-frame {
   display: flex;
   position: relative;
-  justify-content: center;
+  justify-content: space-around;
   flex-direction: column;
   align-items: center;
   margin: 7vh 0 5vh 0;
-  width: 33vw;
-  height: 50vh;
+  width: 25vw;
+  height: 35vh;
   background-color: rgba(255, 255, 255, 0.253);
   border-radius: 15px;
 }
@@ -36,6 +36,7 @@
 .usuario {
   display: flex;
   align-items: center;
+  margin-top: 4vh;
   justify-content: center;
   flex-direction: column;
   position: relative;
@@ -44,10 +45,11 @@
 
 .box-input {
   display: flex;
+  position: relative;
   align-content: center;
   align-items: center;
-  margin: 20px 0;
-  height: 70px;
+  margin: 10px 0;
+  height: 50px;
   width: 90%;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.6);
@@ -55,14 +57,16 @@
   i {
     width: 50px;
     text-align: center;
-    margin: 0 20px;
-    font-size: 3em;
+    margin: 0 5px;
+    font-size: 2em;
     color: darkgray;
   }
 
   .user-inputs {
+    position: absolute;
+    left: 4vw;
     border: none;
-    line-height: 50px;
+    width: 15vw;
     font-size: 1.5rem;
     background-color: transparent;
   }
@@ -76,6 +80,15 @@
     color: rgb(177, 177, 177);
     opacity: 1; /* Firefox */
   }
+
+
+  .invalid-feedback{
+    position: relative;
+    left: -20px;
+    top: 30px;
+    z-index: 100;
+  }
+
 }
 
 .login-butao {
@@ -83,17 +96,18 @@
   border-radius: 10px;
   border-color: transparent;
   color: white;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 300;
-  margin-top: 2vh;
-  width: 70%;
-  height: 70px;
+  margin-bottom: 3vh;
+  width: 50%;
+  height: 50px;
 
   &:focus {
     outline: 0;
   }
   &:hover {
     cursor: pointer;
+    background-color: coral;
   }
 }
 
@@ -103,8 +117,29 @@
   .login-frame {
     margin: 7vh 0 5vh 0;
     width: 50vw;
-    height: 40vh;
+    height: 25vh;
   }
+
+  .icon-top {
+    top: -70px;
+    font-size: 7rem;
+  }
+
+  .box-input {
+    .user-inputs {
+      left: 8vw;
+      width: 75%;
+    }
+  }
+
+  .login-butao {
+    //font-size: 1.3rem;
+    //font-weight: 300;
+    margin-bottom: 2vh;
+    width: 50%;
+    //height: 40px;
+  }
+
 }
 
 // Small devices (landscape phones, less than 768px)
@@ -114,14 +149,19 @@
   }
 
   .login-frame {
-    width: 90vw;
+    justify-content: center;
+    width: 80vw;
     height: 40vh;
     border-radius: 15px;
   }
 
   .icon-top {
-    top: -30px;
-    font-size: 3em;
+    top: -35px;
+    font-size: 5rem;
+  }
+
+  .usuario{
+    margin-top: 1.5vh;
   }
 
   .box-input {
@@ -136,16 +176,19 @@
     }
 
     .user-inputs {
+      left: 12vw;
+      width: 80%;
       font-size: 1.5rem;
       background-color: transparent;
     }
   }
 
   .login-butao {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 300;
-    margin-top: 3vh;
+    margin-top: 1.5vh;
+    margin-bottom: 1.5vh;
     width: 50%;
-    height: 50px;
+    height: 40px;
   }
 }
