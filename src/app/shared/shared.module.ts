@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { EmConstrucaoComponent } from './em-construcao/em-construcao.component';
 import { RouterModule } from '@angular/router';
@@ -16,13 +17,16 @@ import { FirestoreDatePipe } from '../pipes/firestore-date.pipe';
   ],
   declarations: [
     EmConstrucaoComponent,
-    FirestoreDatePipe
+    FirestoreDatePipe,
   ],
   exports: [
     MDBBootstrapModule,
     SlickCarouselModule,
     EmConstrucaoComponent,
-    FirestoreDatePipe
-  ]
+    FirestoreDatePipe,
+  ],
+  entryComponents: [
+  ],
+  providers: []
 })
 export class SharedModule { }

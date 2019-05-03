@@ -14,7 +14,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   errorMessage: string = '';
   hide = true;
-  usuario = new Usuario
+  usuario = new Usuario;
+  submitted: boolean = false;
 
   constructor(private authService: AuthService,
     private router: Router,
@@ -26,25 +27,30 @@ export class LoginComponent implements OnInit {
 
   createForm() {
     this.loginForm = this.formbuilder.group({
-      nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+      email: [null, [
+        Validators.required, 
+        Validators.email,
+        Validators.minLength(3), 
+        Validators.maxLength(100)]],
       password: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(20)]]
     });
   }
 
   tryLogin() {
+    
     this.authService.doLogin(this.loginForm.value)
       .then(res => {
         console.log(res);
         this.router.navigate(['/administracao/home']);
       }, err => {
         console.log(err.message);
-        this.errorMessage = err.message;
+        //this.errorMessage = err.message;
       })
   }
 
   onSubmit() {
-    //this.submitted = true
-    console.log(this.loginForm.valid)
+    this.submitted = true
+    console.log(this.loginForm)
     if (this.loginForm.valid) {
       this.tryLogin()
     }
@@ -63,6 +69,9 @@ export class LoginComponent implements OnInit {
   // }
 
   // hasError(field: string) {
-  //   return this.loginForm.get(field).errors
+  //   if(this.submitted){
+  //     //console.log(this.loginForm.get(field))
+  //     return this.loginForm.get(field).errors
+  //   }
   // }
 }

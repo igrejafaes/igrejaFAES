@@ -6,14 +6,15 @@
       <i class="icon-top fa fa-user-circle"></i>
       <div class="usuario">
         <!-- <span>Nome</span> -->
-        <div class="box-input">
+        <div class="box-input" [ngClass]="{'box-input-invalid': submitted && !loginForm.controls.email.valid}">
           <i class="fa fa-user-circle"></i>
           <input
-            formControlName="nome"
-            id="nome"
+            formControlName="email"
+            id="email"
             class="user-inputs"
             type="text"
-            placeholder="Informe o Usuário"
+            placeholder="Informe o e-mail"
+            #email
           />
         </div>
         <!-- <span>Senha</span> -->
@@ -24,11 +25,12 @@
             id="password"
             class="user-inputs"
             type="password"
-            placeholder="Entre com a Senha"
+            placeholder="Informe a Senha"
           />
         </div>
       </div>
       <button class="login-butao" type="submit">Login</button>
     </div>
   </form>
+  <!-- div *ngIf="submitted && hasError('email')" >{{ getErrorMessage(loginForm.get('email')) }}</div -->
 </div>

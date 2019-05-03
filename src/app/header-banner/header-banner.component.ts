@@ -7,7 +7,7 @@ import { GetImageUrlService } from './../services/get-image-url.service';
 
 @Component({
   selector: 'app-header-banner',
-  template: `<img [src]="bannerImage" alt="Logo FAES" />`,
+  template: `<img [src]="bannerImage" alt="Logo FAES"/>`,
   styles: ['img {width: 100%; height: auto;}']
 })
 export class HeaderBannerComponent implements OnInit {

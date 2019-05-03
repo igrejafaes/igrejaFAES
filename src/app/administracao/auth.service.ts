@@ -15,7 +15,7 @@ export class AuthService {
 
   doLogin(usuario: Usuario) {
     return new Promise<any>((resolve, reject) => {
-      firebase.auth().signInWithEmailAndPassword(usuario.nome, usuario.password)
+      firebase.auth().signInWithEmailAndPassword(usuario.email, usuario.password)
         .then(res => {
           this._usuarioAutenticado = true;
           //console.log('autenticado')

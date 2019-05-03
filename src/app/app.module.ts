@@ -55,7 +55,7 @@ registerLocaleData(ptBr)
     NgwWowModule.forRoot(),
     AppRoutingModule,
   ],
-  exports: [ ],
+  exports: [],
   providers: [
     { provide: LOCALE_ID, useValue: "pt-BR" }, //replace "en-US" with your locale
   ],

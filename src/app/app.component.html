@@ -1,6 +1,8 @@
-<app-header-banner></app-header-banner>
-<app-navbar></app-navbar>
-
+<!-- BANNER -->
+<app-header-banner *ngIf="!isAdm"></app-header-banner>
+<!-- NAVBAR -->
+<app-navbar *ngIf="!isAdm"></app-navbar>
+<!-- ROUTER OUTLET -->
 <router-outlet></router-outlet>
-
+<!-- FOOTER -->
 <app-rodape></app-rodape>
