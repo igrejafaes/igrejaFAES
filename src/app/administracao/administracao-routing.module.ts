@@ -1,3 +1,4 @@
+import { PaginaNaoEncontradaComponent } from './../pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { AdmHomeComponent } from './adm-home/adm-home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -9,9 +10,10 @@ import { AuthGuard } from './guards/auth.guard'
 
 const routes: Routes = [
   { path: 'administracao', component: AdministracaoComponent, children: [
-    { path: '', component: LoginComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'home', component: AdmHomeComponent , canActivate: [AuthGuard] }
+    { path: '', redirectTo: '/administracao/home', pathMatch: 'full', canActivate: [AuthGuard] },
+    { path: 'home', component: AdmHomeComponent , canActivate: [AuthGuard] },
+    { path: '**', component: PaginaNaoEncontradaComponent }
   ] },
 ];
 

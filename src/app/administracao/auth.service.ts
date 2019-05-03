@@ -18,13 +18,9 @@ export class AuthService {
       firebase.auth().signInWithEmailAndPassword(usuario.email, usuario.password)
         .then(res => {
           this._usuarioAutenticado = true;
-          //console.log('autenticado')
-          //this.mostrarMenuEmitter.emit(true);
           resolve(res);
         }, err => {
           this._usuarioAutenticado = false;
-          //console.log(err.message)
-          //this.mostrarMenuEmitter.emit(false);
           reject(err);
         })
     })

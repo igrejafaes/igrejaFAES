@@ -11,12 +11,13 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from "angularfire2/auth";
 
-import { HomepageModule } from './homepage/homepage.module';
 import { SharedModule } from './shared/shared.module';
+import { HomepageModule } from './homepage/homepage.module';
 import { DepartamentoModule } from './departamento/departamento.module';
 import { AdministracaoModule } from './administracao/administracao.module';
 import { IgrejaModule } from './igreja/igreja.module';
 import { NgwWowModule } from 'ngx-wow';
+
 
 import { AppComponent } from './app.component';
 import { HeaderBannerComponent } from './header-banner/header-banner.component';
@@ -36,7 +37,7 @@ registerLocaleData(ptBr)
     NavbarComponent,
     PaginaNaoEncontradaComponent,
     RodapeComponent,
-    ContatoComponent
+    ContatoComponent,
     ],
   imports: [
     BrowserModule,
@@ -48,14 +49,14 @@ registerLocaleData(ptBr)
     AngularFireStorageModule,
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     AdministracaoModule,
+    SharedModule,
     HomepageModule,
     DepartamentoModule,
     IgrejaModule,
-    SharedModule,
     NgwWowModule.forRoot(),
     AppRoutingModule,
   ],
-  exports: [],
+  entryComponents: [ ],
   providers: [
     { provide: LOCALE_ID, useValue: "pt-BR" }, //replace "en-US" with your locale
   ],

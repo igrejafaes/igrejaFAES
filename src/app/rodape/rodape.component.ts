@@ -12,7 +12,7 @@ export class RodapeComponent implements OnInit {
 
   logoFAES = '/assets/images/LogoFAES_Branco.png'
   infoIgreja: clInfoIgreja
-  
+ 
   constructor(private infoIgrejaService : InfoigrejaService) { }
 
   ngOnInit() {

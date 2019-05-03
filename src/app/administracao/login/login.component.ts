@@ -1,3 +1,4 @@
+import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService,
     private router: Router,
-    private formbuilder: FormBuilder) { }
+    private formbuilder: FormBuilder,
+    private alertModal: AlertModalService) { }
 
   ngOnInit() {
     this.createForm();
@@ -40,17 +42,20 @@ export class LoginComponent implements OnInit {
     
     this.authService.doLogin(this.loginForm.value)
       .then(res => {
-        console.log(res);
+        //console.log(res);
         this.router.navigate(['/administracao/home']);
       }, err => {
-        console.log(err.message);
-        //this.errorMessage = err.message;
+        if(err.code === 'auth/user-not-found'){
+          this.alertModal.showAlertDanger('Senha ou usuário inválido', 'Login')
+        } else {
+          this.alertModal.showAlertDanger('Um erro ocorreu, tente mais tarde...', 'Login')
+        }
       })
   }
 
   onSubmit() {
     this.submitted = true
-    console.log(this.loginForm)
+    //console.log(this.loginForm)
     if (this.loginForm.valid) {
       this.tryLogin()
     }

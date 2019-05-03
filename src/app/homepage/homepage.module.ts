@@ -19,6 +19,8 @@ import { NoticiasComponent } from './noticias/noticias.component';
   declarations: [
     CarouselComponent, 
     HomepageComponent, 
-    AgendaComponent, ReunioesComponent, NoticiasComponent]
+    AgendaComponent, 
+    ReunioesComponent, 
+    NoticiasComponent]
 })
 export class HomepageModule { }
