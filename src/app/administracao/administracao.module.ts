@@ -9,13 +9,17 @@ import { AdmHomeComponent } from './adm-home/adm-home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarAdmComponent } from './navbar-adm/navbar-adm.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { CarouselComponent } from './carousel/carousel.component';
+import { ScheduleComponent } from './schedule/schedule.component';
+import { NewsComponent } from './news/news.component';
+import { NewsletterComponent } from './newsletter/newsletter.component';
 
 @NgModule({
   declarations: [
     LoginComponent, 
     AdministracaoComponent, 
     AdmHomeComponent, 
-    NavbarAdmComponent,
+    NavbarAdmComponent, CarouselComponent, ScheduleComponent, NewsComponent, NewsletterComponent,
   ],
   imports: [
     CommonModule,
