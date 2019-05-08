@@ -8,11 +8,6 @@ import { AuthService } from '../auth.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  // canActivate(
-  //   next: ActivatedRouteSnapshot,
-  //   state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-  //   return true;
-  // }
 
   constructor(    
     private authService: AuthService,
@@ -22,12 +17,10 @@ export class AuthGuard implements CanActivate {
 
     canActivate(
       next: ActivatedRouteSnapshot,
-      state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+      state: RouterStateSnapshot): Promise<boolean> {
       return new Promise<boolean>((resolve, reject) => {
         this.authService.getCurrentUser()
           .then(user => {
-            const {email} = user;
-            console.log(email)
             return resolve(true);
           }, err => {
             this.router.navigate(['/administracao/login'])

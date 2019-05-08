@@ -6,9 +6,9 @@
         <mdb-carousel class="carousel slide carousel-fade mx-auto" [animation]="'fade'" [isControls]="true">
 
             <!--First slide-->
-            <mdb-carousel-item *ngFor="let imagem of imagens">
+            <mdb-carousel-item *ngFor="let imagem of imagens" class="d-flex justify-content-center">
                 <!-- img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(130).jpg" alt="First slide" -->
-                <img class="w-100" [src]="imagem" alt="First slide">
+                <img class="carousel-image" [src]="imagem" alt="First slide">
 
             </mdb-carousel-item>
             <!--/First slide-->

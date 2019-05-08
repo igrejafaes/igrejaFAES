@@ -1,37 +1,47 @@
 <!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark unique-color-dark sticky-top" [containerInside]="true">
-
+<mdb-navbar
+  SideClass="navbar navbar-expand-lg navbar-dark unique-color-dark sticky-top"
+  [containerInside]="true"
+>
   <!-- Navbar brand -->
-  <mdb-navbar-brand><a class="navbar-brand mr-5" [routerLink]="['home']">Área Administrativa</a></mdb-navbar-brand>
+  <mdb-navbar-brand
+    ><a class="navbar-brand mr-5" [routerLink]="['home']"
+      >Área Administrativa</a
+    ></mdb-navbar-brand
+  >
 
   <!-- Collapsible content -->
   <links>
-
     <!-- Menu -->
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item" [routerLink]="[menu.path]" routerLinkActive="active" *ngFor="let menu of menuList">
-        <a class="nav-link waves-light" mdbWavesEffect>{{ menu.title }}<span class="sr-only">(current)</span></a>
+      <li
+        class="nav-item"
+        [routerLink]="[menu.path]"
+        routerLinkActive="active"
+        *ngFor="let menu of menuList"
+      >
+        <a class="nav-link waves-light" mdbWavesEffect
+          >{{ menu.title }}<span class="sr-only">(current)</span></a
+        >
       </li>
     </ul>
     <!-- Menu -->
 
     <ul class="navbar-nav ml-auto nav-flex-icons">
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="logged">
         <a class="nav-link">
           <div class="btn-group" mdbDropdown>
             <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
             <div class="dropdown-menu dropdown-menu-right dropdown-primary">
               <a class="dropdown-item" href="#">Minha Conta</a>
               <div class="divider dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Sair</a>
+              <a class="dropdown-item" (click)="fazerLogOut()">Sair</a>
             </div>
           </div>
         </a>
       </li>
     </ul>
-
   </links>
   <!-- Collapsible content -->
-
 </mdb-navbar>
 <!--/.Navbar-->

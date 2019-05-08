@@ -10,19 +10,21 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { NewsComponent } from './news/news.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 
-// import { AuthGuard } from './guards/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: 'administracao', component: AdministracaoComponent, children: [
-    { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: '/administracao/home', pathMatch: 'full'/*, canActivate: [AuthGuard]*/ },
-  { path: 'home', component: AdmHomeComponent/*, canActivate: [AuthGuard]*/ },
-  { path: 'carousel', component: CarouselComponent/*, canActivate: [AuthGuard]*/ },
-  { path: 'schedule', component: ScheduleComponent/*, canActivate: [AuthGuard]*/ },
-  { path: 'news', component: NewsComponent/*, canActivate: [AuthGuard]*/ },
-  { path: 'newsletter', component: NewsletterComponent/*, canActivate: [AuthGuard]*/ },
-    { path: '**', component: PaginaNaoEncontradaComponent }
-  ] },
+  {
+    path: 'administracao', component: AdministracaoComponent, children: [
+      { path: 'login', component: LoginComponent },
+      { path: '', redirectTo: '/administracao/home', pathMatch: 'full', canActivate: [AuthGuard]},
+      { path: 'home', component: AdmHomeComponent, canActivate: [AuthGuard]},
+      { path: 'carousel', component: CarouselComponent, canActivate: [AuthGuard]},
+      { path: 'schedule', component: ScheduleComponent, canActivate: [AuthGuard]},
+      { path: 'news', component: NewsComponent, canActivate: [AuthGuard]},
+      { path: 'newsletter', component: NewsletterComponent, canActivate: [AuthGuard]},
+      { path: '**', component: PaginaNaoEncontradaComponent }
+    ]
+  },
 ];
 
 @NgModule({

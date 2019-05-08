@@ -1,5 +1,5 @@
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from './../auth.service';
@@ -24,6 +24,12 @@ export class LoginComponent implements OnInit {
     private alertModal: AlertModalService) { }
 
   ngOnInit() {
+    this.authService.usuarioChange$.subscribe((user) => {
+      if (user != null) {
+        this.alertModal.showAlertSuccess('Você já está logado como ' + user, 'Login');
+        this.router.navigate(['/administracao/home']);
+      }
+    })
     this.createForm();
   }
 

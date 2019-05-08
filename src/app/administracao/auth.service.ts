@@ -2,25 +2,30 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { Usuario } from '../models/usuario';
-
+import { Subject } from 'rxjs/Subject';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private _usuarioAutenticado: boolean = false;
+  //private _usuarioAutenticado: Usuario = null;
   // mostrarMenuEmitter = new EventEmitter<boolean>();
 
+  // public get usuarioAutenticado() : Usuario  {
+  //   return this._usuarioAutenticado
+  // }
+ 
   constructor(private afAuth: AngularFireAuth) { }
 
   doLogin(usuario: Usuario) {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(usuario.email, usuario.password)
         .then(res => {
-          this._usuarioAutenticado = true;
+          //console.log(usuario)
+          this.emitChange(usuario.email);
           resolve(res);
         }, err => {
-          this._usuarioAutenticado = false;
+          //this._usuarioAutenticado = null
           reject(err);
         })
     })
@@ -30,6 +35,8 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       if (firebase.auth().currentUser) {
         this.afAuth.auth.signOut();
+        //this._usuarioAutenticado = null
+        this.emitChange(null)
         resolve();
       } else {
         reject();
@@ -38,10 +45,11 @@ export class AuthService {
   }
 
   getCurrentUser() {
-    return new Promise<any>((resolve, reject) => {
-      var user = firebase.auth().onAuthStateChanged(function (user) {
+    return new Promise<Usuario>((resolve, reject) => {
+      var user = firebase.auth().onAuthStateChanged((user)=>{
         if (user) {
-          resolve(user);
+          const U: Usuario = { nome: '', password: '', email: user.email, acesso: 1 }
+          resolve(U);
         } else {
           reject('No user logged in');
         }
@@ -64,6 +72,17 @@ export class AuthService {
           }
         }
       )
+  }
+
+  // Observable string sources
+  private usuarioChangeSource = new Subject<string>();
+
+  // Observable string streams
+  usuarioChange$ = this.usuarioChangeSource.asObservable();
+
+  // Service message commands
+  emitChange(user: string) {
+      this.usuarioChangeSource.next(user);
   }
 
 }
