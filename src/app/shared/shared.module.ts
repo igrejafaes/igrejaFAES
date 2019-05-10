@@ -7,6 +7,7 @@ import { EmConstrucaoComponent } from './em-construcao/em-construcao.component';
 import { RouterModule } from '@angular/router';
 import { FirestoreDatePipe } from '../pipes/firestore-date.pipe';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
+import { ReturnToTabDirective } from './return-to-tab.directive';
 
 @NgModule({
   imports: [
@@ -19,13 +20,15 @@ import { AlertModalComponent } from './alert-modal/alert-modal.component';
     EmConstrucaoComponent,
     FirestoreDatePipe,
     AlertModalComponent,
+    ReturnToTabDirective,
   ],
   exports: [
     MDBBootstrapModule,
     SlickCarouselModule,
     EmConstrucaoComponent,
     FirestoreDatePipe,
-    AlertModalComponent
+    AlertModalComponent,
+    ReturnToTabDirective
   ],
   entryComponents: [
     AlertModalComponent

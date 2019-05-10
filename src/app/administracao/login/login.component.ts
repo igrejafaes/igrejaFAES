@@ -45,10 +45,9 @@ export class LoginComponent implements OnInit {
   }
 
   tryLogin() {
-    
     this.authService.doLogin(this.loginForm.value)
       .then(res => {
-        //console.log(res);
+        console.log(res);
         this.router.navigate(['/administracao/home']);
       }, err => {
         if(err.code === 'auth/user-not-found'){
@@ -61,7 +60,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true
-    //console.log(this.loginForm)
     if (this.loginForm.valid) {
       this.tryLogin()
     }

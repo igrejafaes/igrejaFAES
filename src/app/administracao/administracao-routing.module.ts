@@ -1,16 +1,17 @@
-import { PaginaNaoEncontradaComponent } from './../pagina-nao-encontrada/pagina-nao-encontrada.component';
-import { AdmHomeComponent } from './adm-home/adm-home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
+// COMPONENTS
+import { UsuarioFormComponent } from './usuario-form/usuario-form.component';
+import { PaginaNaoEncontradaComponent } from './../pagina-nao-encontrada/pagina-nao-encontrada.component';
+import { AdmHomeComponent } from './adm-home/adm-home.component';
 import { LoginComponent } from './login/login.component';
 import { AdministracaoComponent } from './administracao.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { NewsComponent } from './news/news.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
-
-import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
       { path: 'schedule', component: ScheduleComponent, canActivate: [AuthGuard]},
       { path: 'news', component: NewsComponent, canActivate: [AuthGuard]},
       { path: 'newsletter', component: NewsletterComponent, canActivate: [AuthGuard]},
+      { path: 'usuario', component: UsuarioFormComponent, canActivate: [AuthGuard]},
       { path: '**', component: PaginaNaoEncontradaComponent }
     ]
   },
