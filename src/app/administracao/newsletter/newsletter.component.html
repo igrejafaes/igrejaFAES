@@ -1,19 +1,17 @@
-<section>
-    <div class="container">
-
-        <!-- Card -->
-        <div class="card">
-
-            <!-- Card content -->
-            <div class="card-body">
-
-                <!-- Title -->
-                <h4 class="card-title"><a>Lista Newsletter</a></h4>
-
-            </div>
-
+<div class="container">
+    <div class="box flex">
+      <div class="border flex">
+        <div class="box-header">
+          <h4>Newsletter</h4>
+          <p>Clicar em um dos botões acima para acessar os formulários.</p>
         </div>
-        <!-- Card -->
-
+        <div class="box-content flex">
+  
+        </div>
+        <div class="box-footer">
+          <button type="button" mdbBtn color="success" size="sm" mdbWavesEffect (click)="submitUrl()">Enviar</button>
+          <button type="button" mdbBtn color="danger" size="sm" mdbWavesEffect (click)="cancelUrl()">Cancelar</button>
+        </div>
+      </div>
     </div>
-</section>
+  </div>
