@@ -34,6 +34,9 @@ import { NewsletterComponent } from './newsletter/newsletter.component';
     SharedModule,
     ReactiveFormsModule,
     AdministracaoRoutingModule,
+  ],
+  exports: [
+    NavbarAdmComponent
   ]
 })
 export class AdministracaoModule { }

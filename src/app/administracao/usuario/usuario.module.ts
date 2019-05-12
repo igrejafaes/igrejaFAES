@@ -6,6 +6,7 @@ import { UsuarioRoutingModule } from './usuario-routing.module';
 import { UsuarioComponent } from './usuario.component';
 import { UsuarioFormComponent } from './usuario-form/usuario-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdministracaoModule } from '../administracao.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     SharedModule,
     UsuarioRoutingModule,
+    AdministracaoModule,
   ]
 })
 export class UsuarioModule { }
