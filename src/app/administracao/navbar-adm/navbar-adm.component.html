@@ -5,7 +5,7 @@
 >
   <!-- Navbar brand -->
   <mdb-navbar-brand
-    ><a class="navbar-brand mr-5" [routerLink]="['home']"
+    ><a class="navbar-brand mr-5" [routerLink]="['/administracao']"
       >Área Administrativa</a
     ></mdb-navbar-brand
   >
@@ -23,6 +23,37 @@
         <a class="nav-link waves-light" mdbWavesEffect
           >{{ menu.title }}<span class="sr-only">(current)</span></a
         >
+      </li>
+
+      <!-- Dropdown -->
+      <li class="nav-item dropdown" dropdown>
+        <a
+          dropdownToggle
+          mdbWavesEffect
+          type="button"
+          class="nav-link dropdown-toggle waves-light"
+          mdbWavesEffect
+        >
+          Usuarios<span class="caret"></span
+        ></a>
+        <div
+          *dropdownMenu
+          class="dropdown-menu dropdown dropdown-primary"
+          role="menu"
+        >
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            [routerLink]="['/administracao/usuario']"
+            >Listagem</a
+          >
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            [routerLink]="['/administracao/usuario/novo']"
+            >Inserir Novo</a
+          >
+        </div>
       </li>
     </ul>
     <!-- Menu -->

@@ -15,7 +15,7 @@ import { SharedModule } from './shared/shared.module';
 import { HomepageModule } from './homepage/homepage.module';
 import { DepartamentoModule } from './departamento/departamento.module';
 import { AdministracaoModule } from './administracao/administracao.module';
-import { UsuarioModule } from './administracao/usuario/usuario.module';
+import { UsuarioModule } from './administracao/usuarios/usuario.module';
 import { IgrejaModule } from './igreja/igreja.module';
 import { NgwWowModule } from 'ngx-wow';
 
