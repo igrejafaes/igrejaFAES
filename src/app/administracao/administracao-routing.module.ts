@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 
 // COMPONENTS
-import { UsuarioFormComponent } from './usuario-form/usuario-form.component';
 import { PaginaNaoEncontradaComponent } from './../pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { AdmHomeComponent } from './adm-home/adm-home.component';
 import { LoginComponent } from './login/login.component';
@@ -15,17 +14,19 @@ import { NewsletterComponent } from './newsletter/newsletter.component';
 
 const routes: Routes = [
   {
-    path: 'administracao', component: AdministracaoComponent, children: [
+    path: 'administracao', 
+    component: AdministracaoComponent,
+    children: [
+      //{ path: 'usuario', loadChildren: './usuario/usuario.module#UsuarioModule' },
       { path: 'login', component: LoginComponent },
-      { path: '', redirectTo: '/administracao/home', pathMatch: 'full', canActivate: [AuthGuard]},
-      { path: 'home', component: AdmHomeComponent, canActivate: [AuthGuard]},
-      { path: 'carousel', component: CarouselComponent, canActivate: [AuthGuard]},
-      { path: 'schedule', component: ScheduleComponent, canActivate: [AuthGuard]},
-      { path: 'news', component: NewsComponent, canActivate: [AuthGuard]},
-      { path: 'newsletter', component: NewsletterComponent, canActivate: [AuthGuard]},
-      { path: 'usuario', component: UsuarioFormComponent, canActivate: [AuthGuard]},
-      { path: '**', component: PaginaNaoEncontradaComponent }
-    ]
+      { path: 'home', component: AdmHomeComponent, canActivate: [AuthGuard] },
+      { path: 'carousel', component: CarouselComponent, canActivate: [AuthGuard]  },
+      { path: 'schedule', component: ScheduleComponent, canActivate: [AuthGuard]  },
+      { path: 'news', component: NewsComponent, canActivate: [AuthGuard]  },
+      { path: 'newsletter', component: NewsletterComponent, canActivate: [AuthGuard]  },
+      { path: '', redirectTo: '/administracao/home', pathMatch: 'full', canActivate: [AuthGuard]  },
+      { path: '**', component: PaginaNaoEncontradaComponent },
+    ],
   },
 ];
 

@@ -15,7 +15,6 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { NewsComponent } from './news/news.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
-import { UsuarioFormComponent } from './usuario-form/usuario-form.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +26,6 @@ import { UsuarioFormComponent } from './usuario-form/usuario-form.component';
     ScheduleComponent, 
     NewsComponent, 
     NewsletterComponent, 
-    UsuarioFormComponent,
   ],
   imports: [
     CommonModule,

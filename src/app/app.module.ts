@@ -15,6 +15,7 @@ import { SharedModule } from './shared/shared.module';
 import { HomepageModule } from './homepage/homepage.module';
 import { DepartamentoModule } from './departamento/departamento.module';
 import { AdministracaoModule } from './administracao/administracao.module';
+import { UsuarioModule } from './administracao/usuario/usuario.module';
 import { IgrejaModule } from './igreja/igreja.module';
 import { NgwWowModule } from 'ngx-wow';
 
@@ -28,6 +29,7 @@ import { ContatoComponent } from './contato/contato.component';
 //lOCALE PT-BR
 import { registerLocaleData } from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
+
 registerLocaleData(ptBr)
 
 @NgModule({
@@ -41,13 +43,12 @@ registerLocaleData(ptBr)
     ],
   imports: [
     BrowserModule,
-    // ReactiveFormsModule,
-    // FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+    UsuarioModule,
     AdministracaoModule,
     SharedModule,
     HomepageModule,

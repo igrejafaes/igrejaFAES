@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SharedModule } from '../shared/shared.module';
+import { UsuarioModule } from '../administracao/usuario/usuario.module';
 import { HomepageRoutingModule } from './homepage-routing.module';
 
 import { CarouselComponent } from './carousel/carousel.component';
@@ -14,6 +15,7 @@ import { NoticiasComponent } from './noticias/noticias.component';
   imports: [
     CommonModule,
     SharedModule,
+    UsuarioModule,
     HomepageRoutingModule,
   ],
   declarations: [
