@@ -19,10 +19,10 @@
             <span>{{ imagename }}</span>
           </div>
         </div>
-        <div class="imagelist">
+        <div class="box-list">
           <ul class="list-group list-group-flush" *ngFor="let u of imagepath; let i=index">
             <li class="list-group-item d-flex justify-content-between align-items-center">
-              {{ u.name }}
+              {{i + 1}} - {{ u.name }}
               <a style="color: red" (click)="trashUrl(i)">
                 <mdb-icon fas icon="trash"></mdb-icon>
               </a>
