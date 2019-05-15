@@ -1,0 +1,21 @@
+<ul class="list-group list-group-flush" *ngFor="let u of imagepath; let i=index">
+
+        <li class="list-group-item" style="position: relative; display: flex; flex-direction: row;">              
+          
+          <div>
+            <img id="output" style="width: 60px; height: 60px; background-color: silver;" class="border">
+          </div>
+
+          <div>
+            <span>{{i + 1}} - {{ u.name }}</span>
+          </div>
+
+          <div>
+            <a style="color: red" (click)="trashUrl(i)">
+              <mdb-icon fas icon="trash"></mdb-icon>
+            </a>
+          </div>
+
+        </li>
+
+      </ul>

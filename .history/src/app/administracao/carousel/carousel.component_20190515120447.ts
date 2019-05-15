@@ -10,7 +10,7 @@ export class CarouselComponent implements OnInit {
 
   selectedFile: File = null;
 
-  imagename: string = null;
+  imagename: string = "";
 
   imagepath: any = [];
 
@@ -33,7 +33,7 @@ export class CarouselComponent implements OnInit {
         }
       );
       this.selectedFile = null;
-      this.imagename = null;
+      this.imagename = "";
     } else {
       this.alertModal.showAlertSuccess('Favor selecionar uma imagem.', 'Atenção!');
     }

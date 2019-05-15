@@ -70,24 +70,6 @@
 
         .list-group-item {
           padding: 6px;
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-
-          #itemImg {
-            flex: 0;
-            background-color: silver;
-            min-width: 60px;
-            min-height: 60px;
-          }
-          #itemImgName {
-            flex: 1;
-            padding-left: 10px;
-          }
-          #itemImgTrash {
-            flex: 1;
-            text-align: right;
-          }
         }
       }
     }

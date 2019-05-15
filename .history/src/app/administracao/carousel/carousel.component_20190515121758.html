@@ -9,7 +9,7 @@
       <div class="box-content flex">
         <div class="box-input">
           <div class="button-input">
-            <input type="file" id="file" accept="imagem/*" (change)="onSelectedFile($event)">
+            <input type="file" id="file" (change)="onSelectedFile($event)">
             <label for="file" class="btn btn-sm btn-primary waves-light" mdbWavesEffect>
               <mdb-icon fas icon="camera"></mdb-icon>
             </label>
@@ -21,18 +21,12 @@
         </div>
         <div class="box-list">
           <ul class="list-group list-group-flush" *ngFor="let u of imagepath; let i=index">
-            <li class="list-group-item">
-              <div class="border" id="itemImg">
-                <img id="output">
-              </div>
-              <div id="itemImgName">
-                <span>{{i + 1}} - {{ u.name }}</span>
-              </div>
-              <div id="itemImgTrash">
-                <a style="color: red" (click)="trashUrl(i)">
-                  <mdb-icon fas icon="trash"></mdb-icon>
-                </a>
-              </div>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              {{i + 1}} - {{ u.name }}
+              <img [src]=u.name alt="some text" width=60 height=40>
+              <a style="color: red" (click)="trashUrl(i)">
+                <mdb-icon fas icon="trash"></mdb-icon>
+              </a>
             </li>
           </ul>
         </div>

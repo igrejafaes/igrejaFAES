@@ -8,7 +8,7 @@ import { AlertModalService } from 'src/app/shared/alert-modal.service';
 })
 export class CarouselComponent implements OnInit {
 
-  selectedFile: File = null;
+  selectedFile: File = [];
 
   imagename: string = null;
 

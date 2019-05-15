@@ -20,21 +20,27 @@
           </div>
         </div>
         <div class="box-list">
-          <ul class="list-group list-group-flush" *ngFor="let u of imagepath; let i=index">
-            <li class="list-group-item">
-              <div class="border" id="itemImg">
-                <img id="output">
-              </div>
-              <div id="itemImgName">
-                <span>{{i + 1}} - {{ u.name }}</span>
-              </div>
-              <div id="itemImgTrash">
-                <a style="color: red" (click)="trashUrl(i)">
-                  <mdb-icon fas icon="trash"></mdb-icon>
-                </a>
-              </div>
-            </li>
-          </ul>
+            <ul class="list-group list-group-flush" *ngFor="let u of imagepath; let i=index">
+
+                <li class="list-group-item">
+                  
+                  <div style="flex: 0;">
+                    <img id="output" style="width: 60px; height: 60px; background-color: silver;" class="border">
+                  </div>
+        
+                  <div style="flex: 1;">
+                    <span>{{i + 1}} - {{ u.name }}</span>
+                  </div>
+        
+                  <div style="flex: 1; text-align: right;">
+                    <a style="color: red" (click)="trashUrl(i)">
+                      <mdb-icon fas icon="trash"></mdb-icon>
+                    </a>
+                  </div>
+        
+                </li>
+        
+              </ul>
         </div>
       </div>
       <div class="box-footer" *ngIf="imagepath.length > 0">
