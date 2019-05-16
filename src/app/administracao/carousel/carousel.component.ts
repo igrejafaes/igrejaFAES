@@ -8,53 +8,62 @@ import { AlertModalService } from 'src/app/shared/alert-modal.service';
 })
 export class CarouselComponent implements OnInit {
 
-  selectedFile: File = null;
+  images: any = [];
 
-  imagename: string = null;
+  allFiles: any = [];
 
-  imagepath: any = [];
+  headTable = ['Item', 'Imagem', 'Arquivo', 'Tipo', 'Deletar'];
 
   constructor(private alertModal: AlertModalService) { }
 
-  ngOnInit() {
-  }
-
-  onSelectedFile(event: any) {
-    this.selectedFile = <File>event.target.files[0];
-    this.imagename = this.selectedFile.name;
-  }
-
-  addUrl() {
-    if (this.selectedFile !== null) {
-      this.imagepath.push(
-        {
-          name: this.selectedFile.name,
-          url: this.selectedFile,
-        }
-      );
-      this.selectedFile = null;
-      this.imagename = null;
-    } else {
-      this.alertModal.showAlertSuccess('Favor selecionar uma imagem.', 'Atenção!');
+  fileuploads(event: any) {
+    const files = event.target.files;
+    if (files) {
+      for (let i = 0; i < files.length; i++) {
+        const image = {
+          name: '',
+          type: '',
+          size: '',
+          url: '',
+        };
+        this.allFiles.push(files[i]);
+        image.name = files[i].name;
+        image.type = files[i].type;
+        image.size = files[i].size;
+        const reader = new FileReader();
+        reader.onload = (_filedata) => {
+          image.url = reader.result + '';
+          this.images.push(image);
+        };
+        reader.readAsDataURL(files[i]);
+      }
     }
   }
 
-  trashUrl(i: number) {
-    this.imagepath.splice(i, 1);
+  trashImage(image: any) {
+    const i = this.images.indexOf(image);
+    this.images.splice(i, 1);
+    this.allFiles.splice(i, 1);
   }
 
-  submitUrl() {
-    console.log(this.imagepath);
-    this.imagepath = [];
-    this.alertModal.showAlertSuccess('Carroussel atualizado com sucesso.', 'Atenção!');
-  }
-
-  cancelUrl() {
-    if (this.imagepath.length > 0) {
-      this.imagepath = [];
+  cancelImages() {
+    if (this.images.length > 0) {
+      this.images = [];
     } else {
       this.alertModal.showAlertSuccess('Não existem imagens na lista.', 'Atenção!');
     }
   }
 
+  submitImages() {
+    if (this.allFiles.length > 0) {
+      console.log(this.allFiles);
+      this.allFiles = [];
+      this.alertModal.showAlertSuccess('Carroussel atualizado com sucesso.', 'Atenção!');
+    } else {
+      this.alertModal.showAlertSuccess('Não houve alguma alteração.', 'Atenção!');
+    }
+  }
+
+  ngOnInit() {
+  }
 }
