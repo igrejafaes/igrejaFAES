@@ -35,4 +35,8 @@ export class UsuarioListaComponent implements OnInit {
     this.router.navigate(['usuario/editar', usuario.id], { relativeTo: this.route.parent });
   }
 
+  onDelete(usuario: Usuario){
+    
+  }
+
 }

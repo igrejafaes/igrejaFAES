@@ -7,7 +7,6 @@
         <!-- Title -->
         <h4 class="card-title">Listagem de Usuários</h4>
 
-
         <table mdbTable hover="true" *ngIf="list; else loading">
           <thead>
             <tr>
@@ -16,24 +15,27 @@
           </thead>
           <tbody>
             <tr mdbTableCol *ngFor="let usuario of list">
-              <th scope="row" (click)="onEdit(usuario)"><strong class="mr-1">{{ usuario.nome }}</strong>{{ usuario.sobrenome }}</th>
-              <td>{{ usuario.email }}</td>
-              <td>{{ usuario.telefone }}</td>
-              <td>{{ usuario.wathsapp }}</td>
-              <td><a class="text-danger"><mdb-icon fas icon="trash"></mdb-icon></a></td>
+              <th scope="row" (click)="onEdit(usuario)">
+                <strong class="mr-1">{{ usuario.nome }}</strong
+                >{{ usuario.sobrenome }}
+              </th>
+              <td (click)="onEdit(usuario)">{{ usuario.email }}</td>
+              <td (click)="onEdit(usuario)">{{ usuario.telefone }}</td>
+              <td (click)="onEdit(usuario)">{{ usuario.wathsapp }}</td>
+              <td>
+                <button class="btn btn-delete" (click)="onDelete(usuario)"
+                  ><mdb-icon fas icon="trash" class="red-text"></mdb-icon
+                ></button>
+              </td>
             </tr>
           </tbody>
         </table>
-        
+
         <ng-template #loading>
           <span>Carregando Cursos...</span>
         </ng-template>
-
-
-
       </div>
     </div>
     <!-- Card -->
   </div>
 </section>
-
