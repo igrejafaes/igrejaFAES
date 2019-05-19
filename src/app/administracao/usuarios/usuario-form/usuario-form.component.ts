@@ -1,9 +1,9 @@
 import { Usuario } from '../../../models/usuario';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-usuario-form',
@@ -15,36 +15,40 @@ export class UsuarioFormComponent implements OnInit {
   userForm: FormGroup;
   submited:boolean = false;
 
-  constructor(private authService: AuthService,
+  constructor(private userService: UserService,
               private router: Router,
               private formbuilder: FormBuilder,
-              private alertModal: AlertModalService) { }
+              private alertModal: AlertModalService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.createForm();
+    // GET DATA FROM RESOLVE
+    const usuario: Usuario = this.route.snapshot.data['Usuario'];
+    this.createForm(usuario);
   }
 
-  createForm() {
+  createForm(usuario: Usuario) {
     this.userForm = this.formbuilder.group({
-      nome: [null, [
+      nome: [usuario.nome, [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(100)
       ]],
-      sobrenome: [null],
+      sobrenome: [usuario.sobrenome],
       email: [null, [
         Validators.required,
         Validators.email,
         Validators.minLength(3),
         Validators.maxLength(100)
       ]],
-      password: [null, [
+      password: [usuario.password, [
         Validators.required, 
         Validators.minLength(6), 
         Validators.maxLength(20)
       ]],
-      telefone: [null],
-      wathsapp: [null],
+      telefone: [usuario.telefone],
+      wathsapp: [usuario.wathsapp],
+      acesso: [usuario.acesso || 1]
     });
   }
 
@@ -53,8 +57,8 @@ export class UsuarioFormComponent implements OnInit {
 
     if (this.userForm.valid){
       let user: Usuario = this.userForm.value
-
-      this.authService.createNewUser(user)
+      if(!user.acesso) user.acesso = 1
+      this.userService.createNewUser(user)
       .then(
         (response) => console.log(response)
       )

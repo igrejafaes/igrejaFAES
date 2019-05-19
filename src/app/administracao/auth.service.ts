@@ -3,20 +3,13 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { Usuario } from '../models/usuario';
 import { Subject } from 'rxjs/Subject';
-import { AngularFirestoreCollection, AngularFirestore, CollectionReference } from 'angularfire2/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  usuarios: AngularFirestoreCollection<Usuario>;
-
-  constructor(private afAuth: AngularFireAuth,
-    private db: AngularFirestore) {
-      this.usuarios = this.db.collection<Usuario>('/usuarios');
-      //(ref: CollectionReference) => ref.orderBy('feito', 'asc').orderBy('titulo', 'asc'));
-  }
+  constructor(private afAuth: AngularFireAuth) { }
 
   doLogin(usuario: Usuario) {
     return new Promise<any>((resolve, reject) => {
@@ -86,30 +79,12 @@ export class AuthService {
     this.usuarioChangeSource.next(user);
   }
 
-  // CREATE NEW FIREBASE USER
-  createNewUser(usuario: Usuario): any {
-    const result$ = firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.password)
-
-    return result$
-    .then(
-      (resp) => {
-        usuario.uid = resp.user.uid;
-        return this.usuarios.doc<Usuario>(usuario.uid).set(usuario)
-        .then(
-          () => usuario
-        , err => null)
-      }
-      , err => null
-    )
-    .catch(() => null)
-  }
-
-  writeUserData(userId, name, email, imageUrl) {
-    firebase.database().ref('users/' + userId).set({
-      username: name,
-      email: email,
-      profile_picture : imageUrl
-    });
-  }
+  // writeUserData(userId, name, email, imageUrl) {
+  //   firebase.database().ref('users/' + userId).set({
+  //     username: name,
+  //     email: email,
+  //     profile_picture : imageUrl
+  //   });
+  // }
 
 }

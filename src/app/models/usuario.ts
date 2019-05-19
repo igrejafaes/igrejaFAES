@@ -4,5 +4,7 @@ export class Usuario {
     email: string;
     password: string;
     acesso: number;
-    uid?: string;
+    id?: string;
+    telefone?: string;
+    wathsapp?: string;
 }

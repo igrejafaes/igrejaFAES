@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../user.service';
+import { Usuario } from 'src/app/models/usuario';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-usuario-lista',
@@ -7,17 +10,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsuarioListaComponent implements OnInit {
 
-  constructor() { }
+  list: Usuario[];
+
+  constructor(private userService: UserService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
+    
+    this.userService.getUsuarios().subscribe(actionArray => {
+      this.list = actionArray.map(item => {
+        return {
+          id: item.payload.doc.id,
+          ...item.payload.doc.data()
+        } as Usuario;
+      })
+    });
+
   }
 
-  elements: any = [
-    {id: 1, first: 'Mark', last: 'Otto', handle: '@mdo'},
-    {id: 2, first: 'Jacob', last: 'Thornton', handle: '@fat'},
-    {id: 3, first: 'Larry', last: 'the Bird', handle: '@twitter'},
-  ];
-
-  headElements = ['ID', 'First', 'Last', 'Handle'];
+  headElements = ['Nome', 'Email', 'Telefone', 'Wathsapp', ''];
   
+  onEdit(usuario: Usuario) {
+    this.router.navigate(['usuario/editar', usuario.id], { relativeTo: this.route.parent });
+  }
+
 }

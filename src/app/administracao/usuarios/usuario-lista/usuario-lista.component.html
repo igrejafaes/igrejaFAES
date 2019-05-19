@@ -5,25 +5,29 @@
       <!-- Card content -->
       <div class="card-body">
         <!-- Title -->
-        <h4 class="card-title"><a>Listagem de Usuários</a></h4>
+        <h4 class="card-title">Listagem de Usuários</h4>
 
 
-        <table mdbTable hover="true">
+        <table mdbTable hover="true" *ngIf="list; else loading">
           <thead>
             <tr>
               <th *ngFor="let head of headElements" scope="col">{{ head }}</th>
             </tr>
           </thead>
           <tbody>
-            <tr mdbTableCol *ngFor="let el of elements">
-              <th scope="row">{{ el.id }}</th>
-              <td>{{ el.first }}</td>
-              <td>{{ el.last }}</td>
-              <td>{{ el.handle }}</td>
+            <tr mdbTableCol *ngFor="let usuario of list">
+              <th scope="row" (click)="onEdit(usuario)"><strong class="mr-1">{{ usuario.nome }}</strong>{{ usuario.sobrenome }}</th>
+              <td>{{ usuario.email }}</td>
+              <td>{{ usuario.telefone }}</td>
+              <td>{{ usuario.wathsapp }}</td>
+              <td><a class="text-danger"><mdb-icon fas icon="trash"></mdb-icon></a></td>
             </tr>
           </tbody>
         </table>
         
+        <ng-template #loading>
+          <span>Carregando Cursos...</span>
+        </ng-template>
 
 
 

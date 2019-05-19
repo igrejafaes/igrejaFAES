@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-import { UsuarioRoutingModule } from './usuario-routing.module';
-import { UsuarioComponent } from './usuario.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdministracaoModule } from '../administracao.module';
 
@@ -12,7 +10,6 @@ import { UsuarioListaComponent } from './usuario-lista/usuario-lista.component';
 
 @NgModule({
   declarations: [
-    UsuarioComponent,
     UsuarioFormComponent,
     UsuarioListaComponent
   ],
@@ -21,7 +18,6 @@ import { UsuarioListaComponent } from './usuario-lista/usuario-lista.component';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    UsuarioRoutingModule,
     AdministracaoModule,
   ]
 })
