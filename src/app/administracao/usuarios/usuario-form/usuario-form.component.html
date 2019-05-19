@@ -11,7 +11,7 @@
           [formGroup]="userForm"
           (ngSubmit)="onSubmit()"
         >
-          <p class="h4 mb-4">Criar Novo Usuário</p>
+          <p class="h4 mb-4">{{ titulo }}</p>
 
           <div class="form-row">
             <div class="col-md-6">
@@ -136,7 +136,7 @@
 
               <!-- Sign up button -->
               <button mdbBtn color="info" block="true" class="my-4" type="submit">
-                Criar
+                {{ userForm.value.id ? 'Alterar' : 'Criar' }}
               </button>
 
             </div>

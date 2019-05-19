@@ -4,6 +4,7 @@ import * as firebase from 'firebase/app';
 import { AngularFirestoreCollection, AngularFirestore, CollectionReference } from 'angularfire2/firestore';
 import { take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { isNgTemplate } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -39,8 +40,8 @@ export class UserService {
     return this.db.collection('usuarios').snapshotChanges().pipe(take(1));
   }
 
-  loadByID(id: string): Observable<any>{
-    return this.db.collection('usuarios').doc(id).valueChanges().pipe(take(1))
+  loadByID(id: string): Observable<Usuario>{
+    return this.db.collection('usuarios').doc<Usuario>(id).valueChanges().pipe(take(1))
   }
 
 }

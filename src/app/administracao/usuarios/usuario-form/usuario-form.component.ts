@@ -13,7 +13,8 @@ import { UserService } from '../user.service';
 export class UsuarioFormComponent implements OnInit {
 
   userForm: FormGroup;
-  submited:boolean = false;
+  submited: boolean = false;
+  titulo: string = "";
 
   constructor(private userService: UserService,
               private router: Router,
@@ -23,19 +24,24 @@ export class UsuarioFormComponent implements OnInit {
 
   ngOnInit() {
     // GET DATA FROM RESOLVE
-    const usuario: Usuario = this.route.snapshot.data['Usuario'];
+    const ID =  this.route.snapshot.params['id'];
+    const usuario: Usuario = {id: ID,
+        ...this.route.snapshot.data['Usuario']};
+
+    this.titulo = usuario.id ? 'Editar Usuário' : 'Criar Novo Usuário'
     this.createForm(usuario);
   }
 
   createForm(usuario: Usuario) {
     this.userForm = this.formbuilder.group({
+      id: [usuario.id],
       nome: [usuario.nome, [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(100)
       ]],
       sobrenome: [usuario.sobrenome],
-      email: [null, [
+      email: [usuario.email, [
         Validators.required,
         Validators.email,
         Validators.minLength(3),
@@ -56,14 +62,23 @@ export class UsuarioFormComponent implements OnInit {
     this.submited = true
 
     if (this.userForm.valid){
+      // get usuario pelo FORM
       let user: Usuario = this.userForm.value
+      // define o acesso
       if(!user.acesso) user.acesso = 1
-      this.userService.createNewUser(user)
-      .then(
-        (response) => console.log(response)
-      )
-    }
 
+      if (!user.id) {
+        this.userService.createNewUser(user)
+        .then(
+          (response) => console.log(response)
+          )
+      } else {
+        this.alertModal.showAlertDanger('Em implementação', 'Implementando')
+        setTimeout(() => {
+          this.router.navigate(['usuario/lista'], { relativeTo: this.route.parent })
+        }, 1000);
+      }
+    }
   }
 
   input(controle: string) { return this.userForm.get(controle); }
