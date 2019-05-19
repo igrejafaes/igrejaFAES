@@ -1,19 +1,17 @@
-<section>
-    <div class="container">
+<div class="container">
+  <div class="box flex">
+    <div class="border flex">
+      <div class="box-header">
+        <h4>Editar Agenda</h4>
+        <p>Clicar em um dos botões acima para acessar os formulários.</p>
+      </div>
+      <div class="box-content flex">
 
-        <!-- Card -->
-        <div class="card">
-
-            <!-- Card content -->
-            <div class="card-body">
-
-                <!-- Title -->
-                <h4 class="card-title"><a>Editar Agenda</a></h4>
-
-            </div>
-
-        </div>
-        <!-- Card -->
-
+      </div>
+      <div class="box-footer">
+        <button type="button" mdbBtn color="success" size="sm" mdbWavesEffect (click)="submitUrl()">Enviar</button>
+        <button type="button" mdbBtn color="danger" size="sm" mdbWavesEffect (click)="cancelUrl()">Cancelar</button>
+      </div>
     </div>
-</section>
+  </div>
+</div>
