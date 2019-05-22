@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="box flex">
+    <div class="border flex">
+      <div class="box-header">
+        <h4>Editar Carroussel</h4>
+        <p>Clique no botão <mdb-icon fas icon="camera" style="color: #4285f4"></mdb-icon> para selecionar uma imagem.
+          Para adicionar na lista, clique no botão <mdb-icon fas icon="plus" style="color: #ffbb33"></mdb-icon>.</p>
+      </div>
+      <div class="box-content flex">
+        <div class="box-input">
+          <div class="button-input">
+            <input type="file" id="file" (change)="onSelectedFile($event)">
+            <label for="file" class="btn btn-sm btn-primary waves-light" mdbWavesEffect>
+              <mdb-icon fas icon="camera"></mdb-icon>
+            </label>
+            <button mdbBtn type="button" color="warning" size="sm" mdbWavesEffect (click)="addUrl()">
+              <mdb-icon fas icon="plus"></mdb-icon>
+            </button>
+            <span>{{ imagename }}</span>
+          </div>
+        </div>
+        <div class="box-list">
+            <ul class="list-group list-group-flush" *ngFor="let u of imagepath; let i=index">
+
+                <li class="list-group-item" style="position: relative; display: flex; flex-direction: row;">              
+                  
+                  <div>
+                    <img id="output" style="width: 60px; height: 60px; background-color: silver;" class="border">
+                  </div>
+        
+                  <div>
+                    <span>{{i + 1}} - {{ u.name }}</span>
+                  </div>
+        
+                  <div>
+                    <a style="color: red" (click)="trashUrl(i)">
+                      <mdb-icon fas icon="trash"></mdb-icon>
+                    </a>
+                  </div>
+        
+                </li>
+        
+              </ul>
+        </div>
+      </div>
+      <div class="box-footer" *ngIf="imagepath.length > 0">
+        <button type="button" mdbBtn color="success" size="sm" mdbWavesEffect (click)="submitUrl()">Enviar</button>
+        <button type="button" mdbBtn color="danger" size="sm" mdbWavesEffect (click)="cancelUrl()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
