@@ -1,6 +1,8 @@
 import { AuthService } from './auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UsuarioLogadoService } from './usuarioLogado.service';
+import { Usuario } from '../models/usuario';
 
 @Component({
   selector: 'app-administracao',
@@ -9,20 +11,13 @@ import { Router } from '@angular/router';
 })
 export class AdministracaoComponent implements OnInit {
 
-  //loggedIn: boolean = false
+  loggedUsuario: Usuario
 
   constructor(private authService: AuthService,
+              private usuarioLogado: UsuarioLogadoService,
               private router: Router) { }
 
-  ngOnInit() {
-    this.authService.getCurrentUser().then((res) => {
-      //console.log(res)
-      this.authService.emitChange(res.email)
-    }, rej => {
-      //console.log('not logged')
-      this.authService.emitChange(null)
-    })
-  }
+  ngOnInit() {  }
 
   fazerLogOut() {
     //this.subscriptions.unsubscribe;

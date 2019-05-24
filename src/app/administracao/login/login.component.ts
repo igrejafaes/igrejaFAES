@@ -1,68 +1,86 @@
-import { AlertModalService } from 'src/app/shared/alert-modal.service';
-import { Component, OnInit} from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from './../auth.service';
-import { Usuario } from './../../models/usuario';
+import { AlertModalService } from "src/app/shared/alert-modal.service";
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { AuthService } from "./../auth.service";
+import { Usuario } from "./../../models/usuario";
+import { UsuarioLogadoService } from "../usuarioLogado.service";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
-
   loginForm: FormGroup;
-  errorMessage: string = '';
+  errorMessage: string = "";
   hide = true;
-  usuario = new Usuario;
+  usuario = new Usuario();
   submitted: boolean = false;
 
-  constructor(private authService: AuthService,
+  constructor(
+    private authService: AuthService,
     private router: Router,
     private formbuilder: FormBuilder,
-    private alertModal: AlertModalService) { }
+    private alertModal: AlertModalService,
+  ) {}
 
   ngOnInit() {
-    this.authService.usuarioChange$.subscribe((user) => {
-      if (user != null) {
-        this.alertModal.showAlertSuccess('Você já está logado como ' + user, 'Login');
-        this.router.navigate(['/administracao/home']);
+    //verifica se ja esta logado
+    this.authService.isAnonymouslyLogged()
+    .then((resp) => {
+      if(!resp){
+        this.authService.doAnonymousLogin(); 
       }
     })
+
     this.createForm();
   }
 
   createForm() {
     this.loginForm = this.formbuilder.group({
-      email: [null, [
-        Validators.required, 
-        Validators.email,
-        Validators.minLength(3), 
-        Validators.maxLength(100)]],
-      password: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(20)]]
+      email: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(100)
+        ]
+      ],
+      password: [
+        null,
+        [Validators.required, Validators.minLength(6), Validators.maxLength(20)]
+      ]
     });
   }
 
-  tryLogin() {
-    this.authService.doLogin(this.loginForm.value)
-      .then(res => {
-        console.log(res);
-        this.router.navigate(['/administracao/home']);
-      }, err => {
-        if(err.code === 'auth/user-not-found'){
-          this.alertModal.showAlertDanger('Senha ou usuário inválido', 'Login')
-        } else {
-          this.alertModal.showAlertDanger('Um erro ocorreu, tente mais tarde...', 'Login')
+  tryLogin(usuario: string, passowrd: string) {
+    this.authService
+      .doUserLogin(usuario, passowrd)
+      .then(
+        () => {
+          this.router.navigate(["/administracao/home"]);
+        },
+        () => {
+          this.alertModal.showAlertDanger("Senha ou usuário inválido", "Login");
         }
-      })
+      )
+      .catch(() => {
+        this.alertModal.showAlertDanger(
+          "Não foi possível conectar ao BD",
+          "Login"
+        );
+      });
   }
 
   onSubmit() {
-    this.submitted = true
-    if (this.loginForm.valid) {
-      this.tryLogin()
-    }
+    this.submitted = true;
+
+    // verifica validade do form
+    if (!this.loginForm.valid) return;
+
+    // tenta fazer o login
+    this.tryLogin(this.loginForm.value.email, this.loginForm.value.password);
   }
 
   // getErrorMessage(campo) {

@@ -68,7 +68,7 @@ export class UsuarioFormComponent implements OnInit {
       if(!user.acesso) user.acesso = 1
 
       if (!user.id) {
-        this.userService.createNewUser(user)
+        this.userService.addNewUsuario(user)
         .then(
           (response) => console.log(response)
           )

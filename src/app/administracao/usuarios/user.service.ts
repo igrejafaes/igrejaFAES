@@ -1,53 +1,51 @@
-import { Injectable } from '@angular/core';
-import { Usuario } from 'src/app/models/usuario';
-import * as firebase from 'firebase/app';
-import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
-import { take } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { Usuario } from "src/app/models/usuario";
+import {
+  AngularFirestoreCollection,
+  AngularFirestore,
+} from "angularfire2/firestore";
+import { take } from "rxjs/operators";
+import { Observable } from "rxjs";
+import { AuthService } from "../auth.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class UserService {
-  
   usuarios: AngularFirestoreCollection<Usuario>;
 
-  constructor(private db: AngularFirestore) { 
-    this.usuarios = this.db.collection<Usuario>('/usuarios');
+  constructor(private db: AngularFirestore, private auth: AuthService) {
+    this.usuarios = this.db.collection<Usuario>("/usuarios");
   }
 
-  // CREATE NEW FIREBASE USER
-  createNewUser(usuario: Usuario): any {
-    const result$ = firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.password)
-
-    return result$
-    .then(
-      (resp) => {
-        //usuario.id = resp.user.uid;
-        return this.usuarios.doc<Usuario>(usuario.id).set(usuario)
+  // CREATE NEW USUARIO
+  addNewUsuario(usuario: Usuario): any {
+    return new Promise((resolve, reject) => {
+      this.usuarios.add(usuario)
         .then(
-          () => usuario
-        , err => null)
-      }
-      , err => null
-    )
-    .catch(() => null)
+          (docRef) => resolve(docRef.id), 
+          (err) => reject(err))
+    }) 
   }
 
-  // GET LIST OF USERS
-  getUsuarios(){
-    return this.db.collection('usuarios').snapshotChanges().pipe(take(1));
+  // GET LIST OF USUARIOS
+  getUsuarios() {
+    return this.db
+      .collection("usuarios")
+      .snapshotChanges()
+      .pipe(take(1));
   }
 
   // GET USUARIO BY ID
-  loadByID(id: string): Observable<Usuario>{
-    return this.db.collection('usuarios').doc<Usuario>(id).valueChanges().pipe(take(1))
+  loadByID(id: string): Observable<Usuario> {
+    return this.db
+      .collection("usuarios")
+      .doc<Usuario>(id)
+      .valueChanges()
+      .pipe(take(1));
   }
 
   // DELETE USUARIO BY ID
-  deleteUsuaruiByID(id: string){
-
-
-  }
+  deleteUsuaruiByID(id: string) {}
 
 }
