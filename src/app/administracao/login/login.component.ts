@@ -1,5 +1,5 @@
 import { AlertModalService } from "src/app/shared/alert-modal.service";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthService } from "./../auth.service";
@@ -11,12 +11,11 @@ import { UsuarioLogadoService } from "../usuarioLogado.service";
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.scss"]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+
   loginForm: FormGroup;
-  errorMessage: string = "";
-  hide = true;
-  usuario = new Usuario();
   submitted: boolean = false;
+  isLogged: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -33,8 +32,24 @@ export class LoginComponent implements OnInit {
         this.authService.doAnonymousLogin(); 
       }
     })
-
+    this.isLogged = true;
+    // criar o FormControl
     this.createForm();
+  }
+
+  // DELETE ANONYMOUS USER ON DESTROY COMPONENT
+  ngOnDestroy(): void {
+    if(!this.isLogged){
+      this.authService.doLogout()
+    }
+  }
+
+  // DELETE ANONYMOUS USER BEFORE UNLOAD PAGE
+  @HostListener('window:beforeunload')
+  doSomething() {
+    if(this.isLogged){
+      this.authService.doLogout()
+    }
   }
 
   createForm() {
@@ -54,6 +69,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  // TRY USUARIO LOGIN WITH ANONYMOUS USER
   tryLogin(usuario: string, passowrd: string) {
     this.authService
       .doUserLogin(usuario, passowrd)

@@ -1,5 +1,5 @@
 import { AuthService } from './auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioLogadoService } from './usuarioLogado.service';
 import { Usuario } from '../models/usuario';
@@ -19,8 +19,13 @@ export class AdministracaoComponent implements OnInit {
 
   ngOnInit() {  }
 
+  // DELETE ANONYMOUS USER BEFORE UNLOAD PAGE
+  @HostListener('window:beforeunload')
+  doSomething() {
+    this.authService.doLogout()
+  }
+
   fazerLogOut() {
-    //this.subscriptions.unsubscribe;
     this.router.navigate(['/home']);
     this.authService.doLogout();
   }

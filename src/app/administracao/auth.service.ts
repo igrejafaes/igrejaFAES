@@ -69,9 +69,10 @@ export class AuthService {
   doLogout() {
     return new Promise((resolve, reject) => {
       if (firebase.auth().currentUser) {
-        this.afAuth.auth.signOut();
-        this.emitChange(null)
-        resolve();
+        this.afAuth.auth.currentUser.delete().then(() => {
+          this.emitChange(null)
+          resolve();
+        })
       } else {
         reject();
       }
