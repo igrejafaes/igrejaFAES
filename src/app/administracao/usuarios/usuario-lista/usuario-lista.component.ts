@@ -21,12 +21,11 @@ export class UsuarioListaComponent implements OnInit {
     this.userService.getUsuarios().subscribe(actionArray => {
       this.list = actionArray.map(item => {
         return {
-          id: item.payload.doc.id,
-          ...item.payload.doc.data()
+          ...item.payload.doc.data(),
+          id: item.payload.doc.id
         } as Usuario;
       })
     });
-
   }
 
   headElements = ['Nome', 'Email', 'Telefone', 'Wathsapp', ''];

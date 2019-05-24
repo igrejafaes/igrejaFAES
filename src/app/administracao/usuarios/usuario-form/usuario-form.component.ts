@@ -70,8 +70,11 @@ export class UsuarioFormComponent implements OnInit {
       if (!user.id) {
         this.userService.addNewUsuario(user)
         .then(
-          (response) => console.log(response)
-          )
+          (response) => {
+            this.alertModal.showAlertSuccess('Usuário criado com sucesso', 'Sucesso');
+            this.router.navigate(['usuario/lista'], { relativeTo: this.route.parent })
+          }
+        )
       } else {
         this.alertModal.showAlertDanger('Em implementação', 'Implementando')
         setTimeout(() => {

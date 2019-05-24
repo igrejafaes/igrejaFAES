@@ -20,8 +20,8 @@
                 >{{ usuario.sobrenome }}
               </th>
               <td (click)="onEdit(usuario)">{{ usuario.email }}</td>
-              <td (click)="onEdit(usuario)">{{ usuario.telefone }}</td>
-              <td (click)="onEdit(usuario)">{{ usuario.wathsapp }}</td>
+              <td (click)="onEdit(usuario)">{{ usuario.telefone | mask: '(00) 00000-0000' }}</td>
+              <td (click)="onEdit(usuario)">{{ usuario.wathsapp | mask: '(00) 00000-0000' }}</td>
               <td>
                 <button class="btn btn-delete" (click)="onDelete(usuario)"
                   ><mdb-icon fas icon="trash" class="red-text"></mdb-icon
