@@ -17,8 +17,7 @@ export class AgendaService {
   agendaCollection: AngularFirestoreCollection<clAgenda>;
   agenda: Observable<clAgenda[]>;
 
-  constructor(private db: AngularFirestore) {
-  }
+  constructor(private db: AngularFirestore) {}
 
   //Get todas as Agendas
   /****************************************************************************** */

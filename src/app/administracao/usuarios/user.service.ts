@@ -21,10 +21,27 @@ export class UserService {
   // CREATE NEW USUARIO
   addNewUsuario(usuario: Usuario): any {
     return new Promise((resolve, reject) => {
-      this.usuarios.add(usuario)
+      const usuarioWithoutID = { ...usuario } // create a new object
+      delete usuarioWithoutID.id // to save without ID
+      this.usuarios.add(usuarioWithoutID)
         .then(
           (docRef) => resolve(docRef.id), 
           (err) => reject(err))
+    });
+  }
+
+  // UPDATE USUARIO
+  updateUsuario(usuario: Usuario){
+    const usuarioWithoutID = { ...usuario } // create a new object
+    delete usuarioWithoutID.id // to save without ID
+    return new Promise((resolve, reject) => {
+      this.usuarios.doc<Usuario>(usuario.id).set(usuarioWithoutID)
+        .then(
+          () => resolve(), 
+          (err) => reject(err))
+        .catch((reason) => {
+          reject(reason)
+        })
     }) 
   }
 

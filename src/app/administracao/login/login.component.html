@@ -14,11 +14,10 @@
             class="user-inputs"
             type="text"
             placeholder="Informe o e-mail"
-            #email
           />
         </div>
         <!-- <span>Senha</span> -->
-        <div class="box-input">
+        <div class="box-input" [ngClass]="{'box-input-invalid': submitted && !loginForm.controls.password.valid}">
           <i class="fa fa-lock"></i>
           <input
             formControlName="password"

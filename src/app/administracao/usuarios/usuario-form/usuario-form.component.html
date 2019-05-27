@@ -48,7 +48,6 @@
           </div>
 
           <div class="form-row">
-
             <div class="col-md-6">
               <!-- Phone number -->
               <div class="md-form form-group md-bg form-sm">
@@ -58,7 +57,8 @@
                   id="telefone"
                   class="form-control"
                   formControlName="telefone"
-                  mask="(00) 00000-0000" [clearIfNotMatch]="true"
+                  mask="(00) 00000-0000"
+                  [clearIfNotMatch]="true"
                   [onReturnSendTab]
                 />
                 <label for="telefone">Telefone/Celular</label>
@@ -74,17 +74,16 @@
                   id="wathsapp"
                   class="form-control"
                   formControlName="wathsapp"
-                  mask="(00) 00000-0000" [clearIfNotMatch]="true"
+                  mask="(00) 00000-0000"
+                  [clearIfNotMatch]="true"
                   [onReturnSendTab]
                 />
                 <label for="wathsapp">Wathsapp</label>
               </div>
             </div>
-
           </div>
 
           <div class="form-row">
-
             <div class="col">
               <!-- E-mail -->
               <div class="md-form md-bg form-sm">
@@ -94,7 +93,6 @@
                   formControlName="email"
                   type="email"
                   id="email"
-                  formControlName="email"
                   [onReturnSendTab]
                 />
                 <label for="email">Email</label>
@@ -105,7 +103,9 @@
             </div>
           </div>
 
-          <div class="form-row d-flex justify-content-center">
+          <div class="form-row justify-content-center" 
+            *ngIf="!userForm.value.id">
+
             <div class="col-sm-8 col-md-4">
               <!-- Password -->
               <div class="md-form md-bg form-sm">
@@ -115,7 +115,6 @@
                   type="password"
                   id="password"
                   class="form-control"
-                  formControlName="password"
                   [onReturnSendTab]
                 />
                 <label for="password">Senha do Usuário</label>
@@ -123,12 +122,52 @@
                   hasError("password")
                 }}</mdb-error>
               </div>
+            </div>
 
+            <div class="col-sm-8 col-md-4">
+              <!-- Password -->
+              <div class="md-form md-bg form-sm">
+                <input
+                  mdbInput
+                  type="password"
+                  id="confirm"
+                  class="form-control"
+                  [onReturnSendTab]
+                  formControlName="confirm"
+                />
+                <label for="confirm">Confirme a Senha</label>
+                <mdb-error *ngIf="submited && hasError('confirm')">{{
+                  hasError("confirm")
+                }}</mdb-error>
+              </div>
+            </div>
+          </div>
+          <!-- BUTTONS -->
+          <div class="form-row justify-content-center">
+            <div class="col-sm-8 col-md-4">
               <!-- Sign up button -->
-              <button mdbBtn color="info" block="true" class="my-4" type="submit">
-                {{ userForm.value.id ? 'Alterar' : 'Criar' }}
+              <button
+                mdbBtn
+                color="info"
+                block="true"
+                class="my-4"
+                type="submit"
+                >
+                {{ userForm.value.id ? "Alterar" : "Salvar" }}
               </button>
-
+            </div>
+            <!-- Back button -->
+            <div class="col-sm-8 col-md-4">
+              <button
+                mdbBtn
+                color="danger"
+                block="true"
+                class="my-4"
+                type="button"
+                (click)="voltar()"
+                >
+                {{ userForm.value.id ? "Voltar" : "Cancelar" }}
+              </button>
             </div>
           </div>
 
