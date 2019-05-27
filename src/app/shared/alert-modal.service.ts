@@ -4,7 +4,9 @@ import { AlertModalComponent } from './alert-modal/alert-modal.component';
 
 export enum alertTypes {
   DANGER = 'danger',
-  SUCCESS = 'success'
+  SUCCESS = 'success',
+  INFO = 'info',
+  WARNING = 'warning'
 }
 
 @Injectable({
@@ -12,17 +14,53 @@ export enum alertTypes {
 })
 export class AlertModalService {
 
+  bsModalRef: MDBModalRef;
+  
   constructor(private modalService: MDBModalService) { }
+  
+  private showAlert(message: string, title: string, iconType: alertTypes, dismissTimeOut?: number){
+    let modalClass: string = 'modal-side modal-top-right modal-notify '
+    
+    switch (iconType) {
+      case alertTypes.DANGER:
+        modalClass += 'modal-danger'
+        break;
+      case alertTypes.SUCCESS:
+        modalClass += 'modal-success'
+        break;
+      case alertTypes.INFO:
+        modalClass += 'modal-info'
+        break;
+      case alertTypes.WARNING:
+        modalClass += 'modal-warning'
+        break;         
+      default:
+        break;
+    }
 
-  private showAlert(message: string, title: string ,type: alertTypes, dismissTimeOut?: number){
-    const bsModalRef : MDBModalRef = this.modalService.show(AlertModalComponent);
-    bsModalRef.content.type = type;
-    bsModalRef.content.title = title;
-    bsModalRef.content.message = message;
+    this.bsModalRef = this.modalService.show(AlertModalComponent, {
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+      show: false,
+      ignoreBackdropClick: false,
+      class: modalClass,
+      containerClass: 'right',
+      animated: true,
+      data: {
+        heading: 'Modal heading',
+        iconType,
+        content: { heading: 'Content heading', description: 'Content description'}
+      }
+    });
+    //console.log(iconType)
+    //this.bsModalRef.content.iconType = iconType;
+    this.bsModalRef.content.title = title;
+    this.bsModalRef.content.message = message;
     
     if(dismissTimeOut){
       setTimeout(() => {
-        bsModalRef.hide()
+        this.bsModalRef.hide()
       }, dismissTimeOut);
     }
 
@@ -34,6 +72,14 @@ export class AlertModalService {
   
   showAlertSuccess(message: string, title: string){
     this.showAlert(message, title, alertTypes.SUCCESS, 3000)
+  }
+
+  showAlertInfo(message: string, title: string){
+    this.showAlert(message, title, alertTypes.INFO, 3000)
+  }
+
+  showAlertWarning(message: string, title: string){
+    this.showAlert(message, title, alertTypes.WARNING)
   }
 
 }

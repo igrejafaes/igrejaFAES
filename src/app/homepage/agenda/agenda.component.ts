@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators'
 import { AppError } from 'src/app/shared/app-errors/app-error';
 import { NotFoundError } from 'src/app/shared/app-errors/not-found-error';
+import { AlertModalService } from 'src/app/shared/alert-modal.service';
 
 @Component({
   selector: 'app-agenda',
@@ -17,7 +18,8 @@ export class AgendaComponent implements OnInit {
   agendas: clAgenda[] = [];
   tamanho: number = window.innerWidth; // TAMANHO DA WINDOW
 
-  constructor(private agendaService: AgendaService) {
+  constructor(private agendaService: AgendaService,
+    private modal: AlertModalService) {
   }
 
   ngOnInit() {
@@ -108,6 +110,10 @@ export class AgendaComponent implements OnInit {
 
   beforeChange(e) {
     //console.log('beforeChange');
+  }
+
+  modalteste(){
+    this.modal.showAlertWarning('Minha Mensagem', 'Meu Titulo')
   }
 
 }
