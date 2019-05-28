@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Usuario } from 'src/app/models/usuario';
-import { UserService } from './user.service';
+import { UserService } from '../src/app/administracao/usuarios/user.service';
 
 @Injectable({
   providedIn: 'root'

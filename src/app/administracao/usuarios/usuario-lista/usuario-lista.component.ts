@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { Usuario } from 'src/app/models/usuario';
-import { Router, ActivatedRoute } from '@angular/router';
-
+import { MDBModalService, MDBModalRef } from 'angular-bootstrap-md';
+import { UsuarioFormModalComponent } from '../usuario-form-modal/usuario-form-modal.component';
+import { take } from 'rxjs/operators';
+import { AlertModalService } from 'src/app/shared/alert-modal.service';
 @Component({
   selector: 'app-usuario-lista',
   templateUrl: './usuario-lista.component.html',
@@ -11,13 +13,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class UsuarioListaComponent implements OnInit {
 
   list: Usuario[];
+  modalRef: MDBModalRef;
 
-  constructor(private userService: UserService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+  constructor(
+    private userService: UserService,
+    private modalService: MDBModalService,
+    private alertModal: AlertModalService,
+  ) { }
 
   ngOnInit() {
-    
     this.userService.getUsuarios().subscribe(actionArray => {
       this.list = actionArray.map(item => {
         return {
@@ -28,10 +32,55 @@ export class UsuarioListaComponent implements OnInit {
     });
   }
 
+  // ARRAY OF LIST HEAD ELEMENTS
   headElements = ['Nome', 'Email', 'Telefone', 'Wathsapp', ''];
-  
+
+  // CONFIG MODAL OF USUARIO
+  modalConfig(usuario?: Usuario) {
+    return{
+      class: 'modal-notify modal-info modal-dialog-centered modal-lg',
+      containerClass: 'modal-dialog-scrollable',
+      data: {
+        heading: usuario ? 'Editar Usuário' : 'Inserir Usuário',
+        usuario: usuario || new Usuario
+      }
+    };
+  };
+
   onEdit(usuario: Usuario) {
-    this.router.navigate(['usuario/editar', usuario.id], { relativeTo: this.route.parent });
+    this.openEditUsuarioModal(usuario)
+  }
+
+  openEditUsuarioModal(usuario: Usuario) {
+    const UsuarioCopy = {...usuario };
+
+    this.modalRef = this.modalService.show(UsuarioFormModalComponent, this.modalConfig(UsuarioCopy));
+
+    this.modalRef.content.usuarioData.pipe(take(1)).subscribe( (usuarioData: Usuario) => {
+      this.userService.updateUsuario(usuarioData)
+      .then(() => {
+        const i = this.list.findIndex((u) => u.id === usuarioData.id)
+        this.list[i] = usuarioData
+        this.alertModal.showAlertSuccess('Usuário atualizado com sucesso', 'Sucesso');
+      }, () => {
+        this.alertModal.showAlertDanger('Não foi possível atualizar usuário', 'Tente depois');
+      })
+    });
+  }
+
+  openAddUsuarioModal(){
+    this.modalRef = this.modalService.show(UsuarioFormModalComponent, this.modalConfig());
+
+    this.modalRef.content.usuarioData.pipe(take(1)).subscribe( (usuarioData: Usuario) => {
+      this.userService.addNewUsuario(usuarioData)
+      .then(() => {
+        this.list.unshift(usuarioData)
+        this.alertModal.showAlertSuccess('Usuário salvo com sucesso', 'Sucesso');
+      }, () => {
+        this.alertModal.showAlertDanger('Não foi possível salvar o usuário', 'Tente depois');
+      })
+    });
+
   }
 
   onDelete(usuario: Usuario){

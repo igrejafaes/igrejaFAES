@@ -5,7 +5,10 @@
       <!-- Card content -->
       <div class="card-body">
         <!-- Title -->
-        <h4 class="card-title">Listagem de Usuários</h4>
+        <div class="d-flex justify-content-between align-items-center">
+          <h4 class="card-title mb-0">Listagem de Usuários</h4>
+          <button type="button" mdbBtn color="primary" mdbWavesEffect (click)="openAddUsuarioModal()">Inserir Usuário</button>
+        </div>
 
         <table mdbTable hover="true" *ngIf="list; else loading">
           <thead>

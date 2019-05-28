@@ -53,8 +53,7 @@ export class AlertModalService {
         content: { heading: 'Content heading', description: 'Content description'}
       }
     });
-    //console.log(iconType)
-    //this.bsModalRef.content.iconType = iconType;
+
     this.bsModalRef.content.title = title;
     this.bsModalRef.content.message = message;
     
