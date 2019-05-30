@@ -9,9 +9,7 @@ import { AlertModalService } from 'src/app/shared/alert-modal.service';
 export class CarouselComponent implements OnInit {
 
   images: any = [];
-
   allFiles: any = [];
-
   headTable = ['Item', 'Imagem', 'Arquivo', 'Tipo', 'Deletar'];
 
   constructor(private alertModal: AlertModalService) { }

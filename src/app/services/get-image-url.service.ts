@@ -10,9 +10,12 @@ export class GetImageUrlService {
 
   constructor(private storage: AngularFireStorage) { }
 
-  public getImageURL(imageName: string): Observable<string> {
-    const ref: AngularFireStorageReference = this.storage.ref('images/' + imageName);
-    return ref.getDownloadURL().pipe(take(1))
+  public getImageURL(imageName: string, imageFolder: string): Observable<string> {
+
+    const path: string = `images/${imageFolder}/${imageName}`
+    const ref: AngularFireStorageReference = this.storage.ref(path);
+    
+    return ref.getDownloadURL().pipe(take(1));
   }
 
 }

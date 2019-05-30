@@ -3,15 +3,9 @@
 }
 
 table.table-hover tbody tr:hover {
+    cursor: default;
+}
+
+mdb-icon {
     cursor: pointer;
-}
-
-.btn-delete {
-    margin: 0; 
-    padding: 3px 0;
-    width: 100%;
-}
-
-.btn-delete:hover {
-    background-color: rgb(219, 153, 153);
 }

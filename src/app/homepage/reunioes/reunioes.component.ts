@@ -30,7 +30,7 @@ export class ReunioesComponent implements OnInit {
   }
   
   ngOnInit() {
-    this.bannerImage$ = this.imageService.getImageURL('bannerCentral.jpg')
+    this.bannerImage$ = this.imageService.getImageURL('bannerCentral.jpg', '')
     this.reunioes = this.reuniaoService.getReunioes()
   }
 

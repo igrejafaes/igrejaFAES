@@ -5,9 +5,16 @@
       <!-- Card content -->
       <div class="card-body">
         <!-- Title -->
-        <h4 class="card-title">Listagem de Usuários</h4>
+        <div class="d-flex justify-content-between align-items-center">
+          <h4 class="card-title mb-0">Listagem de Usuários</h4>
+          <button type="button" mdbBtn color="primary" mdbWavesEffect (click)="openAddUsuarioModal()">Inserir Usuário</button>
+        </div>
 
-        <table mdbTable hover="true" *ngIf="list; else loading">
+        <table 
+          class="table table-responsive-md" 
+          mdbTable hover="true" 
+          *ngIf="list; else loading">
+
           <thead>
             <tr>
               <th *ngFor="let head of headElements" scope="col">{{ head }}</th>
@@ -15,18 +22,22 @@
           </thead>
           <tbody>
             <tr mdbTableCol *ngFor="let usuario of list">
-              <th scope="row" (click)="onEdit(usuario)">
+              <th scope="row">
                 <strong class="mr-1">{{ usuario.nome }}</strong
                 >{{ usuario.sobrenome }}
               </th>
-              <td (click)="onEdit(usuario)">{{ usuario.email }}</td>
-              <td (click)="onEdit(usuario)">{{ usuario.telefone }}</td>
-              <td (click)="onEdit(usuario)">{{ usuario.wathsapp }}</td>
+              <td>{{ usuario.email }}</td>
+              <td>{{ usuario.telefone | mask: '(00) 00000-0000' }}</td>
+              <td>{{ usuario.wathsapp | mask: '(00) 00000-0000' }}</td>
               <td>
+                <a (click)="onEdit(usuario)" class="mr-2"><mdb-icon fas icon="edit"></mdb-icon></a>
+                <a (click)="onDelete(usuario)"><mdb-icon fas icon="trash"></mdb-icon></a>
+              </td>
+              <!-- <td>
                 <button class="btn btn-delete" (click)="onDelete(usuario)"
                   ><mdb-icon fas icon="trash" class="red-text"></mdb-icon
                 ></button>
-              </td>
+              </td> -->
             </tr>
           </tbody>
         </table>

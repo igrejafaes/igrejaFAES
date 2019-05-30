@@ -10,11 +10,34 @@ export class AlertModalComponent implements OnInit {
 
   @Input() message: string;
   @Input() title: string = 'FAES';
-  @Input() type: string = 'success';
   
-  constructor(public modalRef: MDBModalRef) { }
+  iconType: string;
+  modalIcon: string = '';
+  
+  constructor(public modalRef: MDBModalRef) {
+  }
 
   ngOnInit() {
+    switch (this.iconType) {
+      case 'danger':
+        this.modalIcon = 'fa fa-times-circle'
+        break;
+      case 'success':
+        this.modalIcon = 'fas fa-check'
+        break;
+      case 'info':
+        this.modalIcon = 'fa fa-info'
+        break;
+      case 'warning':
+        this.modalIcon = 'fa fa-exclamation-triangle'
+        break;      
+      default:
+        break;
+    }
+  }
+
+  alertClose(){
+    this.modalRef.hide()
   }
 
 }

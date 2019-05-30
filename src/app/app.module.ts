@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule, LOCALE_ID, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
@@ -18,7 +18,6 @@ import { AdministracaoModule } from './administracao/administracao.module';
 import { UsuarioModule } from './administracao/usuarios/usuario.module';
 import { IgrejaModule } from './igreja/igreja.module';
 import { NgwWowModule } from 'ngx-wow';
-
 
 import { AppComponent } from './app.component';
 import { HeaderBannerComponent } from './header-banner/header-banner.component';
@@ -61,6 +60,7 @@ registerLocaleData(ptBr)
   providers: [
     { provide: LOCALE_ID, useValue: "pt-BR" }, //replace "en-US" with your locale
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ NO_ERRORS_SCHEMA ]
 })
 export class AppModule { }

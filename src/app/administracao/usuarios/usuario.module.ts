@@ -4,14 +4,15 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdministracaoModule } from '../administracao.module';
+import { NgxMaskModule } from 'ngx-mask'
 
-import { UsuarioFormComponent } from './usuario-form/usuario-form.component';
 import { UsuarioListaComponent } from './usuario-lista/usuario-lista.component';
+import { UsuarioFormModalComponent } from './usuario-form-modal/usuario-form-modal.component';
 
 @NgModule({
   declarations: [
-    UsuarioFormComponent,
-    UsuarioListaComponent
+    UsuarioListaComponent,
+    UsuarioFormModalComponent
   ],
   imports: [
     CommonModule,
@@ -19,6 +20,8 @@ import { UsuarioListaComponent } from './usuario-lista/usuario-lista.component';
     ReactiveFormsModule,
     SharedModule,
     AdministracaoModule,
-  ]
+    NgxMaskModule.forRoot()
+  ],
+  entryComponents: [UsuarioFormModalComponent]
 })
 export class UsuarioModule { }
