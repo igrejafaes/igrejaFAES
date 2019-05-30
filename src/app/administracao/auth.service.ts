@@ -1,51 +1,100 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { Usuario } from '../models/usuario';
+import { Usuario } from '../models/clUsuario';
 import { Subject } from 'rxjs/Subject';
-import { AngularFirestoreCollection, AngularFirestore, CollectionReference } from 'angularfire2/firestore';
+import { UsuarioLogadoService } from './usuarioLogado.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  usuarios: AngularFirestoreCollection<Usuario>;
-
+  loggedAnonymously: boolean = false
   constructor(private afAuth: AngularFireAuth,
-    private db: AngularFirestore) {
-      this.usuarios = this.db.collection<Usuario>('/usuarios');
-      //(ref: CollectionReference) => ref.orderBy('feito', 'asc').orderBy('titulo', 'asc'));
-  }
+              private userLogadoService: UsuarioLogadoService) { }
 
   doLogin(usuario: Usuario) {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(usuario.email, usuario.password)
         .then(res => {
-          //console.log(usuario)
           this.emitChange(usuario.email);
           resolve(res);
         }, err => {
-          //this._usuarioAutenticado = null
           reject(err);
         })
+    })
+  }
+
+  // DO USER LOGIN
+  doUserLogin(userName, password): Promise<Usuario> {
+
+    return new Promise((resolve, reject) => {
+      firebase.firestore().collection('usuarios')
+        .where('nome', '==', userName)
+        .where('password', '==', password)
+        .get()
+        .then(querySnapshot => {
+          if(!querySnapshot.empty) {
+            let user = querySnapshot.docs[0];
+            this.emitChange(user.data().nome);
+
+            //
+            this.userLogadoService.usuarioLogado = { id: user.id, ...user.data() } as Usuario
+            //
+
+            resolve( { id: user.id, ...user.data() } as Usuario)
+          } else {
+            reject("Usuário ou Senha inválidos");
+          }
+        }).catch(() => "Não possível consultar o BD...");
+
+    })
+  }
+
+  doAnonymousLogin(){
+    return new Promise((resolve, reject) => {
+      firebase.auth().signInAnonymously().then(
+        res => {
+          this.loggedAnonymously = true;
+          resolve(res);
+        }
+      ).catch(err => {
+        this.loggedAnonymously = false;
+        reject(err);
+      })
     })
   }
 
   doLogout() {
     return new Promise((resolve, reject) => {
       if (firebase.auth().currentUser) {
-        this.afAuth.auth.signOut();
-        //this._usuarioAutenticado = null
-        this.emitChange(null)
-        resolve();
+        this.afAuth.auth.currentUser.delete().then(() => {
+          this.emitChange(null)
+          resolve();
+        })
       } else {
         reject();
       }
     });
   }
 
-  getCurrentUser() {
+  isAnonymouslyLogged() {
+    return new Promise<boolean>((resolve, reject) => {
+      if (firebase.auth().currentUser) {
+        if( firebase.auth().currentUser.isAnonymous ){
+          resolve(true)
+        } else {
+          resolve(false)
+        }
+      }
+      else {
+        resolve(false)
+      }
+    })
+  }
+
+  getCurrentAuthUser() {
     return new Promise<Usuario>((resolve, reject) => {
       var user = firebase.auth().onAuthStateChanged((user) => {
         if (user) {
@@ -75,6 +124,12 @@ export class AuthService {
       )
   }
 
+  // CREATE NEW FIREBASE USER
+  createNewUser(email: string, password: string): Promise<firebase.auth.UserCredential> {
+    return firebase.auth()
+      .createUserWithEmailAndPassword(email, password)
+  }
+
   // Observable string sources
   private usuarioChangeSource = new Subject<string>();
 
@@ -82,34 +137,16 @@ export class AuthService {
   usuarioChange$ = this.usuarioChangeSource.asObservable();
 
   // Service message commands
-  emitChange(user: string) {
-    this.usuarioChangeSource.next(user);
+  emitChange(usuarioNome: string) {
+    this.usuarioChangeSource.next(usuarioNome);
   }
 
-  // CREATE NEW FIREBASE USER
-  createNewUser(usuario: Usuario): any {
-    const result$ = firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.password)
-
-    return result$
-    .then(
-      (resp) => {
-        usuario.uid = resp.user.uid;
-        return this.usuarios.doc<Usuario>(usuario.uid).set(usuario)
-        .then(
-          () => usuario
-        , err => null)
-      }
-      , err => null
-    )
-    .catch(() => null)
-  }
-
-  writeUserData(userId, name, email, imageUrl) {
-    firebase.database().ref('users/' + userId).set({
-      username: name,
-      email: email,
-      profile_picture : imageUrl
-    });
-  }
+  // writeUserData(userId, name, email, imageUrl) {
+  //   firebase.database().ref('users/' + userId).set({
+  //     username: name,
+  //     email: email,
+  //     profile_picture : imageUrl
+  //   });
+  // }
 
 }

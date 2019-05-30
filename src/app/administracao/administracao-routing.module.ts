@@ -11,19 +11,23 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { NewsComponent } from './news/news.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
+import { UsuarioListaComponent } from './usuarios/usuario-lista/usuario-lista.component';
+//import { UsuarioResolveGuard } from './usuarios/usuario-resolve.guard';
 
 const routes: Routes = [
   {
     path: 'administracao', 
     component: AdministracaoComponent,
     children: [
-      //{ path: 'usuario', loadChildren: './usuario/usuario.module#UsuarioModule' },
       { path: 'login', component: LoginComponent },
       { path: 'home', component: AdmHomeComponent, canActivate: [AuthGuard] },
       { path: 'carousel', component: CarouselComponent, canActivate: [AuthGuard]  },
       { path: 'schedule', component: ScheduleComponent, canActivate: [AuthGuard]  },
       { path: 'news', component: NewsComponent, canActivate: [AuthGuard]  },
       { path: 'newsletter', component: NewsletterComponent, canActivate: [AuthGuard]  },
+      { path: 'usuario', redirectTo: 'usuario/lista', pathMatch: 'full', canActivate: [AuthGuard]  },
+      { path: 'usuario/lista', component: UsuarioListaComponent, canActivate: [AuthGuard]  },
+      { path: 'usuario/**', component: PaginaNaoEncontradaComponent },
       { path: '', redirectTo: '/administracao/home', pathMatch: 'full', canActivate: [AuthGuard]  },
       { path: '**', component: PaginaNaoEncontradaComponent },
     ],

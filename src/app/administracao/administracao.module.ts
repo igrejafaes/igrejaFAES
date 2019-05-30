@@ -15,6 +15,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { NewsComponent } from './news/news.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
+import { UsuarioLogadoService } from './usuarioLogado.service';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { NewsletterComponent } from './newsletter/newsletter.component';
   ],
   exports: [
     NavbarAdmComponent
-  ]
+  ],
+  providers: [ UsuarioLogadoService ]
 })
 export class AdministracaoModule { }

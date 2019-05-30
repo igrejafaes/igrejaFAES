@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuarioLogadoService } from '../usuarioLogado.service';
 
 @Component({
   selector: 'app-adm-home',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdmHomeComponent implements OnInit {
 
-  constructor() { }
+  logadoNome: string = ""
+
+  constructor(private logado: UsuarioLogadoService) { }
 
   ngOnInit() {
+    this.logadoNome = this.logado.usuarioLogado.nome
   }
 
 }

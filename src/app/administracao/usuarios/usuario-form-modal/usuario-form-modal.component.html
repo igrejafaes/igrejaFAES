@@ -1,0 +1,176 @@
+<!-- MODAL CONTENT -->
+<div class="modal-content">
+  <!-- HEADER -->
+  <div class="modal-header">
+      <button type="button" class="close pull-right white-text" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">×</span>
+      </button>
+      <h4 class="modal-title w-100" id="myModalLabel">{{ heading }}</h4>
+  </div>
+  <!-- /HEADER -->
+  <!-- BODY -->
+  <div class="modal-body">
+      <!-- FORM -->
+      <form
+      class="text-center"
+      [formGroup]="userForm"
+      (ngSubmit)="onSave()"
+    >
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="md-form form-group md-bg form-sm">
+            <!-- First name -->
+            <input
+              AutoFocus
+              mdbInput
+              type="text"
+              id="primeiroNome"
+              class="form-control"
+              formControlName="nome"
+              [onReturnSendTab]
+            />
+            <label for="primeiroNome">Primeiro Nome</label>
+            <mdb-error *ngIf="submited && hasError('nome')">{{
+              hasError("nome")
+            }}</mdb-error>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="md-form form-group md-bg form-sm">
+            <!-- Last name -->
+            <input
+              mdbInput
+              type="text"
+              id="sobrenome"
+              class="form-control"
+              formControlName="sobrenome"
+              [onReturnSendTab]
+            />
+            <label for="sobrenome">Sobrenome</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-6">
+          <!-- Phone number -->
+          <div class="md-form form-group md-bg form-sm">
+            <input
+              mdbInput
+              type="text"
+              id="telefone"
+              class="form-control"
+              formControlName="telefone"
+              mask="(00) 00000-0000"
+              [clearIfNotMatch]="true"
+              [onReturnSendTab]
+            />
+            <label for="telefone">Telefone/Celular</label>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <!-- Phone number -->
+          <div class="md-form form-group md-bg form-sm">
+            <input
+              mdbInput
+              type="text"
+              id="wathsapp"
+              class="form-control"
+              formControlName="wathsapp"
+              mask="(00) 00000-0000"
+              [clearIfNotMatch]="true"
+              [onReturnSendTab]
+            />
+            <label for="wathsapp">Wathsapp</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col">
+          <!-- E-mail -->
+          <div class="md-form md-bg form-sm">
+            <input
+              mdbInput
+              class="form-control"
+              formControlName="email"
+              type="email"
+              id="email"
+              [onReturnSendTab]
+            />
+            <label for="email">Email</label>
+            <mdb-error *ngIf="submited && hasError('email')">{{
+              hasError("email")
+            }}</mdb-error>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row justify-content-center" 
+        *ngIf="!userForm.value.id">
+
+        <div class="col-sm-8 col-md-4">
+          <!-- Password -->
+          <div class="md-form md-bg form-sm">
+            <input
+              mdbInput
+              formControlName="password"
+              type="password"
+              id="password"
+              class="form-control"
+              [onReturnSendTab]
+            />
+            <label for="password">Senha do Usuário</label>
+            <mdb-error *ngIf="submited && hasError('password')">{{
+              hasError("password")
+            }}</mdb-error>
+          </div>
+        </div>
+
+        <div class="col-sm-8 col-md-4">
+          <!-- Confirm Password -->
+          <div class="md-form md-bg form-sm">
+            <input
+              mdbInput
+              formControlName="confirm"
+              type="password"
+              id="confirm"
+              class="form-control"
+              [onReturnSendTab]
+            />
+            <label for="confirm">Confirme a Senha</label>
+            <mdb-error *ngIf="submited && hasError('confirm')">{{
+              hasError("confirm")
+            }}</mdb-error>
+          </div>
+        </div>
+      </div>
+    </form>
+    <!-- /FORM -->
+  </div>
+  <!-- /BODY -->
+  <!-- FOOTER -->
+  <div class="modal-footer">
+    <button 
+      type="button" 
+      mdbBtn 
+      color="primary" 
+      class="relative waves-light" 
+      mdbWavesEffect 
+      (click)="onSave()">{{ usuario.id ? "Alterar!" : "Salvar!" }}
+    </button>
+
+    <button 
+      type="button" 
+      mdbBtn 
+      color="danger" 
+      class="white-text waves-light" 
+      aria-label="Fechar" 
+      (click)="modalRef.hide()"
+      mdbWavesEffect>{{ usuario.id ? "Voltar" : "Cancelar" }}
+    </button>
+  </div>
+  <!-- /FOOTER -->
+</div>
+

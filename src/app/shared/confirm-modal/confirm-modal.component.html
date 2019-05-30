@@ -1,0 +1,31 @@
+<!--Content-->
+<div class="modal-content text-center">
+  <!--Header-->
+  <div class="modal-header d-flex justify-content-center">
+    <p class="heading">{{ heading }}</p>
+  </div>
+
+  <!--Body-->
+  <div class="modal-body">
+    <i class="{{ modalIcon }} fa-4x animated rotateIn"></i>
+  </div>
+
+  <!--Footer-->
+  <div class="modal-footer justify-content-center">
+
+    <a type="button" 
+      mdbBtn color="danger" 
+      outline="true" 
+      class="waves-effect" 
+      mdbWavesEffect (click)="onConfirmOK()">{{ textOK }}</a>
+
+    <a type="button" 
+      mdbBtn color="danger" 
+      class="waves-effect" 
+      mdbWavesEffect 
+      data-dismiss="modal" 
+      (click)="onConfirmCancel()">{{ textCancel }}</a>
+    
+  </div>
+</div>
+<!--/.Content-->

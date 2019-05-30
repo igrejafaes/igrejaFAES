@@ -11,7 +11,13 @@ export class ReturnToTabDirective {
     if ((e.which == 13 || e.keyCode == 13)) {
       const form = e.target.form;
       const index = Array.prototype.indexOf.call(form.elements, event.target);
-      form.elements[index + 1].focus();
+      // check exists next form element
+      if(form.elements[index + 1]) {
+        form.elements[index + 1].focus();
+      } else { // if not exists return to first element
+        form.elements[0].focus(); 
+      }
+      // prevent default
       event.preventDefault();
     }
   }

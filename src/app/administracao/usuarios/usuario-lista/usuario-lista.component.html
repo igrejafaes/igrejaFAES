@@ -1,0 +1,52 @@
+<section>
+  <div class="container">
+    <!-- Card -->
+    <div class="card">
+      <!-- Card content -->
+      <div class="card-body">
+        <!-- Title -->
+        <div class="d-flex justify-content-between align-items-center">
+          <h4 class="card-title mb-0">Listagem de Usuários</h4>
+          <button type="button" mdbBtn color="primary" mdbWavesEffect (click)="openAddUsuarioModal()">Inserir Usuário</button>
+        </div>
+
+        <table 
+          class="table table-responsive-md" 
+          mdbTable hover="true" 
+          *ngIf="list; else loading">
+
+          <thead>
+            <tr>
+              <th *ngFor="let head of headElements" scope="col">{{ head }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr mdbTableCol *ngFor="let usuario of list">
+              <th scope="row">
+                <strong class="mr-1">{{ usuario.nome }}</strong
+                >{{ usuario.sobrenome }}
+              </th>
+              <td>{{ usuario.email }}</td>
+              <td>{{ usuario.telefone | mask: '(00) 00000-0000' }}</td>
+              <td>{{ usuario.wathsapp | mask: '(00) 00000-0000' }}</td>
+              <td>
+                <a (click)="onEdit(usuario)" class="mr-2"><mdb-icon fas icon="edit"></mdb-icon></a>
+                <a (click)="onDelete(usuario)"><mdb-icon fas icon="trash"></mdb-icon></a>
+              </td>
+              <!-- <td>
+                <button class="btn btn-delete" (click)="onDelete(usuario)"
+                  ><mdb-icon fas icon="trash" class="red-text"></mdb-icon
+                ></button>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+
+        <ng-template #loading>
+          <span>Carregando Cursos...</span>
+        </ng-template>
+      </div>
+    </div>
+    <!-- Card -->
+  </div>
+</section>
