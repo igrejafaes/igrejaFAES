@@ -21,6 +21,7 @@
           <div class="md-form form-group md-bg form-sm">
             <!-- First name -->
             <input
+              AutoFocus
               mdbInput
               type="text"
               id="primeiroNome"
@@ -128,15 +129,15 @@
         </div>
 
         <div class="col-sm-8 col-md-4">
-          <!-- Password -->
+          <!-- Confirm Password -->
           <div class="md-form md-bg form-sm">
             <input
               mdbInput
+              formControlName="confirm"
               type="password"
               id="confirm"
               class="form-control"
               [onReturnSendTab]
-              formControlName="confirm"
             />
             <label for="confirm">Confirme a Senha</label>
             <mdb-error *ngIf="submited && hasError('confirm')">{{
@@ -151,6 +152,14 @@
   <!-- /BODY -->
   <!-- FOOTER -->
   <div class="modal-footer">
+    <button 
+      type="button" 
+      mdbBtn 
+      color="primary" 
+      class="relative waves-light" 
+      mdbWavesEffect 
+      (click)="onSave()">{{ usuario.id ? "Alterar!" : "Salvar!" }}
+    </button>
 
     <button 
       type="button" 
@@ -160,15 +169,6 @@
       aria-label="Fechar" 
       (click)="modalRef.hide()"
       mdbWavesEffect>{{ usuario.id ? "Voltar" : "Cancelar" }}
-    </button>
-
-    <button 
-      type="button" 
-      mdbBtn 
-      color="primary" 
-      class="relative waves-light" 
-      mdbWavesEffect 
-      (click)="onSave()">{{ usuario.id ? "Alterar!" : "Salvar!" }}
     </button>
   </div>
   <!-- /FOOTER -->

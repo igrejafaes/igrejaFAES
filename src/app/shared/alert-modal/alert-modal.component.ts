@@ -10,16 +10,14 @@ export class AlertModalComponent implements OnInit {
 
   @Input() message: string;
   @Input() title: string = 'FAES';
-  //@Input() iconType: string;
+  
   iconType: string;
-
   modalIcon: string = '';
   
   constructor(public modalRef: MDBModalRef) {
   }
 
   ngOnInit() {
-    console.log(this.iconType)
     switch (this.iconType) {
       case 'danger':
         this.modalIcon = 'fa fa-times-circle'

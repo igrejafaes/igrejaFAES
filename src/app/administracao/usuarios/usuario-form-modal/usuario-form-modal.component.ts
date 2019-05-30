@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { MDBModalRef } from 'angular-bootstrap-md';
 import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
 import { Usuario } from 'src/app/models/usuario';
@@ -81,7 +81,11 @@ export class UsuarioFormModalComponent implements OnInit {
     this.submited = true
 
     if (this.userForm.valid) {
-      if(!this.userForm.value.acesso) this.userForm.value.acesso = 1;
+      
+      let newUsuario = { ...this.userForm.value }
+      if(!newUsuario.acesso) this.userForm.value.acesso = 1;
+      delete newUsuario.confirm
+
       this.usuarioData.next(this.userForm.value);
 	    this.modalRef.hide();
     } else {

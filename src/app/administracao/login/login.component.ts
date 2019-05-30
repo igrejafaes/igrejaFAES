@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         ]
       ],
       password: [
-        '123',
+        '123456',
         [Validators.required, Validators.minLength(3), Validators.maxLength(20)]
       ]
     });

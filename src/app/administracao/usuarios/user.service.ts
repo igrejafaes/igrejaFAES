@@ -63,6 +63,16 @@ export class UserService {
   }
 
   // DELETE USUARIO BY ID
-  deleteUsuaruiByID(id: string) {}
+  deleteUsuaruiByID(id: string) {
+    return new Promise((resolve, reject) => {
+      this.usuarios.doc<Usuario>(id).delete()
+        .then(
+          () => resolve(), 
+          (err) => reject(err))
+        .catch((reason) => {
+          reject(reason)
+        })
+    }) 
+  }
 
 }
