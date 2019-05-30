@@ -55,7 +55,7 @@ export class HeaderBannerComponent implements OnInit {
       //this.bannerImage = '../../assets/images/BannerSuperior.jpg';
     }
 
-    this.getImage.getImageURL(imageName)
+    this.getImage.getImageURL(imageName, '')
       .subscribe((imageURL) => {
         this.bannerImage = imageURL;
         this.loading = false;

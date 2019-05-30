@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthService } from "./../auth.service";
-import { Usuario } from "./../../models/usuario";
+import { Usuario } from "../../models/clUsuario";
 import { UsuarioLogadoService } from "../usuarioLogado.service";
 
 @Component({

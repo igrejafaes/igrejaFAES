@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { Usuario } from '../models/usuario';
+import { Usuario } from '../models/clUsuario';
 import { Subject } from 'rxjs/Subject';
 import { UsuarioLogadoService } from './usuarioLogado.service';
 

@@ -1,7 +1,7 @@
 import { Component, OnInit  } from '@angular/core';
 import { MDBModalRef } from 'angular-bootstrap-md';
 import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
-import { Usuario } from 'src/app/models/usuario';
+import { Usuario } from 'src/app/models/clUsuario';
 import { Subject } from 'rxjs';
 
 @Component({

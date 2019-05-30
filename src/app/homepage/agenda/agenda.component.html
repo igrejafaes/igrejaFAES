@@ -2,49 +2,59 @@
   <!-- HEADER AGENDA -->
   <div class="row agenda-header justify-content-between">
     <div class="col sm-4">
-      <h1 class="h1-responsive" (click)="modalteste()"><mdb-icon far icon="calendar-check"></mdb-icon> Agenda</h1>
+      <h1 class="h1-responsive" (click)="modalteste()">
+        <mdb-icon far icon="calendar-check"></mdb-icon> Agenda
+      </h1>
     </div>
     <div class="col sm-4 text-right agenda-header-navbtn">
-      <i class="fa fa-arrow-circle-o-left btn-nav view overlay zoom" (click)="slickModal.slickPrev()"></i>
-      <i class="fa fa-arrow-circle-o-right btn-nav" (click)="slickModal.slickNext()"></i>
+      <i
+        class="fa fa-arrow-circle-o-left btn-nav view overlay zoom"
+        (click)="slickModal.slickPrev()"
+      ></i>
+      <i
+        class="fa fa-arrow-circle-o-right btn-nav"
+        (click)="slickModal.slickNext()"
+      ></i>
     </div>
   </div>
   <!-- /HEADER AGENDA -->
 
   <!-- CARROUSEL AGENDA -->
   <div class="container">
-
-    <ngx-slick-carousel 
-    class="carousel" 
-    #slickModal="slick-carousel" 
-    [config]="slideConfig" 
-    (init)="slickInit($event)"
-    (breakpoint)="breakpoint($event)" 
-    (afterChange)="afterChange($event)" 
-    (beforeChange)="beforeChange($event)">
-
-           
-      <div ngxSlickItem *ngFor="let item of agendas" class="card slide text-center m-2 view overlay">
-        
-          <img class="card-img-top img-fluid" [src]='item.ImagemURL' alt="Card image cap" width="100%">
-          <div class="mask rgba-blue-light"></div>
-          <div class="card-body">
-            <h5 class="card-title">{{ item.Titulo }}</h5>
-            <p class="card-text">{{ item.Descricao }}</p>
-          </div>
-          <div class="card-footer">
-            <!-- <p>{{ item.AgendaData['seconds'] * 1000 | date: 'dd/MMM/yyyy' }}</p> -->
-            <p>{{ item.AgendaData | firestoreDate: 'dd/MMM/yyyy' }}</p>
-            <!-- <small class="text-muted">{{ item.AgendaData }}</small> -->
-          </div>
-        
+    <ngx-slick-carousel
+      class="carousel"
+      #slickModal="slick-carousel"
+      [config]="slideConfig"
+      (init)="slickInit($event)"
+      (breakpoint)="breakpoint($event)"
+      (afterChange)="afterChange($event)"
+      (beforeChange)="beforeChange($event)"
+    >
+      <div
+        ngxSlickItem
+        *ngFor="let item of agendas"
+        class="card slide text-center m-2 view overlay"
+      >
+        <img
+          class="card-img-top img-fluid"
+          [src]="item.ImagemURL"
+          alt="Card image cap"
+          width="100%"
+        />
+        <div class="mask rgba-blue-light"></div>
+        <div class="card-body">
+          <h5 class="card-title">{{ item.Titulo }}</h5>
+          <p class="card-text">{{ item.Descricao }}</p>
+        </div>
+        <div class="card-footer">
+          <!-- <p>{{ item.AgendaData['seconds'] * 1000 | date: 'dd/MMM/yyyy' }}</p> -->
+          <p>{{ item.AgendaData | firestoreDate: "dd/MMM/yyyy" }}</p>
+          <!-- <small class="text-muted">{{ item.AgendaData }}</small> -->
+        </div>
       </div>
-       
     </ngx-slick-carousel>
-
   </div>
-    <!-- </div> -->
+  <!-- </div> -->
 
   <!-- /CARROUSEL AGENDA -->
-
-</div> 
+</div>

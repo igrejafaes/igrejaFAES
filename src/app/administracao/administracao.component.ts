@@ -2,7 +2,7 @@ import { AuthService } from './auth.service';
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioLogadoService } from './usuarioLogado.service';
-import { Usuario } from '../models/usuario';
+import { Usuario } from '../models/clUsuario';
 
 @Component({
   selector: 'app-administracao',

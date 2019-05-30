@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
-import { Usuario } from 'src/app/models/usuario';
+import { Usuario } from 'src/app/models/clUsuario';
 import { MDBModalService, MDBModalRef } from 'angular-bootstrap-md';
 import { UsuarioFormModalComponent } from '../usuario-form-modal/usuario-form-modal.component';
 import { take } from 'rxjs/operators';
