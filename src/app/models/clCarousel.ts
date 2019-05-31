@@ -5,4 +5,7 @@ export class Carousel {
   imageFolder: string;
   date: string;
   linkURL?: string;
+  imagePath() : string{
+    return `/images/${this.imageFolder}/${this.imageFile}`
+  }
 }

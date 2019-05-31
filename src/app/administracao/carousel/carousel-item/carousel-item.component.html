@@ -1,0 +1,22 @@
+<mdb-card>
+  <!--Card image-->
+  <mdb-card-img *ngIf="carousel.imageFile" src="{{ carousel.imagePath() }}" alt="Card image cap" class="waves-light"
+    mdbWavesEffect></mdb-card-img>
+  <!--Card content-->
+  <mdb-card-body>
+
+    <!--Title-->
+    <mdb-card-title>
+      <h4>{{ carousel.title }}</h4>
+    </mdb-card-title>
+
+    <!--Text-->
+    <mdb-card-text> {{ carousel.description }}
+    </mdb-card-text>
+
+    <div class="text-left">
+      <a *ngIf="editable" mdbBtn color="primary" mdbWavesEffect (click)="onEdit()">Edit</a>
+      <a mdbBtn class="red lighten-1 white-text" mdbWavesEffect (click)="onDelete()">Delete</a>
+    </div>
+  </mdb-card-body>
+</mdb-card>

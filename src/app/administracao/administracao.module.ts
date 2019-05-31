@@ -16,6 +16,7 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { NewsComponent } from './news/news.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { UsuarioLogadoService } from './usuarioLogado.service';
+import { CarouselItemComponent } from './carousel/carousel-item/carousel-item.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { UsuarioLogadoService } from './usuarioLogado.service';
     CarouselComponent, 
     ScheduleComponent, 
     NewsComponent, 
-    NewsletterComponent, 
+    NewsletterComponent, CarouselItemComponent, 
   ],
   imports: [
     CommonModule,
