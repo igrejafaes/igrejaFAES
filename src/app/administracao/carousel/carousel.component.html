@@ -1,49 +1,54 @@
-<div class="container">
-  <div class="box flex">
-    <div class="border flex">
-      <div class="box-header">
-        <h4>Editar Carroussel</h4>
-        <p>Clique no botão <mdb-icon fas icon="camera" style="color: #4285f4"></mdb-icon> para selecionar uma imagem.
-          É possível realizar múltiplas seleções.</p>
-      </div>
-      <div class="box-content flex">
-        <div class="box-input">
-          <div class="button-input">
-            <input type="file" id="file" multiple accept="imagem/*" (change)="fileuploads($event)">
-            <label for="file" class="btn btn-sm btn-primary waves-light" mdbWavesEffect>
-              <mdb-icon fas icon="camera"></mdb-icon>
-            </label>
+<section>
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <div class="px-4 section-header">
+          <h3>Lista de Carroussel</h3>
+          <p class="grey-text pt-3">Adicionar, editar and excluir Carroussel</p>
+          <button
+            mdbBtn
+            color="primary"
+            class="ml-3"
+            (click)="openAddCarouselModal()"
+          >
+            Adicionar Novo Carroussel
+          </button>
+        </div>
+
+        <div class="container-fluid pb-5">
+          <div class="py-5">
+            <!-- app-projects-list [projects]="projects$ | async" (projectDeleted)="onProjectDelete($event)" (projectEdited)="onProjectEdit($event)"></app-projects-list -->
+
+            <div class="carousel-list d-flex flex-wrap fadeIn animated">
+              <div class="carousel" *ngFor="let carousel of listCarousel">
+                <app-carousel-item
+                  [carousel]="carousel"
+                  [editable]="true"
+                  (deleted)="onCarouselDelete($event)"
+                  (edited)="openEditCarouselModal($event)"
+                ></app-carousel-item>
+              </div>
+            </div>
+
+            <div
+              *ngIf="!listCarousel"
+              class="d-flex justify-content-center align-items-center"
+              style="margin-top: 200px"
+            >
+              <div
+                class="spinner-grow text-primary"
+                role="status"
+                style="width: 4rem; height: 4rem;"
+              >
+                <span class="sr-only">Lendo...</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="box-list">
-          <table mdbTable hover="true" small="true" mdbTableScroll scrollY="true" maxHeight="450">
-            <thead *ngIf="images.length > 0">
-              <tr>
-                <th *ngFor="let head of headTable">{{head}}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr mdbTableCol *ngFor="let image of images; let i=index">
-                <td>{{ i + 1 }}</td>
-                <td>
-                  <img [src]="image.url">
-                </td>
-                <td>{{ image.name }}</td>
-                <td>{{ image.type }}</td>
-                <td>
-                  <a style="color: red" href="javascript:void(0)" (click)="trashImage(image)">
-                    <mdb-icon fas icon="trash"></mdb-icon>
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
       </div>
-      <div class="box-footer">
-        <button type="button" mdbBtn color="success" size="sm" mdbWavesEffect (click)="submitImages()">Enviar</button>
-        <button type="button" mdbBtn color="danger" size="sm" mdbWavesEffect (click)="cancelImages()">Cancelar</button>
-      </div>
+      <!-- /Card Body -->
     </div>
+    <!-- /Card -->
   </div>
-</div>
+  <!-- /Container -->
+</section>

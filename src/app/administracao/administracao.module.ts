@@ -17,6 +17,8 @@ import { NewsComponent } from './news/news.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { UsuarioLogadoService } from './usuarioLogado.service';
 import { CarouselItemComponent } from './carousel/carousel-item/carousel-item.component';
+import { CarouselFormModalComponent } from './carousel/carousel-form-modal/carousel-form-modal.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { CarouselItemComponent } from './carousel/carousel-item/carousel-item.co
     CarouselComponent, 
     ScheduleComponent, 
     NewsComponent, 
-    NewsletterComponent, CarouselItemComponent, 
+    NewsletterComponent, 
+    CarouselItemComponent, 
+    CarouselFormModalComponent, 
   ],
   imports: [
     CommonModule,
@@ -36,10 +40,12 @@ import { CarouselItemComponent } from './carousel/carousel-item/carousel-item.co
     SharedModule,
     ReactiveFormsModule,
     AdministracaoRoutingModule,
+    NgxMaskModule.forRoot()
   ],
   exports: [
     NavbarAdmComponent
   ],
+  entryComponents: [CarouselFormModalComponent],
   providers: [ UsuarioLogadoService ]
 })
 export class AdministracaoModule { }

@@ -1,11 +1,10 @@
 export class Carousel {
-  title: string;
-  description?: string;
-  imageFile: string;
-  imageFolder: string;
-  date: string;
+  id?: string;
+  titulo: string;
+  descricao?: string;
+  slideIndex: number;
+  imageName: string;
+  imageURL: string;
+  carrouselData: string;
   linkURL?: string;
-  imagePath() : string{
-    return `/images/${this.imageFolder}/${this.imageFile}`
-  }
 }

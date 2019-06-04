@@ -12,7 +12,7 @@ export class ReturnToTabDirective {
       const form = e.target.form;
       const index = Array.prototype.indexOf.call(form.elements, event.target);
       // check exists next form element
-      if(form.elements[index + 1]) {
+      if(form.elements[index + 1] && form.elements[index + 1].disabled == false) {
         form.elements[index + 1].focus();
       } else { // if not exists return to first element
         form.elements[0].focus(); 
