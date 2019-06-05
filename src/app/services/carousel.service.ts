@@ -61,6 +61,8 @@ export class CarouselService {
     });
   }
 
+  // UPDATE CAROUSEL ITEM
+  // ****************************************************************************** */
   updateCarousel(carousel: Carousel): any {
     const carouselWithoutID = { ...carousel } // create a new object
     delete carouselWithoutID.id // to save without ID
@@ -75,6 +77,19 @@ export class CarouselService {
           (err) => console.log(err)
         )
     });
+  }
+
+  // DELETE CAROUSEL ITEM
+  // ****************************************************************************** */
+  deleteCarousel(id: string) : Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      this.carouselCollection.doc<Carousel>(id)
+      .delete()
+      .then(() => {
+         resolve(true)
+      }, (err) => reject(err))
+      .catch((reason)=> reject(reason))
+    })
   }
 
 }

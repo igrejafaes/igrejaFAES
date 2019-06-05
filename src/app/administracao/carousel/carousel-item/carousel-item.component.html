@@ -1,23 +1,32 @@
 <mdb-card>
   <!--Card image-->
-  <mdb-card-img *ngIf="carousel.imageURL" src="{{ carousel.imageURL }}" alt="Card image cap" class="waves-light"
-    mdbWavesEffect></mdb-card-img>
+  <mdb-card-img 
+    *ngIf="carousel.imageURL"
+    src="{{ carousel.imageURL }}"
+    [hidden]="loading"
+    alt="Card image cap"
+    class="waves-light"
+    mdbWavesEffect
+  ></mdb-card-img>
   <!--Card content-->
   <mdb-card-body>
-
     <!--Title-->
     <mdb-card-title>
       <h4>{{ carousel.titulo }}</h4>
     </mdb-card-title>
 
     <!--Text-->
-    <mdb-card-text> {{ carousel.descricao }}
-    </mdb-card-text>
+    <mdb-card-text> {{ carousel.descricao }} </mdb-card-text>
 
     <div class="text-center d-flex flex-column flex-fill">
       <a mdbBtn color="primary" mdbWavesEffect (click)="onEdit()">Editar</a>
-      <a mdbBtn class="red lighten-1 white-text w-80" mdbWavesEffect (click)="onDelete()">Apagar</a>
+      <a
+        mdbBtn
+        class="red lighten-1 white-text w-80"
+        mdbWavesEffect
+        (click)="onDelete()"
+        >Apagar</a
+      >
     </div>
-
   </mdb-card-body>
 </mdb-card>
