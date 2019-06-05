@@ -99,12 +99,13 @@
       </div>
 
       <!-- imageURL -->
-      <div class="md-form form-group md-bg form-sm mb-0">
+      <div class="md-form form-group md-outline form-sm mb-0">
         <textarea
           mdbInput
           type="text"
           id="imageURL"
-          class="form-control"
+          class="form-control md-textarea"
+          rows="3"
           formControlName="imageURL"
           [onReturnSendTab]
         ></textarea>
@@ -120,24 +121,26 @@
     <div class="d-flex flex-fill align-items-center">
       <div class="d-flex flex-column">
         <!-- BUTTON LOAD -->
-        <div class="button-input">
-          <input
-          type="file"
-          id="file"
-          multiple
-          accept="imagem/*"
-          (change)="loadFileImage($event)"
-          />
-          <label
-          for="file"
-          mdbBtn type="button" color="dark-green" mdbWavesEffect size="sm"
-          mdbWavesEffect
-          class="w-100 mt-0"
-          >
+        <div class="fileloader">
+
+          <div class="button-input">
+            <input
+            type="file"
+            id="file"
+            accept="imagem/*"
+            (change)="loadFileImage($event)"
+            />
+            <label
+            for="file"
+            mdbBtn type="button" color="dark-green" mdbWavesEffect size="sm"
+            mdbWavesEffect
+            class="w-100 mt-0"
+            >
             <mdb-icon fas icon="camera" class="mr-0"></mdb-icon>
             {{ carousel ? "Obter Imagem" : "Alterar Imagem" }}
           </label>
         </div>
+      </div>
         <!-- /BUTTON LOAD -->
         <!-- BUTTON SAVE IMAGE -->
         <button 
@@ -167,7 +170,7 @@
 
     <!-- PROGRESS BAR -->
     <div *ngIf="currentUpload">
-      <div class="progress">
+      <div class="progress mt-2">
         <div
           class="progress-bar progress-bar-animated"
           [ngStyle]="{ width: currentUpload?.progress + '%' }"
@@ -182,7 +185,7 @@
   <!-- /BODY -->
   
   <!-- FOOTER -->
-  <div class="modal-footer">
+  <div class="modal-footer p-0">
     <!-- submit / save -->
     <button
       type="button"

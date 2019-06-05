@@ -82,8 +82,8 @@ export class CarouselComponent implements OnInit {
       show: false,
       ignoreBackdropClick: true,
       animated: true,
-      class: 'modal-notify modal-info modal-dialog-centered modal-md',
-      containerClass: 'modal-dialog-scrollable',
+      //class: 'modal-notify modal-info modal-dialog-centered modal-md',
+      class: 'modal-dialog modal-dialog-scrollable',
       data: {
         heading: carousel ? 'Editar Item do Carrousel' : 'Novo Item do Carroussel',
         carousel: carousel || new Carousel

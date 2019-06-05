@@ -1,14 +1,30 @@
+.modal-header {
+  background-color: cadetblue;
+}
+
+.modal-footer {
+  background-color: gainsboro;
+}
+
+.fileloader{
+  position: relative;
+}
+
 #file {
-    -webkit-appearance: none;
-    position:absolute;
-    top:1px;
-    right:1px;
-    width: 40px;
-    height: 40px;
-    text-indent: 100em;
-    //background: url('assets/images/maps/Browse.png');
-    background-size: cover;
-    overflow: hidden;
-    cursor: pointer;
-    outline: none;
+  -webkit-appearance: none;
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  width: 40px;
+  height: 40px;
+  text-indent: 100em;
+  //background: url('assets/images/maps/Browse.png');
+  background-size: cover;
+  overflow: hidden;
+  cursor: pointer;
+  outline: none;
+}
+
+.md-textarea {
+  font-size: 0.9rem;
 }
