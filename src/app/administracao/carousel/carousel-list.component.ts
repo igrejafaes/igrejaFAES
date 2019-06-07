@@ -1,4 +1,5 @@
-import { CarouselService } from './../../services/carousel.service';
+import { UploadService } from 'src/app/services/upload.service';
+import { CarouselService } from '../../services/carousel.service';
 import { Component, OnInit } from '@angular/core';
 import { Carousel } from 'src/app/models/clCarousel';
 import { MDBModalService, MDBModalRef } from 'angular-bootstrap-md';
@@ -9,10 +10,10 @@ import { ConfirmModalService } from 'src/app/shared/confirm-modal.service';
 
 @Component({
   selector: 'app-carousel',
-  templateUrl: './carousel.component.html',
-  styleUrls: ['./carousel.component.scss']
+  templateUrl: './carousel-list.component.html',
+  styleUrls: ['./carousel-list.component.scss']
 })
-export class CarouselComponent implements OnInit {
+export class CarouselListComponent implements OnInit {
 
   listCarousel: Carousel[]
   modalRef: MDBModalRef;
@@ -22,7 +23,8 @@ export class CarouselComponent implements OnInit {
     private modalService: MDBModalService,
     private carouselService: CarouselService,
     private alertModal: AlertModalService,
-    private confirmModal: ConfirmModalService
+    private confirmModal: ConfirmModalService,
+    private imageService: UploadService
   ) { }
 
   ngOnInit() {
@@ -50,19 +52,35 @@ export class CarouselComponent implements OnInit {
     });
   }
 
+  // DELETE CAROUSEL
   onCarouselDelete(carousel: Carousel) {
-    this.confirmModal.showConfirmDanger('Deseja APAGAR o Carrousel?', 'Sim', 'Não')
+    this.confirmModal.showConfirmDanger('Deseja EXCLUIR o Carrousel?', 'Sim', 'Não')
     .subscribe((confirmation: boolean) => {
       if(confirmation){
+
+        //delete image
+        this.imageService
+        .deleteUpload(carousel.imageName, "carousel")
+        .catch(err => {
+          if (err.code !== "storage/object-not-found") {
+            this.alertModal.showAlertDanger("Não foi possível realizar a troca de imagem...", "Imagem");
+            console.log(err);
+            return;
+          }
+        });
+
+        // delete carousel
         this.service.deleteCarousel(carousel.id)
         .then(()=> {
           const i = this.listCarousel.findIndex((c) => c.id === carousel.id);
           this.listCarousel.splice(i, 1)
         })
+
       }
     })
   }
 
+  // OPEN EDIT MODAL
   openEditCarouselModal(carousel: Carousel) {
     const carouselCopy = { ...carousel };
 

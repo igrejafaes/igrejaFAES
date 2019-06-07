@@ -1,3 +1,4 @@
+import { ImagesDimensions } from './../../../models/clImagesDimensions';
 import { AlertModalService } from "./../../../shared/alert-modal.service";
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { MDBModalRef } from "angular-bootstrap-md";
@@ -15,6 +16,7 @@ import { UploadService } from "src/app/services/upload.service";
 export class CarouselFormModalComponent implements OnInit {
 
   @ViewChild("preview") preview: ElementRef;
+  @ViewChild("ModalBody") modalBody: ElementRef;
   heading: string;
   carouselForm: FormGroup;
   submited: boolean = false;
@@ -24,9 +26,9 @@ export class CarouselFormModalComponent implements OnInit {
   constructor(
     public modalRef: MDBModalRef,
     private formbuilder: FormBuilder,
-    private upSvc: UploadService,
+    private imageService: UploadService,
     private alert: AlertModalService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.createForm(this.carousel);
@@ -44,7 +46,10 @@ export class CarouselFormModalComponent implements OnInit {
       descricao: [carousel.descricao],
       imageURL: [carousel.imageURL, [Validators.required]],
       imageName: [carousel.imageName, [Validators.required]],
-      carrouselData: [carousel.carrouselData || new Date().toDateString()],
+      carrouselData: [
+        this.convertToDate(carousel.carrouselData),
+        [Validators.required]
+      ],
       linkURL: [carousel.linkURL],
       slideIndex: [carousel.slideIndex || 1]
     });
@@ -52,11 +57,20 @@ export class CarouselFormModalComponent implements OnInit {
     this.carouselForm.controls["imageURL"].disable();
   }
 
+  convertToDate(dateString: string) {
+    if (!dateString || !dateString.length) {
+      dateString = new Date().toLocaleDateString()
+    }
+    dateString.split('/').reverse().join('-')
+    const myDate = dateString.split('/').reverse().join('-')
+    return myDate
+  }
+
   // SALVAR IMAGEM
   // **************************************************************************
   onSave() {
     // check image file
-    if (this.selectedFiles) {
+    if (this.selectedFile) {
       this.alert.showAlertWarning(
         "A image deve ser enviada antes de salvar",
         "Imagem"
@@ -100,21 +114,39 @@ export class CarouselFormModalComponent implements OnInit {
       if (errors["minlength"]) {
         return `dever ter no mínimo ${
           errors.minlength.requiredLength
-        } caracteres`;
+          } caracteres`;
       }
     }
   }
 
   // TRATAMENTO DA IMAGEM
   // ********************************************************************************************
-  selectedFiles: FileList;
+  selectedFile: File;
   currentUpload: Upload;
 
   // UPLOAD OF IMAGE
   uploadImage() {
+
+    // check file dimension (width, height)
+    const width = this.preview.nativeElement.naturalWidth
+    const height = this.preview.nativeElement.naturalHeight
+    const dimension = new ImagesDimensions
+    const dim = dimension.getDimension('carousel')
+
+    if (dim) {
+      if (width != dim.width || height != dim.height) {
+        this.alert.showAlertInfo(
+          `A imagem escolhida não possui as dimensões necessárias:
+          largura: ${dim.width}, altura: ${dim.height}`,
+          'Imagem'
+        );
+        return;
+      }
+    }
+
     // if exist old image delete
     if (this.carousel.imageName) {
-      this.upSvc
+      this.imageService
         .deleteUpload(this.carousel.imageName, "carousel")
         .catch(err => {
           if (err.code !== "storage/object-not-found") {
@@ -129,16 +161,16 @@ export class CarouselFormModalComponent implements OnInit {
     }
 
     // upload image
-    let file = this.selectedFiles.item(0);
-    this.currentUpload = new Upload(file, "carousel");
+    this.currentUpload = new Upload(this.selectedFile, "carousel");
 
-    this.upSvc.uploadFile(this.currentUpload).then(
+    this.imageService.uploadFile(this.currentUpload).then(
       url => {
-        this.carouselForm.controls["imageName"].setValue(file.name);
+        this.scrollToBottom(); // to see progress bar
+        this.carouselForm.controls["imageName"].setValue(this.selectedFile.name);
         this.carouselForm.controls["imageURL"].setValue(url);
-        this.carousel.imageName = file.name;
+        this.carousel.imageName = this.selectedFile.name;
         this.carousel.imageURL = url;
-        this.selectedFiles = null;
+        this.selectedFile = null;
       },
       err => {
         this.alert.showAlertDanger(
@@ -152,12 +184,39 @@ export class CarouselFormModalComponent implements OnInit {
 
   // PREVIEW OF NEW IMAGE
   loadFileImage(event) {
-    this.selectedFiles = event.target.files;
+
+    const file = event.target.files && event.target.files[0];
+    if (!file) { return };
+
+    // check file type
+    if (!(file.type == 'image/jpeg' || file.type == 'image/png')) {
+      console.log(file.type);
+      this.alert.showAlertInfo(
+        "A imagem escolhida não é JPEG ou PNG...",
+        "Imagem"
+      );
+      return;
+    };
+
+    this.selectedFile = file;
     const reader = new FileReader();
     reader.onload = () => {
       this.preview.nativeElement.src = reader.result;
     };
-    reader.readAsDataURL(event.target.files[0]);
+    reader.readAsDataURL(file);
+    this.scrollToBottom(); // to see new image
+
+  }
+
+  // SCROLL TO BOTTOM
+  scrollToBottom(): void {
+    try {
+      setTimeout(() => {
+        this.modalBody.nativeElement.scrollTop = this.modalBody.nativeElement.scrollHeight;
+      }, 500);
+    } catch (err) {
+      console.log(err)
+    }
   }
 
 }

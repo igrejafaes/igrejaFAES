@@ -1,0 +1,35 @@
+.card {
+  margin-top: 20px;
+}
+
+.carousel-list {
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+.carousel {
+  width: 80%;
+  margin: 1rem;
+}
+
+@media (min-width: 768px) {
+  .carousel {
+      width: calc(50% - 2rem);
+  }
+
+  .carousel-list {
+      justify-content: normal;
+  }
+}
+
+@media (min-width: 992px) {
+  .carousel {
+      width: calc(33.3333% - 2rem);
+  }
+}
+
+@media (min-width: 1200px) {
+  .carousel {
+      width: calc(25% - 3rem);
+  }
+}

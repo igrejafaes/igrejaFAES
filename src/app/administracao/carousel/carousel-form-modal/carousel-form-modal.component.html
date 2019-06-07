@@ -16,7 +16,7 @@
   </div>
   <!-- /HEADER -->
   <!-- BODY -->
-  <div class="modal-body">
+  <div #ModalBody class="modal-body">
     <!-- FORM -->
     <form class="text-center" [formGroup]="carouselForm" (ngSubmit)="onSave()">
       <!-- titulo -->
@@ -66,29 +66,30 @@
 
       <div class="d-flex">
         <!-- Data do Carrousel -->
-        <div class="md-form md-bg form-sm my-0 mr-3 w-100">
+        <div class="md-form form-group md-bg form-sm my-0 mr-3 w-100">
+          <label *ngIf="carousel.carrouselData" for="carrouselData">Data</label>
+          <span *ngIf="!carousel.carrouselData" class="labelData">Data</span>
           <input
             mdbInput
-            mdbDateFormat
             formControlName="carrouselData"
-            type="text"
+            type="date"
             id="carrouselData"
             class="form-control"
             [onReturnSendTab]
           />
-          <label for="carrouselData">Data do Carrousel</label>
           <mdb-error *ngIf="submited && hasError('carrouselData')">{{
             hasError("carrouselData")
           }}</mdb-error>
         </div>
+
         <!-- slideIndex -->
-        <div class="md-form md-bg my-0 form-sm w-100">
+        <div class="md-form form-group md-bg form-sm my-0 w-100">
           <input
             mdbInput
             formControlName="slideIndex"
             type="number"
             id="slideIndex"
-            class="form-control"
+            class="slide form-control"
             [onReturnSendTab]
           />
           <label for="slideIndex">Ordem de Apresentação</label>
@@ -144,7 +145,7 @@
         <!-- /BUTTON LOAD -->
         <!-- BUTTON SAVE IMAGE -->
         <button 
-          [disabled]="!selectedFiles" 
+          [disabled]="!selectedFile" 
           (click)="uploadImage()"
           mdbBtn type="button" color="primary" mdbWavesEffect size="sm"
           mdbWavesEffect
@@ -176,8 +177,8 @@
           [ngStyle]="{ width: currentUpload?.progress + '%' }"
         ></div>
       </div>
-      Progress: {{ currentUpload?.name }} | {{ currentUpload?.progress }}%
-      Complete
+      Enviando: {{ currentUpload?.name }} | {{ currentUpload?.progress }}%
+      Completo
     </div>
     <!-- /PROGRESS BAR -->
 

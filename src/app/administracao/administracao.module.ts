@@ -11,7 +11,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { LoginComponent } from './login/login.component';
 import { AdministracaoComponent } from './administracao.component';
 import { AdmHomeComponent } from './adm-home/adm-home.component';
-import { CarouselComponent } from './carousel/carousel.component';
+import { CarouselListComponent } from './carousel/carousel-list.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { NewsComponent } from './news/news.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
@@ -26,7 +26,7 @@ import { NgxMaskModule } from 'ngx-mask';
     AdministracaoComponent, 
     AdmHomeComponent, 
     NavbarAdmComponent, 
-    CarouselComponent, 
+    CarouselListComponent, 
     ScheduleComponent, 
     NewsComponent, 
     NewsletterComponent, 
