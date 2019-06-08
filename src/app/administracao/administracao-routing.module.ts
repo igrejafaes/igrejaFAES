@@ -7,7 +7,7 @@ import { PaginaNaoEncontradaComponent } from './../pagina-nao-encontrada/pagina-
 import { AdmHomeComponent } from './adm-home/adm-home.component';
 import { LoginComponent } from './login/login.component';
 import { AdministracaoComponent } from './administracao.component';
-import { CarouselComponent } from './carousel/carousel.component';
+import { CarouselListComponent } from './carousel/carousel-list.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { NewsComponent } from './news/news.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
@@ -21,7 +21,7 @@ const routes: Routes = [
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'home', component: AdmHomeComponent, canActivate: [AuthGuard] },
-      { path: 'carousel', component: CarouselComponent, canActivate: [AuthGuard]  },
+      { path: 'carousel', component: CarouselListComponent, canActivate: [AuthGuard]  },
       { path: 'schedule', component: ScheduleComponent, canActivate: [AuthGuard]  },
       { path: 'news', component: NewsComponent, canActivate: [AuthGuard]  },
       { path: 'newsletter', component: NewsletterComponent, canActivate: [AuthGuard]  },

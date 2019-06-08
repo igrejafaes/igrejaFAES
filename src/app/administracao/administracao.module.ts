@@ -11,11 +11,14 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { LoginComponent } from './login/login.component';
 import { AdministracaoComponent } from './administracao.component';
 import { AdmHomeComponent } from './adm-home/adm-home.component';
-import { CarouselComponent } from './carousel/carousel.component';
+import { CarouselListComponent } from './carousel/carousel-list.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { NewsComponent } from './news/news.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { UsuarioLogadoService } from './usuarioLogado.service';
+import { CarouselItemComponent } from './carousel/carousel-item/carousel-item.component';
+import { CarouselFormModalComponent } from './carousel/carousel-form-modal/carousel-form-modal.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -23,10 +26,12 @@ import { UsuarioLogadoService } from './usuarioLogado.service';
     AdministracaoComponent, 
     AdmHomeComponent, 
     NavbarAdmComponent, 
-    CarouselComponent, 
+    CarouselListComponent, 
     ScheduleComponent, 
     NewsComponent, 
     NewsletterComponent, 
+    CarouselItemComponent, 
+    CarouselFormModalComponent, 
   ],
   imports: [
     CommonModule,
@@ -35,10 +40,12 @@ import { UsuarioLogadoService } from './usuarioLogado.service';
     SharedModule,
     ReactiveFormsModule,
     AdministracaoRoutingModule,
+    NgxMaskModule.forRoot()
   ],
   exports: [
     NavbarAdmComponent
   ],
+  entryComponents: [CarouselFormModalComponent],
   providers: [ UsuarioLogadoService ]
 })
 export class AdministracaoModule { }

@@ -1,0 +1,60 @@
+<section>
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <div class="row px-4 section-header">
+          <div class="col-md-6 justify-content-md-start">
+            <h3>Lista de Carroussel</h3>
+            <p class="grey-text pt-0">Adicionar, editar and excluir Carroussel</p>
+          </div>
+          <div class="col-md-6 buttonAdd">
+            <button
+              mdbBtn
+              color="primary"
+              (click)="openAddCarouselModal()"
+              >
+              Novo Carroussel
+            </button>
+          </div>
+        </div>
+
+        <div class="container-fluid pb-5">
+          <div class="py-0">
+            
+            <!-- CAROUSEL ITENS -->
+            <div class="carousel-list d-flex flex-wrap fadeIn animated">
+              <div class="carousel" *ngFor="let carousel of listCarousel">
+                <app-carousel-item
+                  [carousel]="carousel"
+                  [editable]="true"
+                  (deleted)="onCarouselDelete($event)"
+                  (edited)="openEditCarouselModal($event)"
+                ></app-carousel-item>
+              </div>
+            </div>
+            <!-- /CAROUSEL ITENS -->
+
+            <!-- SPINNER -->
+            <div
+              *ngIf="!listCarousel"
+              class="d-flex justify-content-center align-items-center"
+              style="margin-top: 200px"
+            >
+              <div
+                class="spinner-grow text-primary"
+                role="status"
+                style="width: 4rem; height: 4rem;"
+              >
+                <span class="sr-only">Lendo...</span>
+              </div>
+            </div>
+            <!-- /SPINNER -->
+          </div>
+        </div>
+      </div>
+      <!-- /Card Body -->
+    </div>
+    <!-- /Card -->
+  </div>
+  <!-- /Container -->
+</section>

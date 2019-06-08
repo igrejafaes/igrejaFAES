@@ -1,6 +1,6 @@
 <!-- CAROUSEL -->
 <div class="container-fluid" [ngStyle]="{ backgroundImage: imgBackURL }">
-    <div class="row">
+    <div class="row" *ngIf="imagens.length">
 
         <!--Carousel Wrapper-->
         <mdb-carousel class="carousel slide carousel-fade mx-auto" [animation]="'fade'" [isControls]="true">
@@ -15,7 +15,11 @@
 
         </mdb-carousel>
         <!--/.Carousel Wrapper-->
-
+    </div>
+    <div *ngIf="!imagens.length" class="d-flex justify-content-center spinner align-items-center">
+        <div class="spinner-grow text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
     </div>
 </div>
 <!-- /CAROUSEL -->

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CarouselService } from 'src/app/services/carousel.service';
 
 @Component({
   selector: 'app-carousel',
@@ -11,13 +12,16 @@ export class CarouselComponent implements OnInit {
   imgBackURL : string = 'url(' + this.imgFolder + 'fundoCarousel.jpg)';
   imagens : string[] = [];
 
-  constructor() { }
+  constructor(private service : CarouselService) { }
   
   ngOnInit() {
-    // deve criar um service
-    this.imagens.push(this.imgFolder + 'bannerCar_1.jpg');
-    this.imagens.push(this.imgFolder + 'bannerCar_2.jpg');
-    this.imagens.push(this.imgFolder + 'bannerCar_3.jpg');
+    this.getCarouselImages()
+  }
+
+  getCarouselImages(){
+    this.service.getCarouselList().then((list) => {
+      this.imagens = list.map((c) => { return c.imageURL })
+    })
   }
 
 }

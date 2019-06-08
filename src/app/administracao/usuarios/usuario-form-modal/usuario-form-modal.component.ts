@@ -82,11 +82,11 @@ export class UsuarioFormModalComponent implements OnInit {
 
     if (this.userForm.valid) {
       
-      let newUsuario = { ...this.userForm.value }
-      if(!newUsuario.acesso) this.userForm.value.acesso = 1;
-      delete newUsuario.confirm
+      let clearUsuario = { ...this.userForm.value }
+      if(!clearUsuario.acesso) this.userForm.value.acesso = 1;
+      delete clearUsuario.confirm
 
-      this.usuarioData.next(this.userForm.value);
+      this.usuarioData.next(clearUsuario);
 	    this.modalRef.hide();
     } else {
       const controls = this.userForm.controls;

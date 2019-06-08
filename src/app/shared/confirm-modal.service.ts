@@ -31,7 +31,7 @@ export class ConfirmModalService {
   }
 
   // MODAL CONFIG
-  defineModalConfig(title: string, iconType: confirmTypes, textOK?: string, textCancel?: string) {
+  private defineModalConfig(title: string, iconType: confirmTypes, textOK?: string, textCancel?: string) {
     return {
       backdrop: true,
       keyboard: true,
@@ -50,7 +50,7 @@ export class ConfirmModalService {
   }
 
   // MODAL CLASS CONFIG
-  defineModalClass(iconType: confirmTypes): string {
+  private defineModalClass(iconType: confirmTypes): string {
     // define o modalClass icon string
     let modalClass: string = 'modal-sm modal-notify '
     switch (iconType) {
