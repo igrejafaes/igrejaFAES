@@ -1,11 +1,13 @@
 <!--Navbar-->
 <mdb-navbar
-  SideClass="navbar navbar-expand-lg navbar-dark unique-color-dark sticky-top"
+  SideClass="navbar navbar-expand-lg navbar-dark unique-color-dark sticky-top scrolling-navbar"
   [containerInside]="true"
 >
   <!-- Navbar brand -->
   <mdb-navbar-brand
-    ><a class="navbar-brand mr-5" [routerLink]="['/administracao']"
+    ><a 
+      class="navbar-brand mr-5" 
+      [routerLink]="['/administracao']"
       ><strong class="mr-2">FAES</strong>Área Administrativa</a
     ></mdb-navbar-brand
   >
@@ -14,18 +16,18 @@
   <links>
     <!-- Menu -->
     <ul class="navbar-nav mr-auto">
-      <li
-        class="nav-item"
-        [routerLink]="[menu.path]"
-        routerLinkActive="active"
-        *ngFor="let menu of menuList"
-      >
-        <a class="nav-link waves-light" mdbWavesEffect
-          >{{ menu.title }}<span class="sr-only">(current)</span></a
-        >
-      </li>
 
-     </ul>
+      <li class="nav-item" *ngFor="let menu of menuList">
+        <a 
+        class="nav-link waves-light" 
+        mdbWavesEffect
+        routerLinkActive="activeLink"
+        routerLink="{{ menu.path }}">
+          {{ menu.title }}
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+    </ul>
     <!-- Menu -->
 
     <ul class="navbar-nav ml-auto nav-flex-icons">
@@ -33,7 +35,7 @@
         <a class="nav-link">
           <div class="btn-group" mdbDropdown>
             <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
-            <div class="dropdown-menu dropdown-menu-right dropdown-primary">
+            <div class="dropdown-menu dropdown-menu-left dropdown-primary">
               <!--<a class="dropdown-item" href="#">Minha Conta</a>
               <div class="divider dropdown-divider"></div>-->
               <a class="dropdown-item" (click)="fazerLogOut()">Sair</a>

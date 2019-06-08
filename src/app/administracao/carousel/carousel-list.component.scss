@@ -12,6 +12,18 @@
   margin: 1rem;
 }
 
+.buttonAdd{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+@media (max-width: 767px){
+  .buttonAdd{
+    justify-content: center;
+  }
+}
+
 @media (min-width: 768px) {
   .carousel {
       width: calc(50% - 2rem);
@@ -20,11 +32,16 @@
   .carousel-list {
       justify-content: normal;
   }
+
 }
 
 @media (min-width: 992px) {
   .carousel {
       width: calc(33.3333% - 2rem);
+  }
+
+  .buttonAdd{
+    justify-content: flex-end;
   }
 }
 

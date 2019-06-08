@@ -2,17 +2,20 @@
   <div class="container">
     <div class="card">
       <div class="card-body">
-        <div class="px-4 section-header">
-          <h3>Lista de Carroussel</h3>
-          <p class="grey-text pt-3">Adicionar, editar and excluir Carroussel</p>
-          <button
-            mdbBtn
-            color="primary"
-            class="ml-0"
-            (click)="openAddCarouselModal()"
-          >
-            Adicionar Novo Carroussel
-          </button>
+        <div class="row px-4 section-header">
+          <div class="col-md-6 justify-content-md-start">
+            <h3>Lista de Carroussel</h3>
+            <p class="grey-text pt-0">Adicionar, editar and excluir Carroussel</p>
+          </div>
+          <div class="col-md-6 buttonAdd">
+            <button
+              mdbBtn
+              color="primary"
+              (click)="openAddCarouselModal()"
+              >
+              Novo Carroussel
+            </button>
+          </div>
         </div>
 
         <div class="container-fluid pb-5">

@@ -1,8 +1,10 @@
-<!-- BANNER -->
-<app-header-banner *ngIf="!isAdm"></app-header-banner>
-<!-- NAVBAR -->
-<app-navbar *ngIf="!isAdm"></app-navbar>
-<!-- ROUTER OUTLET -->
-<router-outlet></router-outlet>
-<!-- FOOTER -->
-<app-rodape *ngIf="!isAdm"></app-rodape>
+<div> <!-- container neccessary for stick position navbar -->
+    <!-- BANNER -->
+    <app-header-banner *ngIf="!isAdm"></app-header-banner>
+    <!-- NAVBAR -->
+    <app-navbar *ngIf="!isAdm"></app-navbar>
+    <!-- ROUTER OUTLET -->
+    <router-outlet></router-outlet>
+    <!-- FOOTER -->
+    <app-rodape *ngIf="!isAdm"></app-rodape>
+</div>
