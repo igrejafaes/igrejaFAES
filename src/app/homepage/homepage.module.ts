@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SharedModule } from '../shared/shared.module';
 import { UsuarioModule } from '../administracao/usuarios/usuario.module';
-import { HomepageRoutingModule } from './homepage-routing.module';
+//import { HomepageRoutingModule } from './homepage-routing.module';
 
 import { CarouselComponent } from './carousel/carousel.component';
 import { HomepageComponent } from './homepage.component';
@@ -16,7 +16,7 @@ import { NoticiasComponent } from './noticias/noticias.component';
     CommonModule,
     SharedModule,
     UsuarioModule,
-    HomepageRoutingModule,
+    //HomepageRoutingModule,
   ],
   declarations: [
     CarouselComponent, 

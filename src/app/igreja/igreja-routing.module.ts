@@ -8,7 +8,7 @@ import { OrganizacaoComponent } from './organizacao/organizacao.component';
 import { PaginaNaoEncontradaComponent } from '../pagina-nao-encontrada/pagina-nao-encontrada.component';
 
 const routes: Routes = [
-  { path: 'igreja', component: IgrejaComponent, children: [
+  { path: 'igreja', children: [
     { path: 'confissao', component: ConfissaoComponent },
     { path: 'historia', component: HistoriaComponent },
     { path: 'organizacao', component: OrganizacaoComponent },
