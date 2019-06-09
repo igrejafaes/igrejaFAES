@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { clReuniao } from '../../models/clReuniao';
-import { ReuniaoService } from '../../services/reuniao.service';
+import { clReuniao } from '../../../models/clReuniao';
+import { ReuniaoService } from '../../../services/reuniao.service';
 
 import { NgwWowService, NgwWowConfig } from 'ngx-wow';
 import { Observable } from 'rxjs';

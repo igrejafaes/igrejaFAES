@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd  } from '@angular/router';
 
 @Component({
   selector: 'app-public-page',
@@ -9,21 +8,20 @@ import { Router, NavigationEnd  } from '@angular/router';
 export class PublicPageComponent implements OnInit {
 
   title = 'app';
-  isAdm: boolean = false
 
-  constructor(private router: Router) {  }
+  constructor() {  }
 
   ngOnInit(): void {
-    this.router.events.subscribe((val) => {
-      if(val instanceof NavigationEnd){
-        this.checkRoterURL(val.url)
-      }
-    });
+    // this.router.events.subscribe((val) => {
+    //   if(val instanceof NavigationEnd){
+    //     this.checkRoterURL(val.url)
+    //   }
+    // });
   }
 
-  checkRoterURL(url: string){
-    // check if router is 'administracao' to change isAdm
-    //this.isAdm = url.substring(0, 14) === '/administracao'
-  }
+  // checkRoterURL(url: string){
+  //   // check if router is 'administracao' to change isAdm
+  //   //this.isAdm = url.substring(0, 14) === '/administracao'
+  // }
 
 }

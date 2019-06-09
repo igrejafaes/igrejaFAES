@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ContatoComponent } from 'src/app/contato/contato.component';
+import { ContatoComponent } from 'src/app/public/contato/contato.component';
 import { PaginaNaoEncontradaComponent } from 'src/app/pagina-nao-encontrada/pagina-nao-encontrada.component';
-import { HomepageComponent } from '../homepage/homepage.component';
+import { HomepageComponent } from './homepage/homepage.component';
 import { PublicPageComponent } from './public-page.component';
-import { JovensComponent } from '../departamento/jovens/jovens.component';
-import { MulheresComponent } from '../departamento/mulheres/mulheres.component';
-import { AdolescentesComponent } from '../departamento/adolescentes/adolescentes.component';
-import { CriancasComponent } from '../departamento/criancas/criancas.component';
-import { DiretoriaComponent } from '../departamento/diretoria/diretoria.component';
-import { ConfissaoComponent } from '../igreja/confissao/confissao.component';
-import { HistoriaComponent } from '../igreja/historia/historia.component';
-import { OrganizacaoComponent } from '../igreja/organizacao/organizacao.component';
+import { JovensComponent } from './departamento/jovens/jovens.component';
+import { MulheresComponent } from './departamento/mulheres/mulheres.component';
+import { AdolescentesComponent } from './departamento/adolescentes/adolescentes.component';
+import { CriancasComponent } from './departamento/criancas/criancas.component';
+import { DiretoriaComponent } from './departamento/diretoria/diretoria.component';
+import { ConfissaoComponent } from './igreja/confissao/confissao.component';
+import { HistoriaComponent } from './igreja/historia/historia.component';
+import { OrganizacaoComponent } from './igreja/organizacao/organizacao.component';
 
 const routes: Routes = [
   {

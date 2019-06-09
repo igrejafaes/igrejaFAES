@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { clInfoIgreja } from '../models/clInfoIgreja';
-import { InfoigrejaService } from '../services/infoigreja.service';
+import { clInfoIgreja } from '../../models/clInfoIgreja';
+import { InfoigrejaService } from '../../services/infoigreja.service';
 
 @Component({
   selector: 'app-rodape',

@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener } from "@angular/core";
-import { AgendaService } from "../../services/agenda.service";
-import { clAgenda } from "../../models/clAgenda";
+import { AgendaService } from "../../../services/agenda.service";
+import { clAgenda } from "../../../models/clAgenda";
 import { Observable } from "rxjs";
 import { take } from "rxjs/operators";
 import { AppError } from "src/app/shared/app-errors/app-error";

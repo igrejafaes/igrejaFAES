@@ -12,7 +12,7 @@ $base-color: rgb(190, 8, 8);
 
 .noticias-full {
     padding: 5vh 2vw 10vh 2vw;
-    background-image: url(../../../assets/images/backgrounds/stripes-light.png);
+    background-image: url(../../../../assets/images/backgrounds/stripes-light.png);
     background-blend-mode: color-burn;
 }
 
@@ -77,14 +77,3 @@ img {
         }
     }
 }
-
-// .card-text {
-//     height: 60px;
-//     line-height: 20px;
-//     overflow: hidden;
-// }
-
-// .card-footer p {
-//     padding: 10px;
-//     margin-bottom: 0 !important;
-// }

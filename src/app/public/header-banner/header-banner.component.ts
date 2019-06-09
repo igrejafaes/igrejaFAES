@@ -1,9 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-//import { AngularFireStorage, AngularFireStorageReference } from 'angularfire2/storage';
-//import { Observable } from 'rxjs';
-//import { take } from 'rxjs/operators';
-import returnWindowSize from '../shared/returnWindowSize'
-import { GetImageUrlService } from './../services/get-image-url.service';
+import returnWindowSize from '../../shared/returnWindowSize'
+import { GetImageUrlService } from '../../services/get-image-url.service';
 
 @Component({
   selector: 'app-header-banner',

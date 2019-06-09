@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SharedModule } from '../shared/shared.module';
-import { UsuarioModule } from '../administracao/usuarios/usuario.module';
+import { SharedModule } from '../../shared/shared.module';
+import { UsuarioModule } from '../../administracao/usuarios/usuario.module';
 //import { HomepageRoutingModule } from './homepage-routing.module';
 
 import { CarouselComponent } from './carousel/carousel.component';
