@@ -9,8 +9,7 @@
     <a 
       class="navbar-brand mr-5 font-weight-bold" 
       href="#"
-      [routerLink]="['/']" 
-      routerLinkActive="router-link-active">
+      [routerLink]="['/']">
       FAES
     </a>
   </mdb-navbar-brand>
@@ -22,12 +21,12 @@
     <ul class="navbar-nav mr-auto">
 
       <!-- Menu Home/INICIO -->
-      <li class="nav-item active mr-3">
+      <li class="nav-item mr-3">
         <a 
           class="nav-link waves-light" 
           mdbWavesEffect
           [routerLink]="['/home']" 
-          routerLinkActive="router-link-active">
+          routerLinkActive="activeLink">
             Início
           <span class="sr-only">(current)</span>
         </a>
@@ -37,7 +36,9 @@
       <li class="nav-item dropdown mr-3" dropdown>
         <a 
           dropdownToggle 
-          mdbWavesEffect 
+          mdbWavesEffect
+          [routerLink]="['/igreja']" 
+          routerLinkActive="activeLink"
           type="button" 
           class="nav-link dropdown-toggle waves-light" 
           mdbWavesEffect>
@@ -46,13 +47,13 @@
           <!-- CONFISSAO -->
           <a 
             class="dropdown-item waves-light" 
-            [routerLink]="['/igreja/confissao']" routerLinkActive="router-link-active"
+            [routerLink]="['/igreja/confissao']"
             mdbWavesEffect>Confissão
           </a>
           <!-- ORAGANIZACAO -->
           <a
             class="dropdown-item waves-light"
-            [routerLink]="['/igreja/organizacao']" routerLinkActive="router-link-active" 
+            [routerLink]="['/igreja/organizacao']"
             mdbWavesEffect>Organização
           </a>
           <!-- DIVIDER -->
@@ -60,7 +61,7 @@
           <!-- NOSSA HISTORIA -->
           <a 
             class="dropdown-item waves-light"
-            [routerLink]="['/igreja/historia']" routerLinkActive="router-link-active" 
+            [routerLink]="['/igreja/historia']" 
             mdbWavesEffect>Nossa História
           </a>
         </div>
@@ -69,7 +70,14 @@
       <!-- Dropdown DEPARTAMENTOS -->
       <li class="nav-item dropdown mr-3" dropdown>
 
-        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+        <a dropdownToggle 
+          mdbWavesEffect
+          [routerLink]="['/departamento']" 
+          routerLinkActive="activeLink" 
+          type="button" 
+          class="nav-link dropdown-toggle waves-light" 
+          mdbWavesEffect
+        >
           Ministérios<span class="caret"></span>
         </a>
 
@@ -79,7 +87,6 @@
           <a 
             class="dropdown-item waves-light"
             [routerLink]="['/departamento/mulheres']" 
-            routerLinkActive="router-link-active" 
             mdbWavesEffect href="#">FAES Mulheres
           </a>
 
@@ -87,7 +94,6 @@
           <a
             class="dropdown-item waves-light"
             [routerLink]="['/departamento/jovens']" 
-            routerLinkActive="router-link-active" 
             mdbWavesEffect href="#">FAES Jovens
           </a>
 
@@ -95,7 +101,6 @@
           <a 
             class="dropdown-item waves-light"
             [routerLink]="['/departamento/adolescentes']" 
-            routerLinkActive="router-link-active" 
             mdbWavesEffect href="#">FAES Adolescentes
           </a>
 
@@ -103,7 +108,6 @@
           <a 
             class="dropdown-item waves-light" 
             [routerLink]="['/departamento/criancas']" 
-            routerLinkActive="router-link-active"
             mdbWavesEffect href="#">FAES Crianças
           </a>
 
@@ -113,7 +117,6 @@
           <a 
             class="dropdown-item waves-light"
             [routerLink]="['/departamento/diretoria']" 
-            routerLinkActive="router-link-active" 
             mdbWavesEffect href="#">Diretoria
           </a>
 
@@ -125,7 +128,7 @@
         <a 
           class="nav-link waves-light"
           [routerLink]="['/contato']" 
-          routerLinkActive="router-link-active" 
+          routerLinkActive="activeLink" 
           mdbWavesEffect>Contato
         </a>
       </li>

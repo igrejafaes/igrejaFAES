@@ -29,15 +29,10 @@
               <td>{{ usuario.email }}</td>
               <td>{{ usuario.telefone | mask: '(00) 00000-0000' }}</td>
               <td>{{ usuario.wathsapp | mask: '(00) 00000-0000' }}</td>
-              <td>
-                <a (click)="onEdit(usuario)" class="mr-2"><mdb-icon fas icon="edit"></mdb-icon></a>
-                <a (click)="onDelete(usuario)"><mdb-icon fas icon="trash"></mdb-icon></a>
+              <td class="d-flex">
+                <a (click)="onEdit(usuario)" class="mr-3 blue-grey-text"><mdb-icon fas icon="edit"></mdb-icon></a>
+                <a (click)="onDelete(usuario)" class="red-text"><mdb-icon fas icon="trash"></mdb-icon></a>
               </td>
-              <!-- <td>
-                <button class="btn btn-delete" (click)="onDelete(usuario)"
-                  ><mdb-icon fas icon="trash" class="red-text"></mdb-icon
-                ></button>
-              </td> -->
             </tr>
           </tbody>
         </table>

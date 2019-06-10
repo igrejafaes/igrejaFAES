@@ -1,0 +1,216 @@
+<!-- MODAL CONTENT -->
+<div class="modal-content">
+    <!-- HEADER -->
+    <div class="modal-header">
+      <button
+        type="button"
+        class="close pull-right white-text"
+        aria-label="Close"
+        (click)="modalRef.hide()"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+      <h4 class="modal-title w-100 white-text" id="myModalLabel">
+        {{ heading }}
+      </h4>
+    </div>
+    <!-- /HEADER -->
+    <!-- BODY -->
+    <div #ModalBody class="modal-body">
+      <!-- FORM -->
+      <form class="text-center" [formGroup]="agendaForm" (ngSubmit)="onSave()">
+        <!-- titulo -->
+        <div class="md-form form-group md-bg form-sm mt-0">
+          <!-- titulo -->
+          <input
+            AutoFocus
+            mdbInput
+            type="text"
+            id="titulo"
+            class="form-control"
+            formControlName="titulo"
+            [onReturnSendTab]
+          />
+          <label for="titulo">Título</label>
+          <mdb-error *ngIf="submited && hasError('titulo')">{{
+            hasError("titulo")
+          }}</mdb-error>
+        </div>
+  
+        <!-- descricao -->
+        <div class="md-form form-group md-bg form-sm">
+          <!-- descricao -->
+          <textarea
+            mdbInput
+            type="text"
+            id="descricao"
+            class="md-textarea form-control"
+            formControlName="descricao"
+            [onReturnSendTab]
+          ></textarea>
+          <label for="descricao">Descrição</label>
+        </div>
+  
+        <!-- linkURL -->
+        <div class="md-form form-group md-bg form-sm">
+          <input
+            mdbInput
+            type="text"
+            id="linkURL"
+            class="form-control"
+            formControlName="linkURL"
+            [onReturnSendTab]
+          />
+          <label for="linkURL">Link do Slide</label>
+        </div>
+  
+        <div class="d-flex">
+          <!-- Data do Carrousel -->
+          <div class="md-form form-group md-bg form-sm my-0 mr-3 w-100">
+            <label *ngIf="agenda.AgendaData" for="carrouselData">Data</label>
+            <span *ngIf="!agenda.AgendaData" class="labelData">Data</span>
+            <input
+              mdbInput
+              formControlName="carrouselData"
+              type="date"
+              id="carrouselData"
+              class="form-control"
+              [onReturnSendTab]
+            />
+            <mdb-error *ngIf="submited && hasError('carrouselData')">{{
+              hasError("carrouselData")
+            }}</mdb-error>
+          </div>
+  
+          <!-- slideIndex -->
+          <div class="md-form form-group md-bg form-sm my-0 w-100">
+            <input
+              mdbInput
+              formControlName="slideIndex"
+              type="number"
+              id="slideIndex"
+              class="slide form-control"
+              [onReturnSendTab]
+            />
+            <label for="slideIndex">Ordem de Apresentação</label>
+            <mdb-error *ngIf="submited && hasError('slideIndex')">{{
+              hasError("slideIndex")
+            }}</mdb-error>
+          </div>
+        </div>
+  
+        <!-- imageURL -->
+        <div class="md-form form-group md-outline form-sm mb-0">
+          <textarea
+            mdbInput
+            type="text"
+            id="imageURL"
+            class="form-control md-textarea"
+            rows="3"
+            formControlName="imageURL"
+            [onReturnSendTab]
+          ></textarea>
+          <label for="imageURL">URL da Imagem</label>
+          <mdb-error *ngIf="submited && hasError('imageURL')">{{
+            hasError("imageURL")
+          }}</mdb-error>
+        </div>
+      </form>
+      <!-- /FORM -->
+  
+      <!-- IMAGEM -->
+      <div class="d-flex flex-fill align-items-center">
+        <div class="d-flex flex-column">
+          <!-- BUTTON LOAD -->
+          <div class="fileloader">
+  
+            <div class="button-input">
+              <input
+              type="file"
+              id="file"
+              accept="imagem/*"
+              (change)="loadFileImage($event)"
+              />
+              <label
+              for="file"
+              mdbBtn type="button" color="dark-green" mdbWavesEffect size="sm"
+              mdbWavesEffect
+              class="w-100 mt-0"
+              >
+              <mdb-icon fas icon="camera" class="mr-0"></mdb-icon>
+              {{ agenda ? "Obter Imagem" : "Alterar Imagem" }}
+            </label>
+          </div>
+        </div>
+          <!-- /BUTTON LOAD -->
+          <!-- BUTTON SAVE IMAGE -->
+          <button 
+            [disabled]="!selectedFile" 
+            (click)="uploadImage()"
+            mdbBtn type="button" color="primary" mdbWavesEffect size="sm"
+            mdbWavesEffect
+            class="w-100">
+            <mdb-icon fas icon="save" class="mr-0"></mdb-icon>
+            Enviar Imagem
+          </button>
+          <!-- BUTTON SAVE IMAGE -->
+        </div>
+        <!-- IMAGE PREVIEW -->
+        <div class="ml-3">
+          <img
+            #preview
+            src="{{ carousel.imageURL }}"
+            class="img-fluid waves-light"
+            alt="Imagem do Carrousel"
+            mdbWavesEffect
+          />
+        </div>
+        <!-- IMAGE PREVIEW -->
+      </div>
+      <!-- /IMAGEM -->
+  
+      <!-- PROGRESS BAR -->
+      <div *ngIf="currentUpload">
+        <div class="progress mt-2">
+          <div
+            class="progress-bar progress-bar-animated"
+            [ngStyle]="{ width: currentUpload?.progress + '%' }"
+          ></div>
+        </div>
+        Enviando: {{ currentUpload?.name }} | {{ currentUpload?.progress }}%
+        Completo
+      </div>
+      <!-- /PROGRESS BAR -->
+  
+    </div>
+    <!-- /BODY -->
+    
+    <!-- FOOTER -->
+    <div class="modal-footer p-0">
+      <!-- submit / save -->
+      <button
+        type="button"
+        mdbBtn
+        color="primary"
+        class="relative waves-light"
+        mdbWavesEffect
+        (click)="onSave()"
+      >
+        {{ agenda.id ? "Alterar!" : "Salvar!" }}
+      </button>
+      <!-- cancel -->
+      <button
+        type="button"
+        mdbBtn
+        color="danger"
+        class="white-text waves-light"
+        aria-label="Fechar"
+        (click)="modalRef.hide()"
+        mdbWavesEffect
+      >
+        {{ agenda.id ? "Voltar" : "Cancelar" }}
+      </button>
+    </div>
+    <!-- /FOOTER -->
+  </div>
+  

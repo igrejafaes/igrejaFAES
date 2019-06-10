@@ -22,7 +22,7 @@
           <div class="py-0">
             
             <!-- CAROUSEL ITENS -->
-            <div class="carousel-list d-flex flex-wrap fadeIn animated">
+            <div *ngIf="listCarousel; else loading" class="carousel-list d-flex flex-wrap fadeIn animated">
               <div class="carousel" *ngFor="let carousel of listCarousel">
                 <app-carousel-item
                   [carousel]="carousel"
@@ -35,19 +35,17 @@
             <!-- /CAROUSEL ITENS -->
 
             <!-- SPINNER -->
-            <div
-              *ngIf="!listCarousel"
-              class="d-flex justify-content-center align-items-center"
-              style="margin-top: 200px"
-            >
-              <div
-                class="spinner-grow text-primary"
-                role="status"
-                style="width: 4rem; height: 4rem;"
-              >
-                <span class="sr-only">Lendo...</span>
+            <ng-template #loading>
+              <div class="d-flex justify-content-center my-5">
+                <div 
+                  class="spinner-grow text-primary"
+                  role="status"
+                  style="width: 4rem; height: 4rem;"
+                  >
+                  <span class="sr-only">Lendo...</span>
+                </div>
               </div>
-            </div>
+            </ng-template>
             <!-- /SPINNER -->
           </div>
         </div>

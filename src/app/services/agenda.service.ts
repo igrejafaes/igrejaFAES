@@ -8,6 +8,7 @@ import 'rxjs/add/observable/throw';
 import { clAgenda } from '../models/clAgenda';
 import { AppError } from '../shared/app-errors/app-error';
 import { NotFoundError } from '../shared/app-errors/not-found-error';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,19 +18,21 @@ export class AgendaService {
   agendaCollection: AngularFirestoreCollection<clAgenda>;
   agenda: Observable<clAgenda[]>;
 
-  constructor(private db: AngularFirestore) {}
-
-  //Get todas as Agendas
-  /****************************************************************************** */
-  getAgenda(): Observable<clAgenda[]> {
+  constructor(private db: AngularFirestore) {
     // REFERENCE & ORDERBY
     this.agendaCollection = this.db.collection('agenda', ref => {
       return ref.orderBy('AgendaData')
     });
+  }
+
+  // GET AGENDA OBSERVABLE
+  /****************************************************************************** */
+  getAgenda(): Observable<clAgenda[]> {
     // OBSERVABLE
     this.agenda = this.agendaCollection.valueChanges();
     // RETURN
     return this.agenda
+    .pipe(take(1))
     .catch((error: Response) => {
       if (error.status === 404) {
         return Observable.throw(new NotFoundError())
@@ -38,7 +41,22 @@ export class AgendaService {
       }
     });
   }
-  
+
+  // GET AGENDA SNAPSHOT
+  /****************************************************************************** */
+  getAgendaSnapshot(): Observable<any> {
+    // RETURN
+    return this.agendaCollection.snapshotChanges()
+    .pipe(take(1))
+    .catch((error: Response) => {
+      if (error.status === 404) {
+        return Observable.throw(new NotFoundError())
+      } else {
+        return Observable.throw(new AppError(error))
+      }
+    });
+  }
+
   //Cria nova Agenda
   /****************************************************************************** */
   createAgenda() {

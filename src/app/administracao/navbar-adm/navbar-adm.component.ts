@@ -12,7 +12,7 @@ export class NavbarAdmComponent implements OnInit {
 
   menuList: any[] = [
     { path: '/administracao/carousel', title: 'Carrossel', icon: 'add_a_photo' },
-    { path: '/administracao/schedule', title: 'Agenda', icon: 'update' },
+    { path: '/administracao/agenda', title: 'Agenda', icon: 'update' },
     { path: '/administracao/news', title: 'Notícias', icon: 'event' },
     { path: '/administracao/newsletter', title: 'Newsletter', icon: 'email' },
     { path: '/administracao/usuario', title: 'Usuários', icon: 'email' },
