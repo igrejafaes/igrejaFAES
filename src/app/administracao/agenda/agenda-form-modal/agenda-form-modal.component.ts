@@ -1,3 +1,4 @@
+import { OptionModalService } from './../../../shared/option-modal.service';
 import { clAgenda } from './../../../models/clAgenda';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -27,7 +28,8 @@ export class AgendaFormModalComponent implements OnInit {
     public modalRef: MDBModalRef,
     private formbuilder: FormBuilder,
     private imageService: UploadService,
-    private alert: AlertModalService
+    private alert: AlertModalService,
+    private optionModal: OptionModalService
   ) { }
 
   ngOnInit() {
@@ -183,6 +185,7 @@ export class AgendaFormModalComponent implements OnInit {
   }
 
   // PREVIEW OF NEW IMAGE
+  //************************************************************************************* */
   loadFileImage(event) {
 
     const file = event.target.files && event.target.files[0];
@@ -216,6 +219,45 @@ export class AgendaFormModalComponent implements OnInit {
       }, 500);
     } catch (err) {
       console.log(err)
+    }
+  }
+
+  // ESCOLHER A FILIAL OPEN DIALOG
+  //************************************************************************ */
+  filiais = [
+    'Sede', 
+    'São Pedro', 
+    'B. Aparecida', 
+    'B. Lourdes', 
+    'Rio Novo', 
+    'Jd. Casablanca'
+  ]
+
+  dialogOpen: boolean = false
+  @ViewChild('filialControl') filialControl : ElementRef
+
+  openOptionFilial(e){
+    if(e.keyCode !== 107) {
+      e.preventDefault()
+    } else {
+      this.getOptionFilial();
+      e.preventDefault();
+    }
+  }
+
+  getOptionFilial(){
+    if(!this.dialogOpen){
+      this.dialogOpen = true;
+      this.optionModal.showOptions('Escolha uma Filial', this.filiais)
+      .subscribe((value)=>{
+        if(value != null){
+          const filial = this.filiais[value];
+          this.agenda.Filial = filial;
+          this.agendaForm.controls['filial'].setValue(filial)
+        };
+        this.dialogOpen = false;
+        this.filialControl.nativeElement.focus();
+      });
     }
   }
 

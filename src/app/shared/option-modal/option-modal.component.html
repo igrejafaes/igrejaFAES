@@ -1,0 +1,71 @@
+<!--Content-->
+<div class="modal-content text-center">
+  <!--Header-->
+  <div class="modal-header d-flex justify-content-center">
+    <button
+      type="button"
+      class="close pull-right white-text"
+      aria-label="Close"
+      (click)="onConfirmCancel()"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+    <h5 class="modal-title w-100 white-text text-left" id="myModalLabel">{{ heading }}</h5>
+    <!-- <p class="heading">{{ heading }}</p> -->
+  </div>
+
+  <!--Body-->
+  <div class="modal-body pt-3">
+    <i class="fas fa-question fa-4x animated rotateIn"></i>
+    <div class="div-table"> 
+      <div class="text-center div-table-title">Opções</div>
+      <table mdbTable hover="true" small="true">
+        <!-- <thead>
+          <tr>
+            <th *ngFor="let head of headElements" scope="col">{{ head }}</th>
+          </tr>
+        </thead> -->
+        <tbody>
+          <tr mdbTableCol 
+            *ngFor="let el of elements; let i= index" 
+            (click)="selectItem(i)"
+            [ngClass]="{selected: selectedItem == i}"
+          >
+            <th scope="row">{{ el.index }}</th>
+            <td style="text-align: left ">{{ el.value }}</td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </div>
+  </div>
+
+  <!--Footer-->
+  <!-- <div class="modal-footer justify-content-center">
+
+    <button 
+      mdbBtn 
+      type="button" 
+      color="primary" 
+      outline="true"
+      [disabled]="!selectedItem"
+      mdbWavesEffect
+      class="waves-effect"
+      (click)="onConfirmOK()"
+    >OK
+    </button>
+
+    <button
+      mdbBtn
+      type="button"
+      color="primary"
+      class="waves-effect"
+      mdbWavesEffect
+      data-dismiss="modal"
+      (click)="onConfirmCancel()"
+      >Cancelar
+    </button>
+
+  </div> -->
+</div>
+<!--/.Content-->

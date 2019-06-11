@@ -1,18 +1,24 @@
 <div class="modal-content">
-    <!--Header-->
-    <div class="modal-header">
-      <p class="heading lead">{{ title }}</p>
+  <!--Header-->
+  <div class="modal-header">
+    <p class="heading lead">{{ title }}</p>
 
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="alertClose()">
-        <span aria-hidden="true" class="white-text">&times;</span>
-      </button>
-    </div>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+      (click)="alertClose()"
+    >
+      <span aria-hidden="true" class="white-text">&times;</span>
+    </button>
+  </div>
 
-    <!--Body-->
-    <div class="modal-body">
-      <div class="text-center">
-        <i class="{{ modalIcon }} fa-4x mb-3 animated rotateIn"></i>
-        <p>{{ message }}</p>
-      </div>
+  <!--Body-->
+  <div class="modal-body">
+    <div class="text-center">
+      <i class="{{ modalIcon }} fa-4x mb-3 animated rotateIn"></i>
+      <p>{{ message }}</p>
     </div>
   </div>
+</div>

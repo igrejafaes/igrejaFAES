@@ -59,6 +59,24 @@ export class AgendaService {
 
   //Cria nova Agenda
   /****************************************************************************** */
+  addNewAgenda(agenda: clAgenda): any {
+    const agendaWithoutID = { ...agenda } // create a new object
+    delete agendaWithoutID.id // to save without ID
+
+    return new Promise((resolve, reject) => {
+      this.agendaCollection.add(agendaWithoutID as clAgenda)
+        .then(
+          (docRef) => resolve(docRef.id),
+          (err) => reject(err)
+        )
+        .catch(
+          (err) => console.log(err)
+        )
+    });
+  }
+
+  //Cria nova Agenda
+  /****************************************************************************** */
   createAgenda() {
     this.db.collection('agenda').add([{
       Titulo: 'Culto de Oração',
