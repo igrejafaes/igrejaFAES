@@ -8,6 +8,7 @@ import { UploadService } from 'src/app/services/upload.service';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { Upload } from 'src/app/models/clUpload';
 import { ImagesDimensions } from 'src/app/models/clImagesDimensions';
+import { Filiais } from 'src/app/models/clFiliais';
 
 @Component({
   selector: 'app-agenda-form-modal',
@@ -42,18 +43,19 @@ export class AgendaFormModalComponent implements OnInit {
     this.agendaForm = this.formbuilder.group({
       id: [agenda.id],
       titulo: [
-        agenda.Titulo,
+        agenda.titulo,
         [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
       ],
-      descricao: [agenda.Descricao],
-      imageURL: [agenda.ImagemURL, [Validators.required]],
+      descricao: [agenda.descricao],
+      imageURL: [agenda.imageURL, [Validators.required]],
       imageName: [agenda.imageName, [Validators.required]],
       agendaData: [
-        this.convertToDate(agenda.AgendaData),
+        this.convertToDate(agenda.agendaData),
         [Validators.required]
       ],
-      local: [agenda.Local],
-      filial: [agenda.Filial],
+      agendaHora: [agenda.agendaHora, [Validators.required]],
+      local: [agenda.local],
+      filial: [agenda.filial],
     });
     // disable imageURL
     this.agendaForm.controls["imageURL"].disable();
@@ -133,7 +135,7 @@ export class AgendaFormModalComponent implements OnInit {
     const width = this.preview.nativeElement.naturalWidth
     const height = this.preview.nativeElement.naturalHeight
     const dimension = new ImagesDimensions
-    const dim = dimension.getDimension('carousel')
+    const dim = dimension.getDimension('agenda')
 
     if (dim) {
       if (width != dim.width || height != dim.height) {
@@ -149,7 +151,7 @@ export class AgendaFormModalComponent implements OnInit {
     // if exist old image delete
     if (this.agenda.imageName) {
       this.imageService
-        .deleteUpload(this.agenda.imageName, "carousel")
+        .deleteUpload(this.agenda.imageName, 'agenda')
         .catch(err => {
           if (err.code !== "storage/object-not-found") {
             this.alert.showAlertDanger(
@@ -163,15 +165,15 @@ export class AgendaFormModalComponent implements OnInit {
     }
 
     // upload image
-    this.currentUpload = new Upload(this.selectedFile, "carousel");
+    this.currentUpload = new Upload(this.selectedFile, 'agenda');
 
     this.imageService.uploadFile(this.currentUpload).then(
       url => {
         this.scrollToBottom(); // to see progress bar
-        this.agendaForm.controls["imageName"].setValue(this.selectedFile.name);
-        this.agendaForm.controls["imageURL"].setValue(url);
+        this.agendaForm.controls['imageName'].setValue(this.selectedFile.name);
+        this.agendaForm.controls['imageURL'].setValue(url);
         this.agenda.imageName = this.selectedFile.name;
-        this.agenda.ImagemURL = url;
+        this.agenda.imageURL = url;
         this.selectedFile = null;
       },
       err => {
@@ -224,18 +226,10 @@ export class AgendaFormModalComponent implements OnInit {
 
   // ESCOLHER A FILIAL OPEN DIALOG
   //************************************************************************ */
-  filiais = [
-    'Sede', 
-    'São Pedro', 
-    'B. Aparecida', 
-    'B. Lourdes', 
-    'Rio Novo', 
-    'Jd. Casablanca'
-  ]
-
   dialogOpen: boolean = false
   @ViewChild('filialControl') filialControl : ElementRef
 
+  // control keycode
   openOptionFilial(e){
     if(e.keyCode !== 107) {
       e.preventDefault()
@@ -247,14 +241,19 @@ export class AgendaFormModalComponent implements OnInit {
 
   getOptionFilial(){
     if(!this.dialogOpen){
+      // get filiais
+      const filiais = new Filiais
+      const filiaisNames = filiais.getFiliaisName()
+      // open dialog
       this.dialogOpen = true;
-      this.optionModal.showOptions('Escolha uma Filial', this.filiais)
+      this.optionModal.showOptions('Escolha uma Filial', filiaisNames)
       .subscribe((value)=>{
         if(value != null){
-          const filial = this.filiais[value];
-          this.agenda.Filial = filial;
+          const filial = filiaisNames[value];
+          this.agenda.filial = filial;
           this.agendaForm.controls['filial'].setValue(filial)
         };
+        // on close dialog focus control
         this.dialogOpen = false;
         this.filialControl.nativeElement.focus();
       });

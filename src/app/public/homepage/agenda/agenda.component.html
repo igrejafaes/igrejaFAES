@@ -37,18 +37,18 @@
       >
         <img
           class="card-img-top img-fluid"
-          [src]="item.ImagemURL"
+          [src]="item.imageURL"
           alt="Card image cap"
           width="100%"
         />
         <div class="mask rgba-blue-light"></div>
         <div class="card-body">
-          <h5 class="card-title">{{ item.Titulo }}</h5>
-          <p class="card-text">{{ item.Descricao }}</p>
+          <h5 class="card-title">{{ item.titulo }}</h5>
+          <p class="card-text">{{ item.descricao }}</p>
         </div>
         <div class="card-footer">
           <!-- <p>{{ item.AgendaData['seconds'] * 1000 | date: 'dd/MMM/yyyy' }}</p> -->
-          <p>{{ item.AgendaData | firestoreDate: "dd/MMM/yyyy" }}</p>
+          <p>{{ item.agendaData | date: 'shortDate' }}</p>
           <!-- <small class="text-muted">{{ item.AgendaData }}</small> -->
         </div>
       </div>

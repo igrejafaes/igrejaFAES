@@ -44,11 +44,6 @@ export class AgendaComponent implements OnInit {
     );
   }
 
-  // método criado para exemplo de como criar agenda
-  createAgenda() {
-    this.agendaService.createAgenda();
-  }
-
   @HostListener("window:resize") onResize() {
     this.tamanho = window.innerWidth;
     this.verificaWidth();

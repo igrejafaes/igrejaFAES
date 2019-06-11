@@ -21,7 +21,7 @@ export class AgendaService {
   constructor(private db: AngularFirestore) {
     // REFERENCE & ORDERBY
     this.agendaCollection = this.db.collection('agenda', ref => {
-      return ref.orderBy('AgendaData')
+      return ref.orderBy('agendaData')
     });
   }
 
@@ -57,7 +57,7 @@ export class AgendaService {
     });
   }
 
-  //Cria nova Agenda
+  // Cria nova Agenda
   /****************************************************************************** */
   addNewAgenda(agenda: clAgenda): any {
     const agendaWithoutID = { ...agenda } // create a new object
@@ -74,45 +74,36 @@ export class AgendaService {
         )
     });
   }
+ 
+  // Atualiza a Agenda
+  /****************************************************************************** */
+  updateAgenda(agenda: clAgenda): Promise<any>{
+    const agendaWithoutID = { ...agenda } // create a new object
+    delete agendaWithoutID.id // to save without ID
 
-  //Cria nova Agenda
-  /****************************************************************************** */
-  createAgenda() {
-    this.db.collection('agenda').add([{
-      Titulo: 'Culto de Oração',
-      AgendaData: '05/Jun/2018',
-      Descricao: "Amet officia excepteur dolore eiusmod occaecat proident et culpa occaecat excepteur consectetur duis mollit reprehenderit.",
-      ImagemURL: '../../assets/images/agenda_2.jpg',
-      Local: 'Av. Ibitiguaia, 855 - Juiz de Fora - MG',
-      Filial: 'FAES Sede'
-    }, {
-      Titulo: 'Culto da Vitória',
-      AgendaData: '06/Jul/2018',
-      Descricao: "Quis sit ut do reprehenderit excepteur et et deserunt excepteur excepteur labore.",
-      ImagemURL: '../../assets/images/agenda_3.jpg',
-      Local: 'Av. Senhor dos Passos, 1960 - São Pedro - Juiz de Fora - MG',
-      Filial: 'FAES São Pedro'
-    }, {
-      Titulo: 'Culto de Adoração',
-      AgendaData: '10/Ago/2018',
-      Descricao: "Cillum irure ad ut mollit ex enim incididunt sunt elit irure proident anim non.",
-      ImagemURL: '../../assets/images/agenda_4.jpg',
-      Local: 'R. Maria Aparecida Horanides, 10',
-      Filial: 'FAES Aparecida'
-    }])
-    
+    return new Promise((resolve, reject) => {
+      this.agendaCollection.doc<clAgenda>(agenda.id).set(agendaWithoutID)
+        .then(
+          () => resolve(agenda.id),
+          (err) => reject(err)
+        )
+        .catch(
+          (err) => console.log(err)
+        )
+    });
   }
   
-  //Atualiza a Agenda
+  // Deleta a Agenda pelo uID
   /****************************************************************************** */
-  updateAgenda(){
-    
-  }
-  
-  //Deleta a Agenda pelo uID
-  /****************************************************************************** */
-  deleteAgenda(){
-    
+  deleteAgenda(id: string): Promise<boolean>{
+    return new Promise((resolve, reject) => {
+      this.agendaCollection.doc<clAgenda>(id)
+      .delete()
+      .then(() => {
+         resolve(true)
+      }, (err) => reject(err))
+      .catch((reason)=> reject(reason))
+    })
   }
 
 }

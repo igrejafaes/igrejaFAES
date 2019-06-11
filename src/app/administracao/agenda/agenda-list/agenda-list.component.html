@@ -21,9 +21,9 @@
       </thead>
       <tbody>
         <tr mdbTableCol *ngFor="let agenda of list">
-          <th scope="row">{{ agenda.Titulo }}</th>
-          <td>{{ agenda.AgendaData | firestoreDate: "dd/MMM/yyyy" }}</td>
-          <td>{{ agenda.Descricao }}</td>
+          <th scope="row">{{ agenda.titulo }}</th>
+          <td>{{ agenda.agendaData | date:'shortDate' }}</td>
+          <td>{{ agenda.descricao }}</td>
           <td class="d-flex">
             <a (click)="onEdit(agenda)" class="mr-3 blue-grey-text"><mdb-icon fas icon="edit"></mdb-icon></a>
             <a (click)="onDelete(agenda)" class="red-text"><mdb-icon fas icon="trash"></mdb-icon></a>

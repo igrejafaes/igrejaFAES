@@ -29,7 +29,6 @@
           <tr mdbTableCol 
             *ngFor="let el of elements; let i= index" 
             (click)="selectItem(i)"
-            [ngClass]="{selected: selectedItem == i}"
           >
             <th scope="row">{{ el.index }}</th>
             <td style="text-align: left ">{{ el.value }}</td>

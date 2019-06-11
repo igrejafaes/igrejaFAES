@@ -64,32 +64,33 @@
           />
           <label for="local">Local do Evento</label>
         </div>
-  
+
+        <!-- Filial -->
+        <div class="md-form form-group md-bg form-sm my-0 w-100">
+          <input
+            mdbInput
+            formControlName="filial"
+            type="text"
+            id="filial"
+            class="slide form-control"
+            (keydown)="openOptionFilial($event)"
+            (click)="getOptionFilial()"
+            [onReturnSendTab]
+            #filialControl
+          />
+          <label for="filial">Igreja</label>
+          <mdb-error *ngIf="submited && hasError('filial')">{{
+            hasError("filial")
+          }}</mdb-error>
+        </div>
+
+        <!-- Data e Hora do Evento -->
         <div class="d-flex">
 
-          <!-- Filial -->
+          <!-- Data do Evento -->
           <div class="md-form form-group md-bg form-sm mr-3 my-0 w-100">
-            <input
-              mdbInput
-              formControlName="filial"
-              type="text"
-              id="filial"
-              class="slide form-control"
-              (keydown)="openOptionFilial($event)"
-              (click)="getOptionFilial()"
-              [onReturnSendTab]
-              #filialControl
-            />
-            <label for="filial">Igreja</label>
-            <mdb-error *ngIf="submited && hasError('filial')">{{
-              hasError("filial")
-            }}</mdb-error>
-          </div>
-
-          <!-- Data do Carrousel -->
-          <div class="md-form form-group md-bg form-sm my-0 w-100">
-            <label *ngIf="agenda.AgendaData" for="carrouselData">Data</label>
-            <span *ngIf="!agenda.AgendaData" class="labelData">Data</span>
+            <label *ngIf="agenda.agendaData" for="agendaData">Data</label>
+            <span *ngIf="!agenda.agendaData" class="labelData">Data</span>
             <input
               mdbInput
               formControlName="agendaData"
@@ -100,6 +101,23 @@
             />
             <mdb-error *ngIf="submited && hasError('agendaData')">{{
               hasError("agendaData")
+            }}</mdb-error>
+          </div>
+
+          <!-- Hora do Evento -->
+          <div class="md-form form-group md-bg form-sm my-0 w-100">
+            <label *ngIf="agenda.agendaHora" for="agendaHora">Hora/Início</label>
+            <span *ngIf="!agenda.agendaHora" class="labelData">Hora/Início</span>
+            <input
+              mdbInput
+              formControlName="agendaHora"
+              type="time"
+              id="agendaHora"
+              class="form-control"
+              [onReturnSendTab]
+            />
+            <mdb-error *ngIf="submited && hasError('agendaHora')">{{
+              hasError("agendaHora")
             }}</mdb-error>
           </div>
 
@@ -165,7 +183,7 @@
         <div class="ml-3">
           <img
             #preview
-            src="{{ agenda.ImagemURL }}"
+            src="{{ agenda.imageURL }}"
             class="img-fluid waves-light"
             alt="Imagem do Carrousel"
             mdbWavesEffect

@@ -8,7 +8,7 @@
   .div-table-title{
     color: white;
     font-weight: 400;
-    background-color: rgb(190, 190, 190);
+    background-color: rgb(140, 183, 255);
     position: relative;
     width: 110%;
     left: -10px;
@@ -22,8 +22,4 @@ table {
 
 table.table-hover tbody tr:hover {
   cursor: default;
-}
-
-.selected{
-  background-color: rgb(177, 199, 219);
 }
