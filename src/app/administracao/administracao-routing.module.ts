@@ -8,10 +8,10 @@ import { AdmHomeComponent } from './adm-home/adm-home.component';
 import { LoginComponent } from './login/login.component';
 import { AdministracaoComponent } from './administracao.component';
 import { CarouselListComponent } from './carousel/carousel-list.component';
-import { NewsComponent } from './news/news.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { UsuarioListaComponent } from './usuarios/usuario-lista/usuario-lista.component';
 import { AgendaListComponent } from './agenda/agenda-list/agenda-list.component';
+import { NoticiasListComponent } from './noticias/noticias-list.component';
 
 const routes: Routes = [
   {
@@ -22,7 +22,7 @@ const routes: Routes = [
       { path: 'home', component: AdmHomeComponent, canActivate: [AuthGuard] },
       { path: 'carousel', component: CarouselListComponent, canActivate: [AuthGuard]  },
       { path: 'agenda', component: AgendaListComponent, canActivate: [AuthGuard]  },
-      { path: 'news', component: NewsComponent, canActivate: [AuthGuard]  },
+      { path: 'noticias', component: NoticiasListComponent, canActivate: [AuthGuard]  },
       { path: 'newsletter', component: NewsletterComponent, canActivate: [AuthGuard]  },
       { path: 'usuario', redirectTo: 'usuario/lista', pathMatch: 'full', canActivate: [AuthGuard]  },
       { path: 'usuario/lista', component: UsuarioListaComponent, canActivate: [AuthGuard]  },

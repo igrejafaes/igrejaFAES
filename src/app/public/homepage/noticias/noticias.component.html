@@ -23,12 +23,12 @@
         <div ngxSlickItem *ngFor="let item of noticias" class="slide m-2 view overlay">
           
           <a href="#">
-            <img class="img-fluid" [src]='item.Imagem' alt="Noticia Image" width="100%">
+            <img class="img-fluid" [src]='item.imageURL' alt="Noticia Image" width="100%">
             <div class="mask h-100 rgba-white-strong">
               <div class="noticia-descricao">
                 
-                <div class="noticia-titulo">{{ item.NoticiaTitulo }}</div>
-                <div class="noticia-texto">{{ item.NoticiaTexto }}</div>
+                <div class="noticia-titulo">{{ item.titulo }}</div>
+                <div class="noticia-texto">{{ item.descricao }}</div>
                 
               </div>
             </div>

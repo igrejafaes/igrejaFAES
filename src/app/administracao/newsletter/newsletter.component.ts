@@ -12,4 +12,8 @@ export class NewsletterComponent implements OnInit {
   ngOnInit() {
   }
 
+  openAddNewsletterModal(){
+    
+  }
+
 }
