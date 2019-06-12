@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { clNoticia } from '../../../models/clNoticia';
+import { Noticia } from '../../../models/clNoticia';
 import { NoticiaService } from '../../../services/noticia.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { NoticiaService } from '../../../services/noticia.service';
 })
 export class NoticiasComponent implements OnInit {
 
-  noticias: clNoticia[] = []
+  noticias: Noticia[] = []
 
   constructor(private noticiaService: NoticiaService ) { }
 

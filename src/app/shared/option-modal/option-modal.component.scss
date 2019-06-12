@@ -1,0 +1,25 @@
+.div-table {
+  padding: 0 5px 0 5px;
+  border: 1px solid rgb(190, 190, 190);
+  border-radius: 5px;
+  margin-top: 10px;
+  overflow: hidden;
+
+  .div-table-title{
+    color: white;
+    font-weight: 400;
+    background-color: rgb(140, 183, 255);
+    position: relative;
+    width: 110%;
+    left: -10px;
+    padding: 5px 0
+  }
+}
+
+table {
+  margin-bottom: 0px !important;
+}
+
+table.table-hover tbody tr:hover {
+  cursor: default;
+}

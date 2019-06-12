@@ -14,6 +14,7 @@ export enum confirmTypes {
   providedIn: 'root'
 })
 export class ConfirmModalService {
+  
   bsModalRef: MDBModalRef;
 
   constructor(private modalService: MDBModalService) { }

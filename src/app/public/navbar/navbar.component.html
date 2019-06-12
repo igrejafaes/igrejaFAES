@@ -37,8 +37,7 @@
         <a 
           dropdownToggle 
           mdbWavesEffect
-          [routerLink]="['/igreja']" 
-          routerLinkActive="activeLink"
+          [ngClass]="{activeLink: isIgrejaRoute}"
           type="button" 
           class="nav-link dropdown-toggle waves-light" 
           mdbWavesEffect>
@@ -72,8 +71,7 @@
 
         <a dropdownToggle 
           mdbWavesEffect
-          [routerLink]="['/departamento']" 
-          routerLinkActive="activeLink" 
+          [ngClass]="{activeLink: isDepartamentoRoute}"
           type="button" 
           class="nav-link dropdown-toggle waves-light" 
           mdbWavesEffect

@@ -1,12 +1,14 @@
 export class clAgenda {
+
   id?: string;
-  Titulo: string;
-  AgendaData: string;
-  Descricao: string;
-  ImagemURL: string;
+  titulo: string;
+  agendaData: string;
+  agendaHora: string;
+  descricao: string;
+  imageURL: string;
   imageName: string;
-  Local: string;
-  Filial: string;
+  local: string;
+  filial: string;
 
   constructor(
   ) { }

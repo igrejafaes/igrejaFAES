@@ -1,50 +1,56 @@
-<section>
-  <div class="container">
-    <!-- Card -->
-    <div class="card">
-      <!-- Card content -->
-      <div class="card-body">
-        <!-- Title -->
-        <div class="d-flex justify-content-between align-items-center">
-          <h4 class="card-title mb-0">Listagem de Usuários</h4>
-          <button type="button" mdbBtn color="primary" mdbWavesEffect (click)="openAddUsuarioModal()">Inserir Usuário</button>
-        </div>
+<app-default-content 
+  titulo="Listagem de Usuários" 
+  subTitulo="Clicar em um dos botões acima para acessar os detalhes."
+  buttonAddText="Adicionar Usuário"
+  (openAddModal)="openAddUsuarioModal()">
+  
+  <!-- CONTENT -->
+  <div class="box-content flex">
 
-        <table 
-          class="table table-responsive-md" 
-          mdbTable hover="true" 
-          *ngIf="list; else loading">
+    <!-- TABLE -->
+    <div *ngIf="list; else loading">
 
-          <thead>
-            <tr>
-              <th *ngFor="let head of headElements" scope="col">{{ head }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr mdbTableCol *ngFor="let usuario of list">
-              <th scope="row">
-                <strong class="mr-1">{{ usuario.nome }}</strong
-                >{{ usuario.sobrenome }}
-              </th>
-              <td>{{ usuario.email }}</td>
-              <td>{{ usuario.telefone | mask: '(00) 00000-0000' }}</td>
-              <td>{{ usuario.wathsapp | mask: '(00) 00000-0000' }}</td>
-              <td class="d-flex">
-                <a (click)="onEdit(usuario)" class="mr-3 blue-grey-text"><mdb-icon fas icon="edit"></mdb-icon></a>
-                <a (click)="onDelete(usuario)" class="red-text"><mdb-icon fas icon="trash"></mdb-icon></a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <table 
+        class="table table-responsive-md" 
+        mdbTable hover="true">
 
-        <ng-template #loading>
-          <span>Carregando Cursos...</span>
-        </ng-template>
-      </div>
-      <!-- /Card Body -->
+        <thead class="stylish-color white-text">
+          <tr>
+            <th *ngFor="let head of headElements" scope="col">{{ head }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr mdbTableCol *ngFor="let usuario of list">
+            <th scope="row">
+              <strong class="mr-1">{{ usuario.nome }}</strong
+              >{{ usuario.sobrenome }}
+            </th>
+            <td>{{ usuario.email }}</td>
+            <td>{{ usuario.telefone | mask: '(00) 00000-0000' }}</td>
+            <td>{{ usuario.wathsapp | mask: '(00) 00000-0000' }}</td>
+            <td class="d-flex">
+              <a (click)="onEdit(usuario)" class="mr-3 blue-grey-text"><mdb-icon fas icon="edit"></mdb-icon></a>
+              <a (click)="onDelete(usuario)" class="red-text"><mdb-icon fas icon="trash"></mdb-icon></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <!-- /Card -->
+    <!-- /TABLE -->
+
+    <!-- SPINNER -->
+    <ng-template #loading>
+      <div class="d-flex justify-content-center my-5">
+        <div 
+          class="spinner-grow text-primary"
+          role="status"
+          style="width: 4rem; height: 4rem;"
+          >
+          <span class="sr-only">Lendo...</span>
+        </div>
+      </div>
+    </ng-template>
+    <!-- /SPINNER -->
   </div>
-  <!-- /Container -->
-</section>
-<!-- /Section -->
+  <!-- /CONTENT -->
+</app-default-content>

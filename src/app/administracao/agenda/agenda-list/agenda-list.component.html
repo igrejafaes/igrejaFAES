@@ -1,70 +1,51 @@
-<section>
-  <div class="container">
-    <!-- Box -->
-    <div class="box flex">
-      <!-- border box -->
-      <div class="border flex">
+<app-default-content 
+  titulo="Eventos da Agenda" 
+  subTitulo="Clicar em um dos botões acima para acessar os detalhes."
+  buttonAddText="Adicionar Evento"
+  (openAddModal)="openAddAgendaModal()">
+  
+  <!-- CONTENT -->
+  <div class="box-content flex">
 
-        <!-- header box -->
-        <div class="box-header">
-          <!-- Title -->
-          <div class="d-flex justify-content-between align-items-center">
-            <div>
-              <h4>Eventos da Agenda</h4>
-              <p>Clicar em um dos botões acima para acessar os detalhes.</p>
-            </div>
-            <button type="button" mdbBtn color="primary" mdbWavesEffect (click)="openAddAgendaModal()">Adicionar Evento</button>
-          </div>
-        </div>  
-        <!-- /header box -->
+    <!-- TABLE -->
+    <table 
+      class="table table-responsive-md" 
+      mdbTable 
+      hover="true"
+      *ngIf="list; else loading">
+    
+      <thead class="stylish-color white-text">
+        <tr>
+          <th *ngFor="let head of headElements" scope="col">{{ head }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr mdbTableCol *ngFor="let agenda of list">
+          <th scope="row">{{ agenda.titulo }}</th>
+          <td>{{ agenda.agendaData | date:'shortDate' }}</td>
+          <td>{{ agenda.descricao }}</td>
+          <td class="d-flex">
+            <a (click)="onEdit(agenda)" class="mr-3 blue-grey-text"><mdb-icon fas icon="edit"></mdb-icon></a>
+            <a (click)="onDelete(agenda)" class="red-text"><mdb-icon fas icon="trash"></mdb-icon></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- /TABLE -->
 
-        <!-- box content -->
-        <div class="box-content flex">
-          
-          <table 
-          class="table table-responsive-md" 
-          mdbTable 
-          hover="true"
-          *ngIf="list; else loading">
-          
-          <thead class="stylish-color white-text">
-            <tr>
-              <th *ngFor="let head of headElements" scope="col">{{ head }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr mdbTableCol *ngFor="let agenda of list">
-              <th scope="row">{{ agenda.Titulo }}</th>
-              <td>{{ agenda.AgendaData | firestoreDate: "dd/MMM/yyyy" }}</td>
-              <td>{{ agenda.Descricao }}</td>
-              <td class="d-flex">
-                <a (click)="onEdit(agenda)" class="mr-3 blue-grey-text"><mdb-icon fas icon="edit"></mdb-icon></a>
-                <a (click)="onDelete(agenda)" class="red-text"><mdb-icon fas icon="trash"></mdb-icon></a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        
-        <!-- SPINNER -->
-        <ng-template #loading>
-          <div class="d-flex justify-content-center my-5">
-            <div 
-              class="spinner-grow text-primary"
-              role="status"
-              style="width: 4rem; height: 4rem;"
-              >
-              <span class="sr-only">Lendo...</span>
-            </div>
+    <!-- SPINNER -->
+    <ng-template #loading>
+      <div class="d-flex justify-content-center my-5">
+        <div 
+          class="spinner-grow text-primary"
+          role="status"
+          style="width: 4rem; height: 4rem;"
+          >
+          <span class="sr-only">Lendo...</span>
         </div>
-        </ng-template>
-        <!-- /SPINNER -->
-
       </div>
-      <!-- /box content -->
-      </div>  
-      <!-- /border box -->
-    </div>
-    <!-- /box -->
+    </ng-template>
+    <!-- /SPINNER -->
   </div>
-  <!-- /Container -->
-</section>
+  <!-- /CONTENT -->
+</app-default-content>

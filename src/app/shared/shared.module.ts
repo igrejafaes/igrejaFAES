@@ -12,6 +12,7 @@ import { FirestoreDatePipe } from './pipes/firestore-date.pipe';
 import { EmConstrucaoComponent } from './em-construcao/em-construcao.component';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import { OptionModalComponent } from './option-modal/option-modal.component';
 
 // DIRECTIVES
 import { ReturnToTabDirective } from './directives/return-to-tab.directive';
@@ -31,6 +32,7 @@ import { AutoFocusDirective } from './directives/auto-focus.directive';
     ConfirmModalComponent,
     ReturnToTabDirective,
     AutoFocusDirective,
+    OptionModalComponent,
   ],
   exports: [
     MDBBootstrapModule,
@@ -43,7 +45,8 @@ import { AutoFocusDirective } from './directives/auto-focus.directive';
   ],
   entryComponents: [
     AlertModalComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    OptionModalComponent
   ],
   providers: []
 })

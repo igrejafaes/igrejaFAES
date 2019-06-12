@@ -12,7 +12,6 @@ import { LoginComponent } from './login/login.component';
 import { AdministracaoComponent } from './administracao.component';
 import { AdmHomeComponent } from './adm-home/adm-home.component';
 import { CarouselListComponent } from './carousel/carousel-list.component';
-import { NewsComponent } from './news/news.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { UsuarioLogadoService } from './usuarioLogado.service';
 import { CarouselItemComponent } from './carousel/carousel-item/carousel-item.component';
@@ -21,6 +20,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { AgendaListComponent } from './agenda/agenda-list/agenda-list.component';
 import { AgendaFormModalComponent } from './agenda/agenda-form-modal/agenda-form-modal.component';
 import { DefaultContentComponent } from './shared/default-content/default-content.component';
+import { NoticiasListComponent } from './noticias/noticias-list.component';
 
 @NgModule({
   declarations: [
@@ -29,13 +29,13 @@ import { DefaultContentComponent } from './shared/default-content/default-conten
     AdmHomeComponent, 
     NavbarAdmComponent, 
     CarouselListComponent, 
-    NewsComponent, 
     NewsletterComponent, 
     CarouselItemComponent, 
     CarouselFormModalComponent, 
     AgendaListComponent, 
     AgendaFormModalComponent, 
     DefaultContentComponent, 
+    NoticiasListComponent, 
   ],
   imports: [
     CommonModule,
@@ -47,7 +47,8 @@ import { DefaultContentComponent } from './shared/default-content/default-conten
     NgxMaskModule.forRoot()
   ],
   exports: [
-    NavbarAdmComponent
+    NavbarAdmComponent,
+    DefaultContentComponent
   ],
   entryComponents: [
     CarouselFormModalComponent,
