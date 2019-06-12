@@ -8,9 +8,29 @@
   <div class="box-content flex">
 
     <!-- TABLE -->
-    <div *ngIf="false; else loading">
-
-    </div>
+    <table 
+      class="table table-responsive-md" 
+      mdbTable 
+      hover="true"
+      *ngIf="list; else loading">
+    
+      <thead class="stylish-color white-text">
+        <tr>
+          <th *ngFor="let head of headElements" scope="col">{{ head }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr mdbTableCol *ngFor="let noticia of list">
+          <th scope="row">{{ noticia.titulo }}</th>
+          <td>{{ noticia.noticiaData | date:'shortDate' }}</td>
+          <td>{{ noticia.descricao }}</td>
+          <td class="d-flex">
+            <a (click)="onEdit(noticia)" class="mr-3 blue-grey-text"><mdb-icon fas icon="edit"></mdb-icon></a>
+            <a (click)="onDelete(noticia)" class="red-text"><mdb-icon fas icon="trash"></mdb-icon></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <!-- /TABLE -->
 
     <!-- SPINNER -->

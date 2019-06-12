@@ -1,12 +1,42 @@
 import { Injectable } from '@angular/core';
 import { Noticia } from '../models/clNoticia';
+import { Observable } from 'rxjs';
+import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
+import { take } from 'rxjs/operators';
+import { NotFoundError } from '../shared/app-errors/not-found-error';
+import { AppError } from '../shared/app-errors/app-error';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NoticiaService {
 
-  constructor() { }
+  noticiaCollection: AngularFirestoreCollection<Noticia>;
+  noticia$: Observable<Noticia[]>;
+
+  constructor(private db: AngularFirestore) {
+    // REFERENCE & ORDERBY
+    this.noticiaCollection = this.db.collection('noticia', ref => {
+      return ref.orderBy('noticiaData')
+    });
+  }
+
+  getNoticiasSnapshot(): Observable<any> {
+    // RETURN
+    return this.noticiaCollection.snapshotChanges()
+    .pipe(take(1))
+    .catch((error: Response) => {
+      if (error.status === 404) {
+        return Observable.throw(new NotFoundError())
+      } else {
+        return Observable.throw(new AppError(error))
+      }
+    });
+  }
+
+  deleteNoticia(id: string): any{
+
+  }
 
   getNoticias(): Noticia[] {
     let noticias = [];
