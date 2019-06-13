@@ -7,11 +7,11 @@ import { ConfirmModalService } from 'src/app/shared/confirm-modal.service';
 import { UploadService } from 'src/app/services/upload.service';
 
 @Component({
-  selector: 'app-noticias-list',
-  templateUrl: './noticias-list.component.html',
-  styleUrls: ['./noticias-list.component.scss']
+  selector: 'app-noticias-content',
+  templateUrl: './noticias-content.component.html',
+  styleUrls: ['./noticias-content.component.scss']
 })
-export class NoticiasListComponent implements OnInit {
+export class NoticiasContentComponent implements OnInit {
 
   list: Noticia[];
   modalRef: MDBModalRef;
@@ -123,5 +123,9 @@ export class NoticiasListComponent implements OnInit {
       }
     };
   };
+
+  noticiaoutlet(){
+    console.log('noticiaoutlet')
+  }
 
 }

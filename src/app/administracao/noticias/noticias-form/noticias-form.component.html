@@ -1,0 +1,30 @@
+<app-default-content 
+  titulo="Noticias da Igreja" 
+  subTitulo="Clicar em um dos botões acima para acessar os detalhes."
+  buttonAddText="Adicionar Notícia"
+  (openAddModal)="openAddNoticiaModal()">
+  
+  <!-- CONTENT -->
+  <div class="box-content flex">
+
+    <p>
+      noticias-form works!
+    </p>
+
+    <!-- SPINNER -->
+    <ng-template #loading>
+      <div class="d-flex justify-content-center my-5">
+        <div 
+          class="spinner-grow text-primary"
+          role="status"
+          style="width: 4rem; height: 4rem;"
+          >
+          <span class="sr-only">Lendo...</span>
+        </div>
+      </div>
+    </ng-template>
+    <!-- /SPINNER -->
+
+  </div>
+  <!-- /CONTENT -->
+</app-default-content>
