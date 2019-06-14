@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Noticia } from 'src/app/models/clNoticia';
 import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
@@ -25,18 +26,13 @@ export class NoticiasListComponent implements OnInit {
     private modalService: MDBModalService,
     private alertModal: AlertModalService,
     private confirmModal: ConfirmModalService,
-    private imageService: UploadService
+    private imageService: UploadService,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.noticiaService.getNoticiasSnapshot().subscribe(actionArray => {
       this.list = actionArray.map(item => {
-
-        //
-        console.log(item.payload.doc.data())
-        //
-
-        
         return {
           ...item.payload.doc.data(),
           id: item.payload.doc.id
@@ -46,43 +42,15 @@ export class NoticiasListComponent implements OnInit {
   }
 
   openAddNoticiaModal(){
-    // this.modalRef = this.modalService.show(AgendaFormModalComponent, this.modalConfig());
-
-    // this.modalRef.content.agendaDados.pipe(take(1)).subscribe((agendaDados: clAgenda) => {
-    //   this.agendaService.addNewAgenda(agendaDados)
-    //     .then((id) => {
-    //       agendaDados.id = id;
-    //       this.list.unshift(agendaDados);
-    //       this.alertModal.showAlertSuccess('Evento salvo com sucesso', 'Sucesso');
-    //     }, () => {
-    //       this.alertModal.showAlertDanger('Não foi possível salvar o Evento', 'Tente depois');
-    //     })
-    // });
+    this.router.navigate(["/administracao/noticias/inserir"]);
   }
 
   onEdit(noticia: Noticia){
-    // const agendaCopy = { ...agenda };
-
-    // this.modalRef = this.modalService.show(
-    //   AgendaFormModalComponent,
-    //   this.modalConfig(agendaCopy)
-    // );
-
-    // this.modalRef.content.agendaDados.pipe(take(1)).subscribe((agendaDados: clAgenda) => {
-
-    //   this.agendaService.updateAgenda(agendaDados)
-    //     .then(() => {
-    //       const i = this.list.findIndex((u) => u.id === agendaDados.id)
-    //       this.list[i] = agendaDados
-    //       this.alertModal.showAlertSuccess('Evento atualizado com sucesso', 'Sucesso');
-    //     }, () => {
-    //       this.alertModal.showAlertDanger('Não foi possível atualizar Evento', 'Tente depois');
-    //     })
-    // });
+    this.router.navigate(['/administracao/noticias', noticia.id]);
   }
 
   onDelete(noticia: Noticia){
-    this.confirmModal.showConfirmDanger('Deseja EXCLUIR o Evento?', 'Sim', 'Não')
+    this.confirmModal.showConfirmDanger('Deseja EXCLUIR a Notícia?', 'Sim', 'Não')
     .subscribe((confirmation: boolean) => {
       if(confirmation){
 
@@ -97,7 +65,7 @@ export class NoticiasListComponent implements OnInit {
           }
         });
 
-        // delete carousel
+        // delete noticia
         this.noticiaService.deleteNoticia(noticia.id)
         .then(()=> {
           const i = this.list.findIndex((c) => c.id === noticia.id);

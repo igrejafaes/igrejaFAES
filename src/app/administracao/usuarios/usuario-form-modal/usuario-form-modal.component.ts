@@ -3,6 +3,7 @@ import { MDBModalRef } from 'angular-bootstrap-md';
 import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
 import { Usuario } from 'src/app/models/clUsuario';
 import { Subject } from 'rxjs';
+import { FormInputErrors } from 'src/app/shared/helpers/form-input-errors';
 
 @Component({
   selector: 'app-usuario-form-modal',
@@ -94,15 +95,13 @@ export class UsuarioFormModalComponent implements OnInit {
     }
   }
 
-  hasError(field: string) {
+  hasError(field: string) : string {
     // verifica os erros do FormGroup
-    const errors = this.userForm.get(field).errors
-    if(errors != null){
-      if (errors['required']) { return 'necessário preenchimento';}
-      if (errors['email']) { return 'email inválido';}
-      if (errors['maxlength']) { return `máximo de ${errors.maxlength.requiredLength} caracteres`;}
-      if (errors['minlength']) { return `dever ter no mínimo ${errors.minlength.requiredLength} caracteres`;}
-    } else {
+    const erro = FormInputErrors(field, this.userForm)
+
+    if(!erro){
+      return erro
+    } else{
       const formErr = this.userForm.errors
       if(formErr != null){
         if (formErr['mustMatch']) { return 'A senha e a confirmação precisam ser iguais...';}
@@ -111,6 +110,6 @@ export class UsuarioFormModalComponent implements OnInit {
       }
     }
   }
-
+  
 }
 

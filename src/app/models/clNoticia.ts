@@ -14,10 +14,6 @@ export class Noticia {
     descricao: string;
     imageURL: string;
     imageName: string;
-    local: string;
     filial: string;
-  
-    constructor(
-    ) { }
 
 }

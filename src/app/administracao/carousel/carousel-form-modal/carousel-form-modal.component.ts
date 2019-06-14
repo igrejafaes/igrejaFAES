@@ -7,6 +7,7 @@ import { Subject } from "rxjs";
 import { Carousel } from "src/app/models/clCarousel";
 import { Upload } from "src/app/models/clUpload";
 import { UploadService } from "src/app/services/upload.service";
+import { FormInputErrors } from 'src/app/shared/helpers/form-input-errors';
 
 @Component({
   selector: "app-carousel-form-modal",
@@ -98,25 +99,9 @@ export class CarouselFormModalComponent implements OnInit {
     }
   }
 
-  hasError(field: string) {
+  hasError(field: string) : string {
     // verifica os erros do FormGroup
-    const errors = this.carouselForm.get(field).errors;
-    if (errors != null) {
-      if (errors["required"]) {
-        return "necessário preenchimento";
-      }
-      if (errors["email"]) {
-        return "email inválido";
-      }
-      if (errors["maxlength"]) {
-        return `máximo de ${errors.maxlength.requiredLength} caracteres`;
-      }
-      if (errors["minlength"]) {
-        return `dever ter no mínimo ${
-          errors.minlength.requiredLength
-          } caracteres`;
-      }
-    }
+    return FormInputErrors(field, this.carouselForm)
   }
 
   // TRATAMENTO DA IMAGEM

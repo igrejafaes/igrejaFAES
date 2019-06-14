@@ -1,3 +1,4 @@
+import { NoticiaResolveGuard } from './noticias/noticia-resolve.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
@@ -11,7 +12,6 @@ import { CarouselListComponent } from './carousel/carousel-list.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { UsuarioListaComponent } from './usuarios/usuario-lista/usuario-lista.component';
 import { AgendaListComponent } from './agenda/agenda-list/agenda-list.component';
-import { NoticiasContentComponent } from './noticias/noticias-content.component';
 import { NoticiasFormComponent } from './noticias/noticias-form/noticias-form.component';
 import { NoticiasListComponent } from './noticias/noticias-list/noticias-list.component';
 
@@ -25,7 +25,18 @@ const routes: Routes = [
       { path: 'carousel', component: CarouselListComponent, canActivate: [AuthGuard]  },
       { path: 'agenda', component: AgendaListComponent, canActivate: [AuthGuard]  },
       { path: 'noticias', component: NoticiasListComponent, canActivate: [AuthGuard] },
-      { path: 'noticias/:id', component: NoticiasFormComponent, canActivate: [AuthGuard] },
+      { 
+        path: 'noticias/:id', 
+        component: NoticiasFormComponent, 
+        resolve: { noticia : NoticiaResolveGuard },
+        canActivate: [AuthGuard] 
+      },
+      { 
+        path: 'noticias/inserir', 
+        component: NoticiasFormComponent, 
+        resolve: { noticia : NoticiaResolveGuard },
+        canActivate: [AuthGuard]
+      },
       { path: 'newsletter', component: NewsletterComponent, canActivate: [AuthGuard]  },
       { path: 'usuario', redirectTo: 'usuario/lista', pathMatch: 'full', canActivate: [AuthGuard]  },
       { path: 'usuario/lista', component: UsuarioListaComponent, canActivate: [AuthGuard]  },

@@ -16,7 +16,6 @@ export class NavbarAdmComponent implements OnInit {
     { path: '/administracao/noticias', title: 'Notícias', icon: 'event' },
     { path: '/administracao/newsletter', title: 'Newsletter', icon: 'email' },
     { path: '/administracao/usuario', title: 'Usuários', icon: 'email' },
-    { path: '/administracao/noticias/1', title: 'TESTE', icon: 'email' },
   ];
 
   @Output() LogOut = new EventEmitter();
