@@ -9,6 +9,7 @@ import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { Upload } from 'src/app/models/clUpload';
 import { ImagesDimensions } from 'src/app/models/clImagesDimensions';
 import { Filiais } from 'src/app/models/clFiliais';
+import { FormInputErrors } from 'src/app/shared/helpers/form-input-errors';
 
 @Component({
   selector: 'app-agenda-form-modal',
@@ -102,25 +103,9 @@ export class AgendaFormModalComponent implements OnInit {
     }
   }
 
-  hasError(field: string) {
+  hasError(field: string) : string {
     // verifica os erros do FormGroup
-    const errors = this.agendaForm.get(field).errors;
-    if (errors != null) {
-      if (errors["required"]) {
-        return "necessário preenchimento";
-      }
-      if (errors["email"]) {
-        return "email inválido";
-      }
-      if (errors["maxlength"]) {
-        return `máximo de ${errors.maxlength.requiredLength} caracteres`;
-      }
-      if (errors["minlength"]) {
-        return `dever ter no mínimo ${
-          errors.minlength.requiredLength
-          } caracteres`;
-      }
-    }
+    return FormInputErrors(field, this.agendaForm)
   }
 
   // TRATAMENTO DA IMAGEM

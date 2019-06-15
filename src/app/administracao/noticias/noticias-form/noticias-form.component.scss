@@ -1,0 +1,48 @@
+.md-textarea {
+  font-size: 0.9rem;
+}
+
+.slide {
+  line-height: 1.7em;
+}
+
+.labelData{
+  position: absolute;
+  top: 2px;
+  left: 27px;
+  font-size: 0.75em;
+  font-weight: 500;
+  color: #757575;
+}
+
+[for=noticiaData]{
+  left: 18px;
+}
+
+.fileloader{
+  position: relative;
+}
+
+#file {
+  -webkit-appearance: none;
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  width: 40px;
+  height: 40px;
+  text-indent: 100em;
+  //background: url('assets/images/maps/Browse.png');
+  background-size: cover;
+  overflow: hidden;
+  cursor: pointer;
+  outline: none;
+}
+
+.div-buttons{
+  border: 1px solid #dee2e6;
+  margin: 10px 0;
+}
+
+mdb-error {
+  margin-top: 8px;
+}

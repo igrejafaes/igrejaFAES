@@ -20,7 +20,8 @@ import { NgxMaskModule } from 'ngx-mask';
 import { AgendaListComponent } from './agenda/agenda-list/agenda-list.component';
 import { AgendaFormModalComponent } from './agenda/agenda-form-modal/agenda-form-modal.component';
 import { DefaultContentComponent } from './shared/default-content/default-content.component';
-import { NoticiasListComponent } from './noticias/noticias-list.component';
+import { NoticiasListComponent } from './noticias/noticias-list/noticias-list.component';
+import { NoticiasFormComponent } from './noticias/noticias-form/noticias-form.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { NoticiasListComponent } from './noticias/noticias-list.component';
     AgendaFormModalComponent, 
     DefaultContentComponent, 
     NoticiasListComponent, 
+    NoticiasFormComponent, 
   ],
   imports: [
     CommonModule,

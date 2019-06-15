@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Noticia } from '../../../models/clNoticia';
 import { NoticiaService } from '../../../services/noticia.service';
+import { AppError } from 'src/app/shared/app-errors/app-error';
+import { NotFoundError } from 'src/app/shared/app-errors/not-found-error';
 
 @Component({
   selector: 'app-noticias',
@@ -14,7 +16,21 @@ export class NoticiasComponent implements OnInit {
   constructor(private noticiaService: NoticiaService ) { }
 
   ngOnInit() {
-    this.noticias = this.noticiaService.getNoticias();
+    this.noticiaService.getNoticiasSnapshot().subscribe(actionArray => {
+      this.noticias = actionArray.map(item => {
+        return {
+          ...item.payload.doc.data(),
+          id: item.payload.doc.id
+        } as Noticia;
+      })
+    }, (error: AppError) => {
+      if (error instanceof NotFoundError) {
+        alert("Erro 404. Arquivo não encontrado...");
+      } else {
+        console.log(error);
+        alert("Uma exceção inesperada ocorreu.");
+      }
+    });
   };
 
   slideConfig = {

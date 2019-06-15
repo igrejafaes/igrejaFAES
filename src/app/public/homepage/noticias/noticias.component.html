@@ -20,19 +20,25 @@
         #slickModal="slick-carousel" 
         [config]="slideConfig">
         
-        <div ngxSlickItem *ngFor="let item of noticias" class="slide m-2 view overlay">
+        <div ngxSlickItem *ngFor="let item of noticias" class="slide m-2">
           
-          <a href="#">
-            <img class="img-fluid" [src]='item.imageURL' alt="Noticia Image" width="100%">
-            <div class="mask h-100 rgba-white-strong">
-              <div class="noticia-descricao">
-                
-                <div class="noticia-titulo">{{ item.titulo }}</div>
-                <div class="noticia-texto">{{ item.descricao }}</div>
-                
+          <div class="view overlay">
+
+            <a href="#">
+              <img class="img-fluid" [src]='item.imageURL' alt="Noticia Image" width="100%">
+              <div class="mask h-100 rgba-white-strong">
+                <div class="noticia-descricao">
+                  
+                  <div class="noticia-titulo">{{ item.titulo }}</div>
+                  <div class="noticia-texto">{{ item.descricao }}</div>
+                  
+                </div>
               </div>
-            </div>
-          </a>
+            </a>
+            
+          </div>
+
+          <div class="text-truncate text-center mt-1">{{item.titulo}}</div>
           
         </div>
       </ngx-slick-carousel>

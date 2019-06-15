@@ -21,6 +21,8 @@ export class NoticiaService {
     });
   }
 
+  // GET NOTICIA SNAPSHOT
+  /******************************************************************************/
   getNoticiasSnapshot(): Observable<any> {
     // RETURN
     return this.noticiaCollection.snapshotChanges()
@@ -34,8 +36,73 @@ export class NoticiaService {
     });
   }
 
-  deleteNoticia(id: string): any{
+  // GET NOTICIA BY ID SNAPSHOT
+  /******************************************************************************/
+  getNoticiasByID(id: string): Promise<Noticia> {
+    return new Promise((resolve, reject) => {
+      this.noticiaCollection
+        .doc<Noticia>(id)
+        .snapshotChanges()
+        .pipe(take(1))
+        .subscribe(actionArray => {
+          resolve ({  id: actionArray.payload.id, ...actionArray.payload.data() })
+        }, error => { reject(error) })
+    })
+  }
 
+  // Cria nova Noticia
+  /****************************************************************************** */
+  addNewNoticia(noticia: Noticia): any {
+    const noticiaWithoutID = { ...noticia } // create a new object
+    delete noticiaWithoutID.id // to save without ID
+
+    return new Promise((resolve, reject) => {
+      this.noticiaCollection.add(noticiaWithoutID as Noticia)
+        .then(
+          (docRef) => resolve(docRef.id),
+          (err) => reject(err)
+        )
+        .catch(
+          (err) => console.log(err)
+        )
+    });
+  }
+
+  // Atualiza a Noticia
+  /****************************************************************************** */
+  updateNoticia(noticia: Noticia): Promise<any>{
+    const noticiaWithoutID = { ...noticia } // create a new object
+    delete noticiaWithoutID.id // to save without ID
+
+    return new Promise((resolve, reject) => {
+      this.noticiaCollection.doc<Noticia>(noticia.id).set(noticiaWithoutID)
+        .then(
+          () => resolve(noticia.id),
+          (err) => reject(err)
+        )
+        .catch(
+          (err) => console.log(err)
+        )
+    });
+  }
+
+  // Delete Noticia
+  /****************************************************************************** */
+  deleteNoticia(id: string): Promise<boolean>{
+    return new Promise((resolve, reject) => {
+      this.noticiaCollection.doc<Noticia>(id)
+      .delete()
+      .then(() => {
+         resolve(true)
+      }, (err) => reject(err))
+      .catch((error: Response) => {
+        if (error.status === 404) {
+          return Observable.throw(new NotFoundError())
+        } else {
+          return Observable.throw(new AppError(error))
+        }
+      });
+    })
   }
 
   getNoticias(): Noticia[] {

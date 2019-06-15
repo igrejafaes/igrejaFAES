@@ -11,6 +11,10 @@ export class ImagesDimensions {
     agenda: {
       width: 400,
       height: 400
+    },
+    noticia: {
+      width: 300,
+      height: 200
     }
   };
 
