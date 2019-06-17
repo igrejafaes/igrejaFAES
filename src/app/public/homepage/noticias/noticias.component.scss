@@ -45,86 +45,102 @@ $base-color: rgb(190, 8, 8);
   }
 }
 
-img {
-  border-radius: 10px;
-}
+.noticia-texto{
+  .noticia-titulo{
+    color:black;
+    transition: 0.5s
+  }
 
-.mask {
-  //align-items: center;
-  //align-content: center;
-  border: 5px solid rgba(26, 33, 133, 0.514);
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  .noticia-descricao {
-    padding: 10px;
-
-    .noticia-titulo {
-      border-bottom: 2px solid rgba(0, 0, 0, 0.445);
-      margin-bottom: 10px;
-      text-align: center;
-      //font-size: 1.5rem;
-      //font-weight: 500;
-      width: 100%;
-      color: black;
-    }
-
-    .noticia-texto {
-      color: black;
-    }
+  .noticia-descricao{
+    color:black;
+    transition: 0.5s;
   }
 }
 
+.noticia-texto:hover {
+  .noticia-titulo{
+    color:blue;
+  }
+
+  .noticia-descricao{
+    color:blue
+  }
+}
+  
 // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 766px) {
   .noticia-titulo {
-    font-size: 0.8rem;
-    font-weight: 500;
+    font-size: 0.55rem;
+    font-weight: 300;
   }
 
-  .noticia-texto {
-    display: none;
+  .noticia-descricao {
+    font-size: 1rem;
+    font-weight: 300;
   }
 }
 
 // Small devices (landscape phones, less than 768px)
 @media (min-width: 767px) {
   .noticia-titulo {
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 0.65rem;
+    font-weight: 300;
   }
 
-  .noticia-texto {
-    font-size: 0.8rem;
-    font-weight: 300;
+  .noticia-descricao {
+    font-size: 1.2rem;
+    font-weight: 400;
   }
 }
 
 // Medium devices (tablets, less than 992px)
 @media (min-width: 991px) {
   .noticia-titulo {
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-size: 0.75rem;
+    font-weight: 400;
   }
 
-  .noticia-texto {
-    font-size: 1rem;
-    font-weight: 300;
+  .noticia-descricao {
+    font-size: 1.3rem;
+    font-weight: 400;
   }
 }
 
 // Large devices (desktops, less than 1200px)
 @media (min-width: 1199px) {
   .noticia-titulo {
-    font-size: 1.5rem;
-    font-weight: 500;
+    font-size: 0.8rem;
+    font-weight: 400;
   }
 
-  .noticia-texto {
-    font-size: 1rem;
-    font-weight: 300;
+  .noticia-descricao {
+    font-size: 1.4rem;
+    font-weight: 400;
   }
 }
+
+/* 
+
+html {
+font-size: 1rem;
+}
+
+@include media-breakpoint-up(sm) {
+html {
+font-size: 1.2rem;
+}
+}
+
+@include media-breakpoint-up(md) {
+html {
+font-size: 1.4rem;
+}
+}
+
+@include media-breakpoint-up(lg) {
+html {
+font-size: 1.6rem;
+}
+}
+
+*/
