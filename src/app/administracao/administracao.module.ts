@@ -22,6 +22,9 @@ import { AgendaFormModalComponent } from './agenda/agenda-form-modal/agenda-form
 import { DefaultContentComponent } from './shared/default-content/default-content.component';
 import { NoticiasListComponent } from './noticias/noticias-list/noticias-list.component';
 import { NoticiasFormComponent } from './noticias/noticias-form/noticias-form.component';
+import { NoticiasPhotosModalComponent } from './noticias/noticias-photos-modal/noticias-photos-modal.component';
+import { DropZoneDirective } from './shared/directives/drop-zone.directive';
+import { FileSizePipe } from './shared/pipes/file-size.pipe';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,7 @@ import { NoticiasFormComponent } from './noticias/noticias-form/noticias-form.co
     DefaultContentComponent, 
     NoticiasListComponent, 
     NoticiasFormComponent, 
+    NoticiasPhotosModalComponent, DropZoneDirective, FileSizePipe, 
   ],
   imports: [
     CommonModule,
@@ -55,6 +59,7 @@ import { NoticiasFormComponent } from './noticias/noticias-form/noticias-form.co
   entryComponents: [
     CarouselFormModalComponent,
     AgendaFormModalComponent,
+    NoticiasPhotosModalComponent
   ],
   providers: [ UsuarioLogadoService ]
 })

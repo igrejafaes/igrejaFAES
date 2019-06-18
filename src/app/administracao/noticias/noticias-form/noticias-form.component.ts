@@ -1,3 +1,4 @@
+import { NoticiasPhotosModalComponent } from './../noticias-photos-modal/noticias-photos-modal.component';
 import { NoticiaService } from 'src/app/services/noticia.service';
 import { UploadService } from 'src/app/services/upload.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -11,6 +12,7 @@ import { Filiais } from 'src/app/models/clFiliais';
 import { Upload } from 'src/app/models/clUpload';
 import { ImagesDimensions } from 'src/app/models/clImagesDimensions';
 import { take } from 'rxjs/operators';
+import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 
 @Component({
   selector: 'app-noticias-form',
@@ -24,6 +26,9 @@ export class NoticiasFormComponent implements OnInit {
   noticia: Noticia = new Noticia();
   @ViewChild("preview") preview: ElementRef;
   @ViewChild("content") content: ElementRef;
+  modalRef: MDBModalRef;
+
+  noticiaFotos: []
 
   constructor(
     private formbuilder: FormBuilder,
@@ -32,7 +37,8 @@ export class NoticiasFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private imageService: UploadService,
-    private noticiaService: NoticiaService
+    private noticiaService: NoticiaService,
+    private modalService: MDBModalService,
   ) { }
 
   ngOnInit() {
@@ -46,6 +52,18 @@ export class NoticiasFormComponent implements OnInit {
     );
     // create form
     this.createForm(this.noticia);
+
+    // get noticia fotos
+    this.noticiaService.getNoticiasFotosByID(this.noticia.id).subscribe(actionArray=>{
+  
+      this.noticiaFotos = actionArray.map(item=> {
+        return {
+          ...item.payload.doc.data(),
+          id: item.payload.doc.id
+        };
+      })
+    })
+
   }
 
   // BUILD FORM
@@ -283,5 +301,39 @@ export class NoticiasFormComponent implements OnInit {
       console.log(err)
     }
   }
+
+  // EDIT PHOTOS
+  //************************************************************************************* */
+  openNoticiaPhotosModal(){
+    this.modalRef = this.modalService.show(NoticiasPhotosModalComponent, this.modalConfig(this.noticia));
+
+    this.modalRef.content.noticiaData.pipe(take(1)).subscribe( (noticiaData) => {
+      this.alert.showAlertSuccess('Usuário salvo com sucesso', 'Sucesso');
+
+    });
+
+  }
+
+  // CONFIG MODAL OF USUARIO
+  modalConfig(noticia?: Noticia) {
+    return{
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+      show: false,
+      ignoreBackdropClick: true,
+      animated: true,
+      class: 'modal-notify modal-info modal-dialog-centered modal-lg',
+      containerClass: 'modal-dialog-scrollable',
+      data: {
+        noticiaID: noticia.id,
+        usuario: noticia || new Noticia
+      }
+    };
+  };
+
+
+  
+
 
 }

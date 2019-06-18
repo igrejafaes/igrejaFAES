@@ -146,6 +146,23 @@
         </button>
         <!-- BUTTON SAVE IMAGE -->
         
+        <!-- BUTTON EDIT PHOTOS -->
+        <button
+          [disabled]="!noticia.id"
+          (click)="openNoticiaPhotosModal()"
+          mdbBtn
+          type="button"
+          color="deep-purple"
+          mdbWavesEffect
+          size="sm"
+          mdbWavesEffect
+          class="w-100 ml-0"
+        >
+          <mdb-icon fas icon="save" class="mr-0"></mdb-icon>
+          Fotos da Notícia
+        </button>
+        <!-- BUTTON EDIT PHOTOS -->
+
       </div>
 
       <!-- IMAGE PREVIEW -->
