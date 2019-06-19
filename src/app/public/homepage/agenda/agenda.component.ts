@@ -109,6 +109,6 @@ export class AgendaComponent implements OnInit {
   }
 
   modalteste() {
-    this.modal.showAlertWarning("Minha Mensagem", "Meu Titulo");
+    this.modal.showAlertWarning(["Minha Mensagem"], "Meu Titulo");
   }
 }

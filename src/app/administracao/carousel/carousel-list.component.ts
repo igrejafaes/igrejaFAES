@@ -45,9 +45,9 @@ export class CarouselListComponent implements OnInit {
         .then((id) => {
           carouselData.id = id;
           this.listCarousel.unshift(carouselData);
-          this.alertModal.showAlertSuccess('Carrousel salvo com sucesso', 'Sucesso');
+          this.alertModal.showAlertSuccess(['Carrousel salvo com sucesso'], 'Sucesso');
         }, () => {
-          this.alertModal.showAlertDanger('Não foi possível salvar o Carrousel', 'Tente depois');
+          this.alertModal.showAlertDanger(['Não foi possível salvar o Carrousel'], 'Tente depois');
         })
     });
   }
@@ -63,7 +63,7 @@ export class CarouselListComponent implements OnInit {
         .deleteUpload(carousel.imageName, "carousel")
         .catch(err => {
           if (err.code !== "storage/object-not-found") {
-            this.alertModal.showAlertDanger("Não foi possível realizar a troca de imagem...", "Imagem");
+            this.alertModal.showAlertDanger(["Não foi possível realizar a troca de imagem..."], "Imagem");
             console.log(err);
             return;
           }
@@ -95,9 +95,9 @@ export class CarouselListComponent implements OnInit {
         .then(() => {
           const i = this.listCarousel.findIndex((u) => u.id === carouselData.id)
           this.listCarousel[i] = carouselData
-          this.alertModal.showAlertSuccess('Carrousel atualizado com sucesso', 'Sucesso');
+          this.alertModal.showAlertSuccess(['Carrousel atualizado com sucesso'], 'Sucesso');
         }, () => {
-          this.alertModal.showAlertDanger('Não foi possível atualizar Carrousel', 'Tente depois');
+          this.alertModal.showAlertDanger(['Não foi possível atualizar Carrousel'], 'Tente depois');
         })
     });
   }

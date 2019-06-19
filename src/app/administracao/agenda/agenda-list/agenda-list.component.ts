@@ -48,9 +48,9 @@ export class AgendaListComponent implements OnInit {
         .then((id) => {
           agendaDados.id = id;
           this.list.unshift(agendaDados);
-          this.alertModal.showAlertSuccess('Evento salvo com sucesso', 'Sucesso');
+          this.alertModal.showAlertSuccess(['Evento salvo com sucesso'], 'Sucesso');
         }, () => {
-          this.alertModal.showAlertDanger('Não foi possível salvar o Evento', 'Tente depois');
+          this.alertModal.showAlertDanger(['Não foi possível salvar o Evento'], 'Tente depois');
         })
     });
   }
@@ -69,9 +69,9 @@ export class AgendaListComponent implements OnInit {
         .then(() => {
           const i = this.list.findIndex((u) => u.id === agendaDados.id)
           this.list[i] = agendaDados
-          this.alertModal.showAlertSuccess('Evento atualizado com sucesso', 'Sucesso');
+          this.alertModal.showAlertSuccess(['Evento atualizado com sucesso'], 'Sucesso');
         }, () => {
-          this.alertModal.showAlertDanger('Não foi possível atualizar Evento', 'Tente depois');
+          this.alertModal.showAlertDanger(['Não foi possível atualizar Evento'], 'Tente depois');
         })
     });
   }
@@ -86,7 +86,7 @@ export class AgendaListComponent implements OnInit {
         .deleteUpload(agenda.imageName, "agenda")
         .catch(err => {
           if (err.code !== "storage/object-not-found") {
-            this.alertModal.showAlertDanger("Não foi possível realizar a troca de imagem...", "Imagem");
+            this.alertModal.showAlertDanger(["Não foi possível realizar a troca de imagem..."], "Imagem");
             console.log(err);
             return;
           }

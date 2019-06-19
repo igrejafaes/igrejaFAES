@@ -63,9 +63,9 @@ export class UsuarioListaComponent implements OnInit {
       .then(() => {
         const i = this.list.findIndex((u) => u.id === usuarioData.id)
         this.list[i] = usuarioData
-        this.alertModal.showAlertSuccess('Usuário atualizado com sucesso', 'Sucesso');
+        this.alertModal.showAlertSuccess(['Usuário atualizado com sucesso'], 'Sucesso');
       }, () => {
-        this.alertModal.showAlertDanger('Não foi possível atualizar usuário', 'Tente depois');
+        this.alertModal.showAlertDanger(['Não foi possível atualizar usuário'], 'Tente depois');
       })
     });
   }
@@ -78,9 +78,9 @@ export class UsuarioListaComponent implements OnInit {
       .then((id) => {
         usuarioData.id = id;
         this.list.unshift(usuarioData);
-        this.alertModal.showAlertSuccess('Usuário salvo com sucesso', 'Sucesso');
+        this.alertModal.showAlertSuccess(['Usuário salvo com sucesso'], 'Sucesso');
       }, () => {
-        this.alertModal.showAlertDanger('Não foi possível salvar o usuário', 'Tente depois');
+        this.alertModal.showAlertDanger(['Não foi possível salvar o usuário'], 'Tente depois');
       })
     });
 

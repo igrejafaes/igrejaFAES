@@ -8,7 +8,7 @@ import { MDBModalRef } from 'angular-bootstrap-md';
 })
 export class AlertModalComponent implements OnInit {
 
-  @Input() message: string;
+  @Input() message: string[];
   @Input() title: string = 'FAES';
   
   iconType: string;

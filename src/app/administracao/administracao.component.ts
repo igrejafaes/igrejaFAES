@@ -22,7 +22,7 @@ export class AdministracaoComponent implements OnInit {
   // DELETE ANONYMOUS USER BEFORE UNLOAD PAGE
   @HostListener('window:beforeunload')
   doSomething() {
-    this.authService.doLogout()
+    //this.authService.doLogout()
   }
 
   fazerLogOut() {

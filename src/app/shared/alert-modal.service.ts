@@ -18,7 +18,7 @@ export class AlertModalService {
   
   constructor(private modalService: MDBModalService) { }
   
-  private showAlert(message: string, title: string, iconType: alertTypes, dismissTimeOut?: number){
+  private showAlert(message: string[], title: string, iconType: alertTypes, dismissTimeOut?: number){
     let modalClass: string = 'modal-side modal-top-right modal-notify '
     
     switch (iconType) {
@@ -65,19 +65,19 @@ export class AlertModalService {
 
   }
 
-  showAlertDanger(message: string, title: string){
+  showAlertDanger(message: string[], title: string){
     this.showAlert(message, title, alertTypes.DANGER)
   }
   
-  showAlertSuccess(message: string, title: string){
+  showAlertSuccess(message: string[], title: string){
     this.showAlert(message, title, alertTypes.SUCCESS, 3000)
   }
 
-  showAlertInfo(message: string, title: string){
+  showAlertInfo(message: string[], title: string){
     this.showAlert(message, title, alertTypes.INFO, 3000)
   }
 
-  showAlertWarning(message: string, title: string){
+  showAlertWarning(message: string[], title: string){
     this.showAlert(message, title, alertTypes.WARNING)
   }
 

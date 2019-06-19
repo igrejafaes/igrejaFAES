@@ -205,6 +205,15 @@
       </div>
     </ng-template> -->
     <!-- /SPINNER -->
+
+    <div class="d-flex" >
+      <div *ngFor="let foto of noticiaFotos" style="max-height: 150px;">
+        <img [src]=foto.URL height="100" widht="100" alt="">
+      </div>
+
+    </div>
+
+
   </div>
 
   <div class="div-buttons d-flex justify-content-center">

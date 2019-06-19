@@ -20,7 +20,7 @@ import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
   styleUrls: ['./noticias-form.component.scss']
 })
 export class NoticiasFormComponent implements OnInit {
-  
+
   noticiaForm: FormGroup;
   submited: boolean = false;
   noticia: Noticia = new Noticia();
@@ -46,22 +46,24 @@ export class NoticiasFormComponent implements OnInit {
     this.route.data
       .pipe(take(1))
       .subscribe(
-        (info: {noticia: Noticia}) => {
+        (info: { noticia: Noticia }) => {
           this.noticia = info.noticia;
         }
-    );
+      );
     // create form
     this.createForm(this.noticia);
 
     // get noticia fotos
-    this.noticiaService.getNoticiasFotosByID(this.noticia.id).subscribe(actionArray=>{
-  
-      this.noticiaFotos = actionArray.map(item=> {
+    this.noticiaService.getNoticiasFotosByID(this.noticia.id).subscribe(actionArray => {
+
+      //************************************************************************************* */
+      this.noticiaFotos = actionArray.map(item => {
         return {
           ...item.payload.doc.data(),
           id: item.payload.doc.id
         };
       })
+      console.log(this.noticiaFotos)
     })
 
   }
@@ -97,7 +99,7 @@ export class NoticiasFormComponent implements OnInit {
     return myDate
   }
 
-  hasError(field: string) : string {
+  hasError(field: string): string {
     // verifica os erros do FormGroup
     return FormInputErrors(field, this.noticiaForm)
   }
@@ -105,11 +107,11 @@ export class NoticiasFormComponent implements OnInit {
   // ESCOLHER A FILIAL OPEN DIALOG
   //************************************************************************ */
   dialogOpen: boolean = false
-  @ViewChild('filialControl') filialControl : ElementRef
+  @ViewChild('filialControl') filialControl: ElementRef
 
   // control keycode
-  openOptionFilial(e){
-    if(e.keyCode !== 107) {
+  openOptionFilial(e) {
+    if (e.keyCode !== 107) {
       e.preventDefault()
     } else {
       this.getOptionFilial();
@@ -117,37 +119,37 @@ export class NoticiasFormComponent implements OnInit {
     }
   }
 
-  getOptionFilial(){
-    if(!this.dialogOpen){
+  getOptionFilial() {
+    if (!this.dialogOpen) {
       // get filiais
       const filiais = new Filiais
       const filiaisNames = filiais.getFiliaisName()
       // open dialog
       this.dialogOpen = true;
       this.optionModal.showOptions('Escolha uma Filial', filiaisNames)
-      .subscribe((value)=>{
-        if(value != null){
-          const filial = filiaisNames[value];
-          this.noticia.filial = filial;
-          this.noticiaForm.controls['filial'].setValue(filial)
-        };
-        // on close dialog focus control
-        this.dialogOpen = false;
-        this.filialControl.nativeElement.focus();
-      });
+        .subscribe((value) => {
+          if (value != null) {
+            const filial = filiaisNames[value];
+            this.noticia.filial = filial;
+            this.noticiaForm.controls['filial'].setValue(filial)
+          };
+          // on close dialog focus control
+          this.dialogOpen = false;
+          this.filialControl.nativeElement.focus();
+        });
     }
   }
 
-  noticiaLista(){
+  noticiaLista() {
     this.router.navigate(['/administracao/noticias'])
   }
 
-  onSave(){
+  onSave() {
 
     // check image file
     if (this.selectedFile) {
       this.alert.showAlertWarning(
-        "A image deve ser enviada antes de salvar",
+        ["A image deve ser enviada antes de salvar"],
         "Imagem"
       );
       return;
@@ -160,7 +162,7 @@ export class NoticiasFormComponent implements OnInit {
     if (this.noticiaForm.valid) {
 
       // SALVA A NOTICIA (ADD OR UPDATE)
-      if(!this.noticia.id){
+      if (!this.noticia.id) {
         this.addNoticia()
       } else {
         this.updateNoticia()
@@ -172,7 +174,7 @@ export class NoticiasFormComponent implements OnInit {
         controls[controlName].markAsTouched()
       );
       if (!controls["imageURL"].value) {
-        this.alert.showAlertWarning("Ainda não há imagem escolhida", "Imagem");
+        this.alert.showAlertWarning(["Ainda não há imagem escolhida"], "Imagem");
       }
       // disable imagemURL to not edited
       this.noticiaForm.controls["imageURL"].disable();
@@ -180,25 +182,25 @@ export class NoticiasFormComponent implements OnInit {
   }
 
   // ADD
-  addNoticia(){
+  addNoticia() {
     this.noticiaService.addNewNoticia(this.noticiaForm.value)
-    .then((id) => {
-      this.noticia.id = id;
-      //this.list.unshift(agendaDados);
-      this.alert.showAlertSuccess('Notícia salva com sucesso', 'Sucesso');
-    }, () => {
-      this.alert.showAlertDanger('Não foi possível salvar a Notícia', 'Tente depois');
-    })
+      .then((id) => {
+        this.noticia.id = id;
+        //this.list.unshift(agendaDados);
+        this.alert.showAlertSuccess(['Notícia salva com sucesso'], 'Sucesso');
+      }, () => {
+        this.alert.showAlertDanger(['Não foi possível salvar a Notícia'], 'Tente depois');
+      })
   }
 
   // UPDATE
-  updateNoticia(){
+  updateNoticia() {
     this.noticiaService.updateNoticia(this.noticiaForm.value)
-    .then(() => {
-      this.alert.showAlertSuccess('Notícia atualizada com sucesso', 'Sucesso');
-    }, () => {
-      this.alert.showAlertDanger('Não foi possível atualizar a Notícia', 'Tente depois');
-    })
+      .then(() => {
+        this.alert.showAlertSuccess(['Notícia atualizada com sucesso'], 'Sucesso');
+      }, () => {
+        this.alert.showAlertDanger(['Não foi possível atualizar a Notícia'], 'Tente depois');
+      })
   }
 
   // TRATAMENTO DA IMAGEM
@@ -218,8 +220,8 @@ export class NoticiasFormComponent implements OnInit {
     if (dim) {
       if (width != dim.width || height != dim.height) {
         this.alert.showAlertInfo(
-          `A imagem escolhida não possui as dimensões necessárias:
-          largura: ${dim.width}, altura: ${dim.height}`,
+          [`A imagem escolhida não possui as dimensões necessárias:`,
+            `largura: ${dim.width}, altura: ${dim.height}`],
           'Imagem'
         );
         return;
@@ -233,7 +235,7 @@ export class NoticiasFormComponent implements OnInit {
         .catch(err => {
           if (err.code !== "storage/object-not-found") {
             this.alert.showAlertDanger(
-              "Não foi possível realizar a troca de imagem...",
+              ["Não foi possível realizar a troca de imagem..."],
               "Imagem"
             );
             console.log(err);
@@ -256,7 +258,7 @@ export class NoticiasFormComponent implements OnInit {
       },
       err => {
         this.alert.showAlertDanger(
-          "Não foi possível enviar a imagem...",
+          ["Não foi possível enviar a imagem..."],
           "Imagem"
         );
         console.log(err);
@@ -275,7 +277,7 @@ export class NoticiasFormComponent implements OnInit {
     if (!(file.type == 'image/jpeg' || file.type == 'image/png')) {
       console.log(file.type);
       this.alert.showAlertInfo(
-        "A imagem escolhida não é JPEG ou PNG...",
+        ["A imagem escolhida não é JPEG ou PNG..."],
         "Imagem"
       );
       return;
@@ -302,13 +304,14 @@ export class NoticiasFormComponent implements OnInit {
     }
   }
 
+  //************************************************************************************* */
   // EDIT PHOTOS
   //************************************************************************************* */
-  openNoticiaPhotosModal(){
+  openNoticiaPhotosModal() {
     this.modalRef = this.modalService.show(NoticiasPhotosModalComponent, this.modalConfig(this.noticia));
 
-    this.modalRef.content.noticiaData.pipe(take(1)).subscribe( (noticiaData) => {
-      this.alert.showAlertSuccess('Usuário salvo com sucesso', 'Sucesso');
+    this.modalRef.content.noticiaData.pipe(take(1)).subscribe((noticiaData) => {
+      this.alert.showAlertSuccess(['Usuário salvo com sucesso'], 'Sucesso');
 
     });
 
@@ -316,7 +319,7 @@ export class NoticiasFormComponent implements OnInit {
 
   // CONFIG MODAL OF USUARIO
   modalConfig(noticia?: Noticia) {
-    return{
+    return {
       backdrop: true,
       keyboard: true,
       focus: true,
@@ -333,7 +336,7 @@ export class NoticiasFormComponent implements OnInit {
   };
 
 
-  
+
 
 
 }

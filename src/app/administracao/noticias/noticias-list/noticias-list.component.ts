@@ -59,7 +59,7 @@ export class NoticiasListComponent implements OnInit {
         .deleteUpload(noticia.imageName, "noticia")
         .catch(err => {
           if (err.code !== "storage/object-not-found") {
-            this.alertModal.showAlertDanger("Não foi possível realizar a troca de imagem...", "Imagem");
+            this.alertModal.showAlertDanger(["Não foi possível realizar a troca de imagem..."], "Imagem");
             console.log(err);
             return;
           }

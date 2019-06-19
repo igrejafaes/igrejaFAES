@@ -77,7 +77,7 @@ export class AgendaFormModalComponent implements OnInit {
     // check image file
     if (this.selectedFile) {
       this.alert.showAlertWarning(
-        "A image deve ser enviada antes de salvar",
+        ["A image deve ser enviada antes de salvar"],
         "Imagem"
       );
       return;
@@ -96,7 +96,7 @@ export class AgendaFormModalComponent implements OnInit {
         controls[controlName].markAsTouched()
       );
       if (!controls["imageURL"].value) {
-        this.alert.showAlertWarning("Ainda não há imagem escolhida", "Imagem");
+        this.alert.showAlertWarning(["Ainda não há imagem escolhida"], "Imagem");
       }
       // disable imagemURL to not edited
       this.agendaForm.controls["imageURL"].disable();
@@ -125,8 +125,8 @@ export class AgendaFormModalComponent implements OnInit {
     if (dim) {
       if (width != dim.width || height != dim.height) {
         this.alert.showAlertInfo(
-          `A imagem escolhida não possui as dimensões necessárias:
-          largura: ${dim.width}, altura: ${dim.height}`,
+          [`A imagem escolhida não possui as dimensões necessárias:`,
+          `largura: ${dim.width}, altura: ${dim.height}`],
           'Imagem'
         );
         return;
@@ -140,7 +140,7 @@ export class AgendaFormModalComponent implements OnInit {
         .catch(err => {
           if (err.code !== "storage/object-not-found") {
             this.alert.showAlertDanger(
-              "Não foi possível realizar a troca de imagem...",
+              ["Não foi possível realizar a troca de imagem..."],
               "Imagem"
             );
             console.log(err);
@@ -163,7 +163,7 @@ export class AgendaFormModalComponent implements OnInit {
       },
       err => {
         this.alert.showAlertDanger(
-          "Não foi possível enviar a imagem...",
+          ["Não foi possível enviar a imagem..."],
           "Imagem"
         );
         console.log(err);
@@ -182,7 +182,7 @@ export class AgendaFormModalComponent implements OnInit {
     if (!(file.type == 'image/jpeg' || file.type == 'image/png')) {
       console.log(file.type);
       this.alert.showAlertInfo(
-        "A imagem escolhida não é JPEG ou PNG...",
+        ["A imagem escolhida não é JPEG ou PNG..."],
         "Imagem"
       );
       return;

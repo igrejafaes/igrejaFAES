@@ -1,6 +1,5 @@
 import { Injectable }    from '@angular/core';
 import { Usuario } from '../models/clUsuario';
-//import { HeroesService } from './heroes.service';
  
 @Injectable()
 export class UsuarioLogadoService {
