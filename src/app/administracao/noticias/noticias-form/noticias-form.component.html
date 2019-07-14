@@ -192,28 +192,22 @@
     </div>
     <!-- /PROGRESS BAR -->
 
-    <!-- SPINNER -->
-    <!-- <ng-template #loading>
-      <div class="d-flex justify-content-center my-5">
-        <div 
-          class="spinner-grow text-primary"
-          role="status"
-          style="width: 4rem; height: 4rem;"
-          >
-          <span class="sr-only">Lendo...</span>
+    <!-- IMAGENS -->
+    <div class="div-fotos d-flex justify-content-center p-2">
+
+      <div *ngIf="noticiaFotos" class="swiper-container" [swiper]="config">
+        <div class="swiper-wrapper">
+          <img *ngFor="let foto of noticiaFotos" class="img-fluid swiper-slide" [src]="foto.URL" >
         </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
       </div>
-    </ng-template> -->
-    <!-- /SPINNER -->
-
-    <div class="d-flex" >
-      <div *ngFor="let foto of noticiaFotos" style="max-height: 150px;">
-        <img [src]=foto.URL height="100" widht="100" alt="">
-      </div>
-
+      
     </div>
-
-
+    <!-- /IMAGENS -->
+    
   </div>
 
   <div class="div-buttons d-flex justify-content-center">

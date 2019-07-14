@@ -6,6 +6,7 @@ import { AdministracaoRoutingModule } from './administracao-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarAdmComponent } from './navbar-adm/navbar-adm.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { SwiperModule } from 'ngx-swiper-wrapper';
 
 // COMPONENTS
 import { LoginComponent } from './login/login.component';
@@ -50,7 +51,8 @@ import { FileSizePipe } from './shared/pipes/file-size.pipe';
     SharedModule,
     ReactiveFormsModule,
     AdministracaoRoutingModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    SwiperModule
   ],
   exports: [
     NavbarAdmComponent,

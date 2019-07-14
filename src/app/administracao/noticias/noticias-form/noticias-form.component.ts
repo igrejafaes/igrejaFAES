@@ -13,6 +13,7 @@ import { Upload } from 'src/app/models/clUpload';
 import { ImagesDimensions } from 'src/app/models/clImagesDimensions';
 import { take } from 'rxjs/operators';
 import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 @Component({
   selector: 'app-noticias-form',
@@ -63,7 +64,6 @@ export class NoticiasFormComponent implements OnInit {
           id: item.payload.doc.id
         };
       })
-      console.log(this.noticiaFotos)
     })
 
   }
@@ -330,13 +330,59 @@ export class NoticiasFormComponent implements OnInit {
       containerClass: 'modal-dialog-scrollable',
       data: {
         noticiaID: noticia.id,
-        usuario: noticia || new Noticia
+        noticiaFotos: this.noticiaFotos
       }
     };
   };
 
-
-
-
+  // CONFIG SWIPPER CARROUSEL FOTOS
+  config: SwiperConfigInterface = {
+    observer: true,
+    loop: true,
+    loopFillGroupWithBlank: false,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: true
+    },
+    direction: 'horizontal',
+    threshold: 50,
+    spaceBetween: 5,
+    //slidesPerView: 3,
+    slidesPerGroup: 1,
+    centeredSlides: false,
+    mousewheel: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+      hideOnClick: true, 
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true 
+    },
+      // Responsive breakpoints
+    breakpoints: {
+      // when window width is <= 320px
+      500: {
+        slidesPerView: 1,
+        spaceBetween: 5
+      },
+      // when window width is <= 480px
+      1000: {
+        slidesPerView: 2,
+        spaceBetween: 5
+      },
+      1200: {
+        slidesPerView: 3,
+        spaceBetween: 5
+      },
+      // when window width is <= 640px
+      2000: {
+        slidesPerView: 4,
+        spaceBetween: 5
+      }
+    }
+    
+  };
 
 }

@@ -1,45 +1,45 @@
 <div class="noticias-full">
 
-    <!-- HEADER NOTICIAS -->
-    <div class="row noticia-header justify-content-between">
-        <div class="col sm-4">
-          <h1 class="h1-responsive"><mdb-icon far icon="newspaper"></mdb-icon> Notícias</h1>
-        </div>
-        <div class="col sm-4 text-right noticia-header-navbtn">
-          <i class="fa fa-arrow-circle-o-left btn-nav view overlay zoom" (click)="slickModal.slickPrev()"></i>
-          <i class="fa fa-arrow-circle-o-right btn-nav" (click)="slickModal.slickNext()"></i>
-        </div>
-      </div>
-      <!-- /HEADER NOTICIAS -->
-
-      <!-- CAROUSEL NOTICIAS -->
-      <div class="container">
-        
-      <ngx-slick-carousel
-        class="carousel" 
-        #slickModal="slick-carousel" 
-        [config]="slideConfig">
-        
-        <div ngxSlickItem *ngFor="let noticia of noticias" class="slide m-4">
-          
-          <!--Zoom effect-->
-          <div class="view overlay zoom">
-
-            <img [src]="noticia.imageURL" class="img-fluid w-100" alt="noticia image">
-            <div class="mask flex-center">
-                <p class="white-text">{{noticia.titulo}}</p>
-            </div>
-  
-          </div>
-          
-          <!-- descricao da noticia -->
-          <div class="noticia-texto">
-            <div class="noticia-titulo text-truncate mt-3 text-uppercase">{{noticia.titulo}}</div>
-            <span class="noticia-descricao h4 mt-1">{{ noticia.descricao }}</span>
-          </div>
-
-        </div>
-      </ngx-slick-carousel>
+  <!-- HEADER NOTICIAS -->
+  <div class="row noticia-header justify-content-between">
+    <div class="col sm-4">
+      <h1 class="h1-responsive"><mdb-icon far icon="newspaper"></mdb-icon> Notícias</h1>
     </div>
-    <!-- /CAROUSEL NOTICIAS -->
+    <div class="col sm-4 text-right noticia-header-navbtn">
+      <i class="fa fa-arrow-circle-o-left btn-nav view overlay zoom" (click)="slickModal.slickPrev()"></i>
+      <i class="fa fa-arrow-circle-o-right btn-nav" (click)="slickModal.slickNext()"></i>
+    </div>
+  </div>
+  <!-- /HEADER NOTICIAS -->
+
+  <!-- CAROUSEL NOTICIAS -->
+  <div class="container">
+        
+    <ngx-slick-carousel
+      class="carousel" 
+      #slickModal="slick-carousel" 
+      [config]="slideConfig">
+      
+      <div ngxSlickItem *ngFor="let noticia of noticias" class="slide m-4">
+        
+        <!--Zoom effect-->
+        <div class="view overlay zoom">
+
+          <img [src]="noticia.imageURL" class="img-fluid w-100" alt="noticia image">
+          <div class="mask flex-center">
+              <p class="white-text">{{noticia.titulo}}</p>
+          </div>
+
+        </div>
+        
+        <!-- descricao da noticia -->
+        <div class="noticia-texto">
+          <div class="noticia-titulo text-truncate mt-3 text-uppercase">{{noticia.titulo}}</div>
+          <span class="noticia-descricao h4 mt-1">{{ noticia.descricao }}</span>
+        </div>
+
+      </div>
+    </ngx-slick-carousel>
+  </div>
+  <!-- /CAROUSEL NOTICIAS -->
 </div>

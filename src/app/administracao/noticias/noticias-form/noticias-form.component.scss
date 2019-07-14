@@ -38,7 +38,7 @@
   outline: none;
 }
 
-.div-buttons{
+.div-buttons, .div-fotos{
   border: 1px solid #dee2e6;
   margin: 10px 0;
 }
@@ -46,3 +46,8 @@
 mdb-error {
   margin-top: 8px;
 }
+
+.swiper-pagination {
+  bottom: 0px;
+}
+
