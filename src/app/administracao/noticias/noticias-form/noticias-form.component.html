@@ -1,0 +1,242 @@
+<app-default-content
+  [titulo]="noticia.id ? 'Editar Notícia' : 'Inserir nova Notícia' "
+  subTitulo="Entre com as informações da nova Notícia."
+  buttonAddText="Voltar / Listagem"
+  (openAddModal)="noticiaLista()"
+>
+  <!-- CONTENT -->
+  <div #content class="box-content flex">
+    <!-- FORM -->
+    <form class="text-center" [formGroup]="noticiaForm" (ngSubmit)="onSave()">
+      <!-- titulo -->
+      <div class="md-form form-group md-bg form-sm mt-0">
+        <!-- titulo -->
+        <input
+          AutoFocus
+          mdbInput
+          type="text"
+          id="titulo"
+          class="form-control"
+          formControlName="titulo"
+          [onReturnSendTab]
+        />
+        <label for="titulo">Título</label>
+        <mdb-error *ngIf="submited && hasError('titulo')">{{
+          hasError("titulo")
+        }}</mdb-error>
+      </div>
+
+      <!-- descricao -->
+      <div class="md-form form-group md-bg form-sm">
+        <!-- descricao -->
+        <textarea
+          mdbInput
+          type="text"
+          id="descricao"
+          class="md-textarea form-control"
+          formControlName="descricao"
+          [onReturnSendTab]
+        ></textarea>
+        <label for="descricao">Descrição</label>
+      </div>
+
+      <!-- Filia e Data -->
+      <div class="row">
+        <!-- Filial -->
+        <div class="col-md md-form form-group md-bg form-sm my-0">
+          <input
+            mdbInput
+            formControlName="filial"
+            type="text"
+            id="filial"
+            class="slide form-control"
+            (keydown)="openOptionFilial($event)"
+            (click)="getOptionFilial()"
+            [onReturnSendTab]
+            #filialControl
+          />
+          <label class="ml-3" for="filial">Igreja</label>
+          <mdb-error *ngIf="submited && hasError('filial')">{{
+            hasError("filial")
+          }}</mdb-error>
+        </div>
+
+        <!-- Data do Evento -->
+        <div class="col-md md-form form-group md-bg form-sm my-0 w-100">
+          <label *ngIf="noticia.noticiaData" for="noticiaData">Data</label>
+          <span *ngIf="!noticia.noticiaData" class="labelData">Data</span>
+          <input
+            mdbInput
+            formControlName="noticiaData"
+            type="date"
+            id="noticiaData"
+            class="form-control"
+            [onReturnSendTab]
+          />
+          <mdb-error *ngIf="submited && hasError('noticiaData')">{{
+            hasError("noticiaData")
+          }}</mdb-error>
+        </div>
+      </div>
+
+      <!-- imageURL -->
+      <div class="md-form form-group md-outline form-sm mb-0">
+        <textarea
+          mdbInput
+          type="text"
+          id="imageURL"
+          class="form-control md-textarea"
+          rows="3"
+          formControlName="imageURL"
+          [onReturnSendTab]
+        ></textarea>
+        <label for="imageURL">URL da Imagem</label>
+        <mdb-error *ngIf="submited && hasError('imageURL')">{{
+          hasError("imageURL")
+        }}</mdb-error>
+      </div>
+    </form>
+
+    <!-- /FORM -->
+
+    <!-- IMAGEM -->
+    <div class="d-flex flex-fill align-items-center">
+      <div class="d-flex flex-column">
+
+        <!-- BUTTON LOAD -->
+        <div class="fileloader">
+          <div class="button-input">
+            <input
+              type="file"
+              id="file"
+              accept="imagem/*"
+              (change)="loadFileImage($event)"
+            />
+            <label
+              for="file"
+              mdbBtn
+              type="button"
+              color="dark-green"
+              mdbWavesEffect
+              size="sm"
+              mdbWavesEffect
+              class="w-100 mt-0 ml-0"
+            >
+              <mdb-icon fas icon="camera" class="mr-0"></mdb-icon>
+              {{ noticia ? "Obter Imagem" : "Alterar Imagem" }}
+            </label>
+          </div>
+        </div>
+        <!-- /BUTTON LOAD -->
+
+        <!-- BUTTON SAVE IMAGE -->
+        <button
+          [disabled]="!selectedFile"
+          (click)="uploadImage()"
+          mdbBtn
+          type="button"
+          color="primary"
+          mdbWavesEffect
+          size="sm"
+          mdbWavesEffect
+          class="w-100 ml-0"
+        >
+          <mdb-icon fas icon="save" class="mr-0"></mdb-icon>
+          Enviar Imagem
+        </button>
+        <!-- BUTTON SAVE IMAGE -->
+        
+        <!-- BUTTON EDIT PHOTOS -->
+        <button
+          [disabled]="!noticia.id"
+          (click)="openNoticiaPhotosModal()"
+          mdbBtn
+          type="button"
+          color="deep-purple"
+          mdbWavesEffect
+          size="sm"
+          mdbWavesEffect
+          class="w-100 ml-0"
+        >
+          <mdb-icon fas icon="save" class="mr-0"></mdb-icon>
+          Fotos da Notícia
+        </button>
+        <!-- BUTTON EDIT PHOTOS -->
+
+      </div>
+
+      <!-- IMAGE PREVIEW -->
+      <div class="ml-3">
+        <img
+          #preview
+          src="{{ noticia.imageURL }}"
+          class="img-fluid waves-light"
+          alt="Imagem do Principal"
+          mdbWavesEffect
+        />
+      </div>
+      <!-- IMAGE PREVIEW -->
+    </div>
+    <!-- /IMAGEM -->
+
+    <!-- PROGRESS BAR -->
+    <div *ngIf="currentUpload">
+      <div class="progress mt-2">
+        <div
+          class="progress-bar progress-bar-animated"
+          [ngStyle]="{ width: currentUpload?.progress + '%' }"
+        ></div>
+      </div>
+      Enviando: {{ currentUpload?.name }} | {{ currentUpload?.progress }}%
+      Completo
+    </div>
+    <!-- /PROGRESS BAR -->
+
+    <!-- IMAGENS -->
+    <div class="div-fotos d-flex justify-content-center p-2">
+
+      <div *ngIf="noticiaFotos" class="swiper-container" [swiper]="config">
+        <div class="swiper-wrapper">
+          <img *ngFor="let foto of noticiaFotos" class="img-fluid swiper-slide" [src]="foto.URL" >
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+      
+    </div>
+    <!-- /IMAGENS -->
+    
+  </div>
+
+  <div class="div-buttons d-flex justify-content-center">
+
+    <!-- submit / save -->
+    <button
+      type="button"
+      mdbBtn
+      color="primary"
+      class="relative waves-light"
+      mdbWavesEffect
+      (click)="onSave()"
+      >
+      {{ noticia.id ? "Alterar!" : "Salvar!" }}
+    </button>
+  
+    <!-- cancel -->
+    <button
+      type="button"
+      mdbBtn
+      color="danger"
+      class="white-text waves-light"
+      aria-label="Fechar"
+      (click)="noticiaLista()"
+      mdbWavesEffect
+      >
+      {{ noticia.id ? "Voltar" : "Cancelar" }}
+    </button>
+  </div>
+
+  <!-- /CONTENT -->
+</app-default-content>

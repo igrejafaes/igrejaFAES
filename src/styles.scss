@@ -77,6 +77,21 @@ html, body {
     }
 }
 
+.swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    border-radius: 100%;
+    background: #000;
+    opacity: 0.2;
+}
+  
+.swiper-pagination-bullet-active {
+    color:#fff;
+    background: #007aff;
+    opacity: 1;
+}
+
 /*
 // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575px) { 

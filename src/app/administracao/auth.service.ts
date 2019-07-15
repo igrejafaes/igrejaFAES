@@ -4,6 +4,9 @@ import * as firebase from 'firebase/app';
 import { Usuario } from '../models/clUsuario';
 import { Subject } from 'rxjs/Subject';
 import { UsuarioLogadoService } from './usuarioLogado.service';
+import { AppError } from '../shared/app-errors/app-error';
+import { take } from 'rxjs/operators';
+import { LoginErros, loginErrorCodes } from './../shared/app-errors/login-errors';
 
 @Injectable({
   providedIn: 'root'
@@ -11,65 +14,108 @@ import { UsuarioLogadoService } from './usuarioLogado.service';
 export class AuthService {
 
   loggedAnonymously: boolean = false
+
+  // Observable string sources
+  private usuarioChangeSource = new Subject<string>();
+
+  // Observable string streams
+  usuarioChange$ = this.usuarioChangeSource.asObservable();
+
+  // Service EMIT CHANGE USUARIO
+  emitChange(usuarioNome: string) {
+    this.usuarioChangeSource.next(usuarioNome);
+  }
+
   constructor(private afAuth: AngularFireAuth,
               private userLogadoService: UsuarioLogadoService) { }
 
-  doLogin(usuario: Usuario) {
+  // DO USUARIO LOGIN: 1-LOGIN FIREBASE | 2-CHECK USUARIO
+  /************************************************************************ */
+  doUsuarioLogin(email: string, password: string): Promise<Usuario> {
+
     return new Promise<any>((resolve, reject) => {
-      firebase.auth().signInWithEmailAndPassword(usuario.email, usuario.password)
+      this.doFirebaseLogin(email, password)
+      .then(()=>{
+        this.verifyUsuarioLogin(email)
+        .then((usuario: Usuario)=>{
+          this.emitChange(usuario.nome);
+          this.userLogadoService.usuarioLogado = usuario;
+          resolve(usuario);
+        }, (err)=>{
+          reject(err)
+        })
+        .catch((err)=>{
+          reject(err)
+        })
+
+      }, (err)=>reject(err))
+      .catch((reject)=>reject(reject))
+    })
+
+  }
+
+  // DO LOGIN WITH EMAIL AND PASSWORD
+  doFirebaseLogin(email, password) {
+    return new Promise<any>((resolve, reject) => {
+      firebase.auth().signInWithEmailAndPassword(email, password)
         .then(res => {
-          this.emitChange(usuario.email);
           resolve(res);
         }, err => {
-          reject(err);
+          if (err.code === 'auth/user-not-found') {
+            reject(new LoginErros(loginErrorCodes.usuario_senha_invalidos));
+          } else {
+            reject(new AppError(err))
+          }
+        }).catch(reason => {
+          reject(reason);
         })
     })
   }
 
-  // DO USER LOGIN
-  doUserLogin(userName, password): Promise<Usuario> {
-
+  // USUARIO LOGIN
+  verifyUsuarioLogin(email: string): Promise<Usuario> {
+    
     return new Promise((resolve, reject) => {
       firebase.firestore().collection('usuarios')
-        .where('nome', '==', userName)
-        .where('password', '==', password)
+        .where('email', '==', email)
         .get()
-        .then(querySnapshot => {
-          if(!querySnapshot.empty) {
-            let user = querySnapshot.docs[0];
-            this.emitChange(user.data().nome);
+        .then((querySnapshot)=>{
 
-            //
-            this.userLogadoService.usuarioLogado = { id: user.id, ...user.data() } as Usuario
-            //
-
-            resolve( { id: user.id, ...user.data() } as Usuario)
-          } else {
-            reject("Usuário ou Senha inválidos");
+          // check if return empty
+          if(querySnapshot.empty) { 
+            reject(new LoginErros(loginErrorCodes.usuario_incompleto)); 
           }
-        }).catch(() => "Não possível consultar o BD...");
+          
+          let userData = querySnapshot.docs[0];
+          const usuario: Usuario = { id: userData.id, ...userData.data() } as Usuario
+          
+          // check if usuario is Active
+          if(!usuario.ativo){
+            this.doLogout().then();
+            reject(new LoginErros(loginErrorCodes.usuario_inativo)); 
+          }
 
+          // resolve
+          resolve( usuario )
+
+        })
+        .catch((error) => {
+          if (error.code === 'permission-denied') {
+            reject(new LoginErros(loginErrorCodes.permissao_negada));
+          } else {
+            reject(new AppError(error))
+          }
+        });
     })
-  }
 
-  doAnonymousLogin(){
-    return new Promise((resolve, reject) => {
-      firebase.auth().signInAnonymously().then(
-        res => {
-          this.loggedAnonymously = true;
-          resolve(res);
-        }
-      ).catch(err => {
-        this.loggedAnonymously = false;
-        reject(err);
-      })
-    })
   }
-
+  /************************************************************************ */
+ // USER LOGOUT
   doLogout() {
     return new Promise((resolve, reject) => {
       if (firebase.auth().currentUser) {
-        this.afAuth.auth.currentUser.delete().then(() => {
+        this.afAuth.auth.signOut()
+        .then(() => {
           this.emitChange(null)
           resolve();
         })
@@ -79,30 +125,34 @@ export class AuthService {
     });
   }
 
-  isAnonymouslyLogged() {
-    return new Promise<boolean>((resolve, reject) => {
-      if (firebase.auth().currentUser) {
-        if( firebase.auth().currentUser.isAnonymous ){
-          resolve(true)
-        } else {
-          resolve(false)
-        }
-      }
-      else {
-        resolve(false)
-      }
-    })
-  }
+  // GET LOGGED USER
+  getCurrentAuthUser(): Promise<Usuario> {
 
-  getCurrentAuthUser() {
     return new Promise<Usuario>((resolve, reject) => {
-      var user = firebase.auth().onAuthStateChanged((user) => {
+
+      this.afAuth.authState
+      .pipe(take(1))
+      .subscribe((user)=>{
         if (user) {
-          const U: Usuario = { nome: '', password: '', email: user.email, acesso: 1 }
-          resolve(U);
+
+          this.verifyUsuarioLogin(user.email)
+          .then((usuario: Usuario)=>{
+            this.emitChange(usuario.nome);
+            this.userLogadoService.usuarioLogado = usuario;
+            resolve(usuario);
+          }, (err)=>{
+            reject(err)
+          })
+          .catch((err)=>{
+            reject(err)
+          })
+
         } else {
-          reject('No user logged in');
+          reject(new LoginErros(loginErrorCodes.nenhum_usuario));
         }
+      
+      }, (error) =>{
+        reject(error);
       })
     })
   }
@@ -130,15 +180,10 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
   }
 
-  // Observable string sources
-  private usuarioChangeSource = new Subject<string>();
-
-  // Observable string streams
-  usuarioChange$ = this.usuarioChangeSource.asObservable();
-
-  // Service message commands
-  emitChange(usuarioNome: string) {
-    this.usuarioChangeSource.next(usuarioNome);
+  // UPDATE FIREBASE USER EMAIL
+  updateUserEmail(newEmail: string): Promise<any> {
+    return firebase.auth().currentUser
+      .updateEmail(newEmail)
   }
 
   // writeUserData(userId, name, email, imageUrl) {

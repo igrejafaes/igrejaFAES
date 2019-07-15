@@ -7,6 +7,7 @@ import { Subject } from "rxjs";
 import { Carousel } from "src/app/models/clCarousel";
 import { Upload } from "src/app/models/clUpload";
 import { UploadService } from "src/app/services/upload.service";
+import { FormInputErrors } from 'src/app/shared/helpers/form-input-errors';
 
 @Component({
   selector: "app-carousel-form-modal",
@@ -72,7 +73,7 @@ export class CarouselFormModalComponent implements OnInit {
     // check image file
     if (this.selectedFile) {
       this.alert.showAlertWarning(
-        "A image deve ser enviada antes de salvar",
+        ["A image deve ser enviada antes de salvar"],
         "Imagem"
       );
       return;
@@ -91,32 +92,16 @@ export class CarouselFormModalComponent implements OnInit {
         controls[controlName].markAsTouched()
       );
       if (!controls["imageURL"].value) {
-        this.alert.showAlertWarning("Ainda não há imagem escolhida", "Imagem");
+        this.alert.showAlertWarning(["Ainda não há imagem escolhida"], "Imagem");
       }
       // disable imagemURL to not edited
       this.carouselForm.controls["imageURL"].disable();
     }
   }
 
-  hasError(field: string) {
+  hasError(field: string) : string {
     // verifica os erros do FormGroup
-    const errors = this.carouselForm.get(field).errors;
-    if (errors != null) {
-      if (errors["required"]) {
-        return "necessário preenchimento";
-      }
-      if (errors["email"]) {
-        return "email inválido";
-      }
-      if (errors["maxlength"]) {
-        return `máximo de ${errors.maxlength.requiredLength} caracteres`;
-      }
-      if (errors["minlength"]) {
-        return `dever ter no mínimo ${
-          errors.minlength.requiredLength
-          } caracteres`;
-      }
-    }
+    return FormInputErrors(field, this.carouselForm)
   }
 
   // TRATAMENTO DA IMAGEM
@@ -136,8 +121,8 @@ export class CarouselFormModalComponent implements OnInit {
     if (dim) {
       if (width != dim.width || height != dim.height) {
         this.alert.showAlertInfo(
-          `A imagem escolhida não possui as dimensões necessárias:
-          largura: ${dim.width}, altura: ${dim.height}`,
+          [`A imagem escolhida não possui as dimensões necessárias:`,
+          `largura: ${dim.width}, altura: ${dim.height}`],
           'Imagem'
         );
         return;
@@ -151,7 +136,7 @@ export class CarouselFormModalComponent implements OnInit {
         .catch(err => {
           if (err.code !== "storage/object-not-found") {
             this.alert.showAlertDanger(
-              "Não foi possível realizar a troca de imagem...",
+              ["Não foi possível realizar a troca de imagem..."],
               "Imagem"
             );
             console.log(err);
@@ -174,7 +159,7 @@ export class CarouselFormModalComponent implements OnInit {
       },
       err => {
         this.alert.showAlertDanger(
-          "Não foi possível enviar a imagem...",
+          ["Não foi possível enviar a imagem..."],
           "Imagem"
         );
         console.log(err);
@@ -192,7 +177,7 @@ export class CarouselFormModalComponent implements OnInit {
     if (!(file.type == 'image/jpeg' || file.type == 'image/png')) {
       console.log(file.type);
       this.alert.showAlertInfo(
-        "A imagem escolhida não é JPEG ou PNG...",
+        ["A imagem escolhida não é JPEG ou PNG..."],
         "Imagem"
       );
       return;

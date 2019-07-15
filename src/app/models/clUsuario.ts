@@ -7,4 +7,5 @@ export class Usuario {
     id?: string;
     telefone?: string;
     wathsapp?: string;
+    ativo: boolean;
 }

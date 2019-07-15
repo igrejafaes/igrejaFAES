@@ -1,17 +1,31 @@
-<div class="container">
-    <div class="box flex">
-      <div class="border flex">
-        <div class="box-header">
-          <h4>Newsletter</h4>
-          <p>Clicar em um dos botões acima para acessar os formulários.</p>
-        </div>
-        <div class="box-content flex">
+<app-default-content 
+  titulo="Newsletter Cadastrados" 
+  subTitulo="Clicar em um dos botões acima para acessar os detalhes."
+  buttonAddText="Adicionar Newsletter"
+  (openAddModal)="openAddNewsletterModal()">
   
-        </div>
-        <div class="box-footer">
-          <button type="button" mdbBtn color="success" size="sm" mdbWavesEffect>Enviar</button>
-          <button type="button" mdbBtn color="danger" size="sm" mdbWavesEffect>Cancelar</button>
+  <!-- CONTENT -->
+  <div class="box-content flex">
+
+    <!-- TABLE -->
+    <div *ngIf="false; else loading">
+
+    </div>
+    <!-- /TABLE -->
+
+    <!-- SPINNER -->
+    <ng-template #loading>
+      <div class="d-flex justify-content-center my-5">
+        <div 
+          class="spinner-grow text-primary"
+          role="status"
+          style="width: 4rem; height: 4rem;"
+          >
+          <span class="sr-only">Lendo...</span>
         </div>
       </div>
-    </div>
+    </ng-template>
+    <!-- /SPINNER -->
   </div>
+  <!-- /CONTENT -->
+</app-default-content>

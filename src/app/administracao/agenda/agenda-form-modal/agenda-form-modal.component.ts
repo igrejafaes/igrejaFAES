@@ -1,3 +1,4 @@
+import { OptionModalService } from './../../../shared/option-modal.service';
 import { clAgenda } from './../../../models/clAgenda';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -7,6 +8,8 @@ import { UploadService } from 'src/app/services/upload.service';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { Upload } from 'src/app/models/clUpload';
 import { ImagesDimensions } from 'src/app/models/clImagesDimensions';
+import { Filiais } from 'src/app/models/clFiliais';
+import { FormInputErrors } from 'src/app/shared/helpers/form-input-errors';
 
 @Component({
   selector: 'app-agenda-form-modal',
@@ -27,7 +30,8 @@ export class AgendaFormModalComponent implements OnInit {
     public modalRef: MDBModalRef,
     private formbuilder: FormBuilder,
     private imageService: UploadService,
-    private alert: AlertModalService
+    private alert: AlertModalService,
+    private optionModal: OptionModalService
   ) { }
 
   ngOnInit() {
@@ -40,18 +44,19 @@ export class AgendaFormModalComponent implements OnInit {
     this.agendaForm = this.formbuilder.group({
       id: [agenda.id],
       titulo: [
-        agenda.Titulo,
+        agenda.titulo,
         [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
       ],
-      descricao: [agenda.Descricao],
-      imageURL: [agenda.ImagemURL, [Validators.required]],
+      descricao: [agenda.descricao],
+      imageURL: [agenda.imageURL, [Validators.required]],
       imageName: [agenda.imageName, [Validators.required]],
       agendaData: [
-        this.convertToDate(agenda.AgendaData),
+        this.convertToDate(agenda.agendaData),
         [Validators.required]
       ],
-      local: [agenda.Local],
-      filial: [agenda.Filial],
+      agendaHora: [agenda.agendaHora, [Validators.required]],
+      local: [agenda.local],
+      filial: [agenda.filial],
     });
     // disable imageURL
     this.agendaForm.controls["imageURL"].disable();
@@ -72,7 +77,7 @@ export class AgendaFormModalComponent implements OnInit {
     // check image file
     if (this.selectedFile) {
       this.alert.showAlertWarning(
-        "A image deve ser enviada antes de salvar",
+        ["A image deve ser enviada antes de salvar"],
         "Imagem"
       );
       return;
@@ -91,32 +96,16 @@ export class AgendaFormModalComponent implements OnInit {
         controls[controlName].markAsTouched()
       );
       if (!controls["imageURL"].value) {
-        this.alert.showAlertWarning("Ainda não há imagem escolhida", "Imagem");
+        this.alert.showAlertWarning(["Ainda não há imagem escolhida"], "Imagem");
       }
       // disable imagemURL to not edited
       this.agendaForm.controls["imageURL"].disable();
     }
   }
 
-  hasError(field: string) {
+  hasError(field: string) : string {
     // verifica os erros do FormGroup
-    const errors = this.agendaForm.get(field).errors;
-    if (errors != null) {
-      if (errors["required"]) {
-        return "necessário preenchimento";
-      }
-      if (errors["email"]) {
-        return "email inválido";
-      }
-      if (errors["maxlength"]) {
-        return `máximo de ${errors.maxlength.requiredLength} caracteres`;
-      }
-      if (errors["minlength"]) {
-        return `dever ter no mínimo ${
-          errors.minlength.requiredLength
-          } caracteres`;
-      }
-    }
+    return FormInputErrors(field, this.agendaForm)
   }
 
   // TRATAMENTO DA IMAGEM
@@ -131,13 +120,13 @@ export class AgendaFormModalComponent implements OnInit {
     const width = this.preview.nativeElement.naturalWidth
     const height = this.preview.nativeElement.naturalHeight
     const dimension = new ImagesDimensions
-    const dim = dimension.getDimension('carousel')
+    const dim = dimension.getDimension('agenda')
 
     if (dim) {
       if (width != dim.width || height != dim.height) {
         this.alert.showAlertInfo(
-          `A imagem escolhida não possui as dimensões necessárias:
-          largura: ${dim.width}, altura: ${dim.height}`,
+          [`A imagem escolhida não possui as dimensões necessárias:`,
+          `largura: ${dim.width}, altura: ${dim.height}`],
           'Imagem'
         );
         return;
@@ -147,11 +136,11 @@ export class AgendaFormModalComponent implements OnInit {
     // if exist old image delete
     if (this.agenda.imageName) {
       this.imageService
-        .deleteUpload(this.agenda.imageName, "carousel")
+        .deleteUpload(this.agenda.imageName, 'agenda')
         .catch(err => {
           if (err.code !== "storage/object-not-found") {
             this.alert.showAlertDanger(
-              "Não foi possível realizar a troca de imagem...",
+              ["Não foi possível realizar a troca de imagem..."],
               "Imagem"
             );
             console.log(err);
@@ -161,20 +150,20 @@ export class AgendaFormModalComponent implements OnInit {
     }
 
     // upload image
-    this.currentUpload = new Upload(this.selectedFile, "carousel");
+    this.currentUpload = new Upload(this.selectedFile, 'agenda');
 
     this.imageService.uploadFile(this.currentUpload).then(
       url => {
         this.scrollToBottom(); // to see progress bar
-        this.agendaForm.controls["imageName"].setValue(this.selectedFile.name);
-        this.agendaForm.controls["imageURL"].setValue(url);
+        this.agendaForm.controls['imageName'].setValue(this.selectedFile.name);
+        this.agendaForm.controls['imageURL'].setValue(url);
         this.agenda.imageName = this.selectedFile.name;
-        this.agenda.ImagemURL = url;
+        this.agenda.imageURL = url;
         this.selectedFile = null;
       },
       err => {
         this.alert.showAlertDanger(
-          "Não foi possível enviar a imagem...",
+          ["Não foi possível enviar a imagem..."],
           "Imagem"
         );
         console.log(err);
@@ -183,6 +172,7 @@ export class AgendaFormModalComponent implements OnInit {
   }
 
   // PREVIEW OF NEW IMAGE
+  //************************************************************************************* */
   loadFileImage(event) {
 
     const file = event.target.files && event.target.files[0];
@@ -192,7 +182,7 @@ export class AgendaFormModalComponent implements OnInit {
     if (!(file.type == 'image/jpeg' || file.type == 'image/png')) {
       console.log(file.type);
       this.alert.showAlertInfo(
-        "A imagem escolhida não é JPEG ou PNG...",
+        ["A imagem escolhida não é JPEG ou PNG..."],
         "Imagem"
       );
       return;
@@ -216,6 +206,42 @@ export class AgendaFormModalComponent implements OnInit {
       }, 500);
     } catch (err) {
       console.log(err)
+    }
+  }
+
+  // ESCOLHER A FILIAL OPEN DIALOG
+  //************************************************************************ */
+  dialogOpen: boolean = false
+  @ViewChild('filialControl') filialControl : ElementRef
+
+  // control keycode
+  openOptionFilial(e){
+    if(e.keyCode !== 107) {
+      e.preventDefault()
+    } else {
+      this.getOptionFilial();
+      e.preventDefault();
+    }
+  }
+
+  getOptionFilial(){
+    if(!this.dialogOpen){
+      // get filiais
+      const filiais = new Filiais
+      const filiaisNames = filiais.getFiliaisName()
+      // open dialog
+      this.dialogOpen = true;
+      this.optionModal.showOptions('Escolha uma Filial', filiaisNames)
+      .subscribe((value)=>{
+        if(value != null){
+          const filial = filiaisNames[value];
+          this.agenda.filial = filial;
+          this.agendaForm.controls['filial'].setValue(filial)
+        };
+        // on close dialog focus control
+        this.dialogOpen = false;
+        this.filialControl.nativeElement.focus();
+      });
     }
   }
 

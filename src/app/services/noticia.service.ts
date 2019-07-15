@@ -1,50 +1,126 @@
 import { Injectable } from '@angular/core';
-import { clNoticia } from '../models/clNoticia';
+import { Noticia } from '../models/clNoticia';
+import { Observable } from 'rxjs';
+import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
+import { take } from 'rxjs/operators';
+import { NotFoundError } from '../shared/app-errors/not-found-error';
+import { AppError } from '../shared/app-errors/app-error';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NoticiaService {
 
-  constructor() { }
+  noticiaCollection: AngularFirestoreCollection<Noticia>;
+  noticia$: Observable<Noticia[]>;
 
-  getNoticias(): clNoticia[] {
-    let noticias = [];
+  constructor(private db: AngularFirestore) {
+    // REFERENCE & ORDERBY
+    this.noticiaCollection = this.db.collection('noticia', ref => {
+      return ref.orderBy('noticiaData')
+    });
+  }
 
-    noticias.push(
-      {
-        Imagem: "https://picsum.photos/150/100/?image=1061",
-        NoticiaTitulo: "Festa dos Jovens",
-        NoticiaTexto: "Duis laboris esse officia aute.",
-        NoticiaData: "10/10/2018"
-      },
-      {
-        Imagem: "https://picsum.photos/150/100/?image=1056",
-        NoticiaTitulo: "Confraternização em São Pedro",
-        NoticiaTexto: "Ullamco reprehenderit culpa velit magna sint aliquip et sit aliqua nostrud.",
-        NoticiaData: "20/11/2018"
-      },
-      {
-        Imagem: "https://picsum.photos/150/100/?image=2",
-        NoticiaTitulo: "Congresso Mulheres FAES",
-        NoticiaTexto: "Lorem irure occaecat ut et reprehenderit elit. Sint enim elit reprehenderit non nisi tempor.",
-        NoticiaData: "03/12/2018"
-      }, 
-      {
-        Imagem: "https://picsum.photos/150/100/?image=1073",
-        NoticiaTitulo: "Encontro de Casais",
-        NoticiaTexto: "Laborum ullamco consectetur enim est occaecat voluptate.",
-        NoticiaData: "05/07/2018"
-      }, 
-      {
-        Imagem: "https://picsum.photos/150/100/?image=1066",
-        NoticiaTitulo: "Casamento do Jonny",
-        NoticiaTexto: "Dolor incididunt duis cupidatat sint. Dolore est qui Lorem commodo.",
-        NoticiaData: "11/05/2018"
+  // GET NOTICIA SNAPSHOT
+  /******************************************************************************/
+  getNoticiasSnapshot(): Observable<any> {
+    // RETURN
+    return this.noticiaCollection.snapshotChanges()
+    .pipe(take(1))
+    .catch((error: Response) => {
+      if (error.status === 404) {
+        return Observable.throw(new NotFoundError())
+      } else {
+        return Observable.throw(new AppError(error))
       }
-    )
+    });
+  }
 
-    return noticias;
-}
+  // GET NOTICIA BY ID SNAPSHOT
+  /******************************************************************************/
+  getNoticiasByID(id: string): Promise<Noticia> {
+    return new Promise((resolve, reject) => {
+      this.noticiaCollection
+        .doc<Noticia>(id)
+        .snapshotChanges()
+        .pipe(take(1))
+        .subscribe(actionArray => {
+          resolve ({  id: actionArray.payload.id, ...actionArray.payload.data() })
+        }, error => { reject(error) })
+    })
+  }
+
+  // Cria nova Noticia
+  /****************************************************************************** */
+  addNewNoticia(noticia: Noticia): any {
+    const noticiaWithoutID = { ...noticia } // create a new object
+    delete noticiaWithoutID.id // to save without ID
+
+    return new Promise((resolve, reject) => {
+      this.noticiaCollection.add(noticiaWithoutID as Noticia)
+        .then(
+          (docRef) => resolve(docRef.id),
+          (err) => reject(err)
+        )
+        .catch(
+          (err) => console.log(err)
+        )
+    });
+  }
+
+  // Atualiza a Noticia
+  /****************************************************************************** */
+  updateNoticia(noticia: Noticia): Promise<any>{
+    const noticiaWithoutID = { ...noticia } // create a new object
+    delete noticiaWithoutID.id // to save without ID
+
+    return new Promise((resolve, reject) => {
+      this.noticiaCollection.doc<Noticia>(noticia.id).set(noticiaWithoutID)
+        .then(
+          () => resolve(noticia.id),
+          (err) => reject(err)
+        )
+        .catch(
+          (err) => console.log(err)
+        )
+    });
+  }
+
+  // Delete Noticia
+  /****************************************************************************** */
+  deleteNoticia(id: string): Promise<boolean>{
+    return new Promise((resolve, reject) => {
+      this.noticiaCollection.doc<Noticia>(id)
+      .delete()
+      .then(() => {
+         resolve(true)
+      }, (err) => reject(err))
+      .catch((error: Response) => {
+        if (error.status === 404) {
+          return Observable.throw(new NotFoundError())
+        } else {
+          return Observable.throw(new AppError(error))
+        }
+      });
+    })
+  }
+
+  // GET NOTICIA BY ID SNAPSHOT
+  /******************************************************************************/
+  getNoticiasFotosByID(noticiaID): Observable<any> {
+    // REFERENCE & ORDERBY
+    const fotosCollection = this.db.collection(`noticia/${noticiaID}/fotos`)
+    // RETURN
+    return fotosCollection.snapshotChanges()
+    .pipe(take(1))
+    .catch((error: Response) => {
+      if (error.status === 404) {
+        return Observable.throw(new NotFoundError())
+      } else {
+        return Observable.throw(new AppError(error))
+      }
+    });
+  }
+
 
 }

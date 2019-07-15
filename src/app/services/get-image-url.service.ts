@@ -14,7 +14,12 @@ export class GetImageUrlService {
 
     const path: string = `images/${imageFolder}/${imageName}`
     const ref: AngularFireStorageReference = this.storage.ref(path);
-    
+
+    return ref.getDownloadURL().pipe(take(1));
+  }
+
+  public getImageToPath(path: string): Observable<string> {
+    const ref: AngularFireStorageReference = this.storage.ref(path);
     return ref.getDownloadURL().pipe(take(1));
   }
 
