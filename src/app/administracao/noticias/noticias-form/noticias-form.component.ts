@@ -25,8 +25,8 @@ export class NoticiasFormComponent implements OnInit {
   noticiaForm: FormGroup;
   submited: boolean = false;
   noticia: Noticia = new Noticia();
-  @ViewChild("preview") preview: ElementRef;
-  @ViewChild("content") content: ElementRef;
+  @ViewChild("preview", {static: false}) preview: ElementRef;
+  @ViewChild("content", {static: false}) content: ElementRef;
   modalRef: MDBModalRef;
 
   noticiaFotos: []
@@ -107,7 +107,7 @@ export class NoticiasFormComponent implements OnInit {
   // ESCOLHER A FILIAL OPEN DIALOG
   //************************************************************************ */
   dialogOpen: boolean = false
-  @ViewChild('filialControl') filialControl: ElementRef
+  @ViewChild('filialControl', {static: false}) filialControl: ElementRef
 
   // control keycode
   openOptionFilial(e) {

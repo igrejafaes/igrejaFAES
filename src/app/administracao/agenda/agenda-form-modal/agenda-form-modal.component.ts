@@ -18,8 +18,8 @@ import { FormInputErrors } from 'src/app/shared/helpers/form-input-errors';
 })
 export class AgendaFormModalComponent implements OnInit {
 
-  @ViewChild("preview") preview: ElementRef;
-  @ViewChild("ModalBody") modalBody: ElementRef;
+  @ViewChild("preview", {static: false}) preview: ElementRef;
+  @ViewChild("ModalBody", {static: false}) modalBody: ElementRef;
   heading: string;
   agendaForm: FormGroup;
   submited: boolean = false;
@@ -212,7 +212,7 @@ export class AgendaFormModalComponent implements OnInit {
   // ESCOLHER A FILIAL OPEN DIALOG
   //************************************************************************ */
   dialogOpen: boolean = false
-  @ViewChild('filialControl') filialControl : ElementRef
+  @ViewChild('filialControl', {static: false}) filialControl : ElementRef
 
   // control keycode
   openOptionFilial(e){

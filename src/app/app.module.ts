@@ -35,7 +35,7 @@ registerLocaleData(ptBr)
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
-    NgwWowModule.forRoot(),
+    NgwWowModule,
     PublicPageModule,
     UsuarioModule,
     AdministracaoModule,

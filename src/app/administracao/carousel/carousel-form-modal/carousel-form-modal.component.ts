@@ -16,8 +16,8 @@ import { FormInputErrors } from 'src/app/shared/helpers/form-input-errors';
 })
 export class CarouselFormModalComponent implements OnInit {
 
-  @ViewChild("preview") preview: ElementRef;
-  @ViewChild("ModalBody") modalBody: ElementRef;
+  @ViewChild("preview", {static: false}) preview: ElementRef;
+  @ViewChild("ModalBody", {static: false}) modalBody: ElementRef;
   heading: string;
   carouselForm: FormGroup;
   submited: boolean = false;
