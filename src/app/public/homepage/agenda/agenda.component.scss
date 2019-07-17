@@ -16,7 +16,14 @@ $base-color: rgb(190, 8, 8);
     background-blend-mode: color-burn;
 }
 
+.card-title {
+    font-weight: 400;
+}
+
 .card-text {
+    color: #747373;
+    font-size: 0.9rem;
+    font-weight: 400;
     height: 60px;
     line-height: 20px;
     overflow: hidden;
@@ -25,6 +32,7 @@ $base-color: rgb(190, 8, 8);
 .card-footer p {
     padding: 10px;
     margin-bottom: 0 !important;
+    font-weight: 400;
 }
 
 .agenda-header {

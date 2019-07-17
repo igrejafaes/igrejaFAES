@@ -11,16 +11,6 @@ export const environment = {
     projectId: "site-faes",
     storageBucket: "site-faes.appspot.com",
     messagingSenderId: "674522148657"
-
-
-
-
-    // apiKey: "AIzaSyCmjqhc698xKwBFwNU7M3ph3PQDmyToWBQ",
-    // authDomain: "sitefaes.firebaseapp.com",
-    // databaseURL: "https://sitefaes.firebaseio.com",
-    // projectId: "sitefaes",
-    // storageBucket: "sitefaes.appspot.com",
-    // messagingSenderId: "1073543828369"
   }
 };
 
