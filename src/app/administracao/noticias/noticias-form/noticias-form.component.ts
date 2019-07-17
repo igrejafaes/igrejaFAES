@@ -311,13 +311,13 @@ export class NoticiasFormComponent implements OnInit {
     this.modalRef = this.modalService.show(NoticiasPhotosModalComponent, this.modalConfig(this.noticia));
 
     this.modalRef.content.noticiaData.pipe(take(1)).subscribe((noticiaData) => {
-      this.alert.showAlertSuccess(['Usuário salvo com sucesso'], 'Sucesso');
+      this.alert.showAlertSuccess(['Notícia salva com sucesso'], 'Sucesso');
 
     });
 
   }
 
-  // CONFIG MODAL OF USUARIO
+  // CONFIG MODAL OF NOTICIA
   modalConfig(noticia?: Noticia) {
     return {
       backdrop: true,
