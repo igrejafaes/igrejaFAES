@@ -49,5 +49,8 @@ mdb-error {
 
 .swiper-pagination {
   bottom: 0px;
-}
 
+  .swiper-pagination-bullet-active {
+    background: #ff5ae9;
+  }
+}

@@ -25,8 +25,8 @@ export class NoticiasPhotosModalComponent implements OnInit, OnDestroy {
   downloadURL: Observable<string>; // Download URL
   isHovering: boolean; // State for dropzone CSS toggling
 
-  @ViewChild("content") content: ElementRef; // To scroll down
-  @ViewChild("previewContainer") previewContainer: ElementRef;
+  @ViewChild("content", {static: false}) content: ElementRef; // To scroll down
+  @ViewChild("previewContainer", {static: false}) previewContainer: ElementRef;
 
   constructor(
     public modalRef: MDBModalRef, 
